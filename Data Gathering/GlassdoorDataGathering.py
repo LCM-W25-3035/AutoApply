@@ -176,10 +176,8 @@ def scrape_job_listings(driver):
             print("Error occurred while loading jobs:", e)
             break
 
-    # Save to DataFrame
     jobs_df = pd.DataFrame(jobs_data)
     jobs_df.drop_duplicates(inplace=True)
-    # Save to CSV
     jobs_df.to_csv('glassdoor_jobs.csv', index=False)
 
 
@@ -194,19 +192,11 @@ if __name__ == "__main__":
     driver.maximize_window()
 
     try:
-        # Log in to Glassdoor
         login_to_glassdoor(driver, GLASSDOOR_EMAIL, GLASSDOOR_PASSWORD)
-
-        # Navigate to Jobs section
         navigate_to_jobs(driver)
-
-        # Search for IT jobs in Ontario, Canada
         search_jobs(driver, "IT", "Ontario, Canada")
-
-        # Scrape job listings
         scrape_job_listings(driver)
 
     finally:
-        # Close the browser
         time.sleep(5)
         driver.quit()
