@@ -15,6 +15,7 @@ GLASSDOOR_EMAIL = 'oscar_quintero_26@hotmail.com'
 password = os.environ.get('GLASSDOOR_PASSWORD') 
 GLASSDOOR_PASSWORD = f"{password}"
 
+
 def human_delay(min_seconds, max_seconds):
     """Adds a random delay to simulate human-like browsing behavior."""
     delay_time = random.uniform(min_seconds, max_seconds)
@@ -145,15 +146,25 @@ def scrape_job_listings(driver):
             # Extract job cards
             job_cards = soup.find_all('div', class_=lambda x: x and 'jobCard' in x)
             for job_card in job_cards:
+
                 job_title = job_card.find('a', class_=lambda x: x and 'jobTitle' in x)
-                company_name = job_card.find('span', class_=lambda x: x and 'employerName' in x)
+                company_name = job_card.find('span', class_='EmployerProfile_compactEmployerName__9MGcV')
                 location = job_card.find('div', class_=lambda x: x and 'location' in x)
                 salary = job_card.find('div', class_=lambda x: x and 'salary' in x)
                 job_url = job_title['href'] if job_title else None
 
+                try:
+                    job_description_element = WebDriverWait(driver, 10).until(
+                        EC.presence_of_element_located((By.CLASS_NAME, 'JobDetails_jobDescription__uW_fK'))
+                    )
+                    job_description = job_description_element.text
+                except:
+                    job_description = 'N/A'
+                    
                 jobs_data.append({
                     'Job Title': job_title.text.strip() if job_title else 'N/A',
                     'Company Name': company_name.text.strip() if company_name else 'N/A',
+                    'Job Descriptions': job_description.strip() if job_description else 'N/A',
                     'Location': location.text.strip() if location else 'N/A',
                     'Salary': salary.text.strip() if salary else 'N/A',
                     'Job URL': f"{job_url}" if job_url else None,
