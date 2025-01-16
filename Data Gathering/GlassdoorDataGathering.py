@@ -90,6 +90,21 @@ def navigate_to_jobs(driver):
         driver.quit()
         exit()
 
+def dismiss_popup(driver):
+    """Checks for and dismisses popups or overlays."""
+    try:
+        # Wait for the popup to appear (if any)
+
+        # Try to close the popup
+        modal_close_button = WebDriverWait(driver, 5).until(
+                EC.element_to_be_clickable((By.CLASS_NAME, 'modal_closeIcon'))
+            )
+        modal_close_button.click()
+        print("Popup dismissed.")
+        human_delay(1, 2)  # Add a slight delay after dismissing
+    except Exception:
+        print("No popup detected.")
+
 def search_jobs(driver, job_title, location):
     """Searches for jobs based on job title and location."""
     try:
@@ -109,7 +124,10 @@ def search_jobs(driver, job_title, location):
         location_input.send_keys(location)
         human_delay(1, 3)
         # After typing the location, give it some time for the automatic search to trigger
-        human_delay(2, 4)  # Simulating a short delay after typing
+        human_delay(10, 11)  # Simulating a short delay after typing
+
+        dismiss_popup(driver)
+
         # Optionally, if necessary, wait for results to load
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'autocomplete_suggestionsList__Wg2ty')))
         print("Search results loaded.")
@@ -135,23 +153,30 @@ def scrape_job_listings(driver):
     processed_jobs = set()
 
     while True:
+        new_jobs_found = False
         try:
             # Esperar a que se carguen las tarjetas de trabajo
             WebDriverWait(driver, 20).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, 'jobCard'))
             )
             print("Job cards loaded successfully.")
-            human_delay(2, 4)
+            human_delay(2, 3)
 
             # Obtener todas las tarjetas de trabajo
             job_cards = driver.find_elements(By.CLASS_NAME, 'jobCard')
 
             for job_card in job_cards:
                 try:
+                    job_titlee = job_card.text.strip()  # Obtener el título como identificador único
+                    if job_titlee in processed_jobs:
+                        continue  # Si ya se procesó, pasar a la siguiente tarjeta
+
+                    new_jobs_found = True  # Indicar que hay una nueva tarjeta
+                    processed_jobs.add(job_titlee)  
 
                     # Click en la tarjeta para cargar la descripción
                     job_card.click()
-                    human_delay(3, 4)
+                    human_delay(2, 3)
 
                     # Extraer información visible directamente de la tarjeta
                     job_title_element = job_card.find_element(By.CLASS_NAME, 'JobCard_jobTitle__GLyJ1')
@@ -194,20 +219,30 @@ def scrape_job_listings(driver):
                 except Exception as job_error:
                     print(f"Error processing job card: {job_error}")
                     continue
+                    # Guardar los datos en un archivo CSV
 
+                jobs_df = pd.DataFrame(jobs_data)
+                jobs_df.drop_duplicates(inplace=True)
+                #df.to_csv('glassdoor_jobs_combinedfull.csv', index=False)
+                jobs_df.to_csv('glassdoor_jobs_backup.csv', index=False, encoding='utf-8-sig')
 
+                print("Data saved to 'glassdoor_jobs_backup.csv'.")
+
+            if not new_jobs_found:
+                print("No new job cards found. Exiting loop.")
+                break
             try:
-                 show_more_button = WebDriverWait(driver, 20).until(
+                show_more_button = WebDriverWait(driver, 20).until(
                      EC.element_to_be_clickable((By.XPATH, '//button[@data-test="load-more"]'))
                  )
-                 show_more_button.click()
-                 print("Clicked 'Show more jobs' button. Loading more jobs...")
-                 human_delay(3, 4)
+                show_more_button.click()
+                print("Clicked 'Show more jobs' button. Loading more jobs...")
+                human_delay(3, 4)
 
             except Exception:
                  print("No more 'Show more jobs' button or error occurred.")
                  break
-
+                
         except Exception as e:
             print("Error occurred while loading jobs:", e)
             break
@@ -215,7 +250,7 @@ def scrape_job_listings(driver):
     # Guardar los datos en un archivo CSV
     df = pd.DataFrame(jobs_data)
     df.drop_duplicates(inplace=True)
-    df.to_csv('glassdoor_jobs_combinedfull.csv', index=False)
+    df.to_csv('glassdoor_jobs_combined-Machine Learning Engineer.csv', index=False, encoding='utf-8-sig')
     print("Scraping complete. Data saved to 'glassdoor_jobs_combined.csv'.")
 
 
@@ -234,7 +269,7 @@ if __name__ == "__main__":
     try:
         login_to_glassdoor(driver, GLASSDOOR_EMAIL, GLASSDOOR_PASSWORD)
         navigate_to_jobs(driver)
-        search_jobs(driver, "IT", "Ontario, Canada")
+        search_jobs(driver, "Machine Learning Engineer", "Ontario, Canada")
         scrape_job_listings(driver)
 
     
