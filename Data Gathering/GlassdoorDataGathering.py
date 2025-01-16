@@ -10,11 +10,12 @@ from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import pandas as pd
 import os
+from dotenv import load_dotenv
+import time
 
-GLASSDOOR_EMAIL = 'oscar_quintero_26@hotmail.com'
-password = os.environ.get('GLASSDOOR_PASSWORD') 
-GLASSDOOR_PASSWORD = f"{password}"
-
+load_dotenv()
+GLASSDOOR_EMAIL = os.getenv('GLASSDOOR_EMAIL')
+GLASSDOOR_PASSWORD = os.getenv('GLASSDOOR_PASSWORD')
 
 def human_delay(min_seconds, max_seconds):
     """Adds a random delay to simulate human-like browsing behavior."""
@@ -130,69 +131,97 @@ def search_jobs(driver, job_title, location):
 
 def scrape_job_listings(driver):
     """Scrapes job listings from the search results."""
-    jobs_data = []
+    jobs_data = []  # Lista única para almacenar toda la información
+    processed_jobs = set()
+
     while True:
         try:
-            # Wait for job cards to load
+            # Esperar a que se carguen las tarjetas de trabajo
             WebDriverWait(driver, 20).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, 'jobCard'))
             )
             print("Job cards loaded successfully.")
             human_delay(2, 4)
 
-            # Parse the HTML
-            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            # Obtener todas las tarjetas de trabajo
+            job_cards = driver.find_elements(By.CLASS_NAME, 'jobCard')
 
-            # Extract job cards
-            job_cards = soup.find_all('div', class_=lambda x: x and 'jobCard' in x)
             for job_card in job_cards:
-
-                job_title = job_card.find('a', class_=lambda x: x and 'jobTitle' in x)
-                company_name = job_card.find('span', class_='EmployerProfile_compactEmployerName__9MGcV')
-                location = job_card.find('div', class_=lambda x: x and 'location' in x)
-                salary = job_card.find('div', class_=lambda x: x and 'salary' in x)
-                job_url = job_title['href'] if job_title else None
-
                 try:
-                    job_description_element = WebDriverWait(driver, 10).until(
-                        EC.presence_of_element_located((By.CLASS_NAME, 'JobDetails_jobDescription__uW_fK'))
-                    )
-                    job_description = job_description_element.text
-                except:
-                    job_description = 'N/A'
-                    
-                jobs_data.append({
-                    'Job Title': job_title.text.strip() if job_title else 'N/A',
-                    'Company Name': company_name.text.strip() if company_name else 'N/A',
-                    'Job Descriptions': job_description.strip() if job_description else 'N/A',
-                    'Location': location.text.strip() if location else 'N/A',
-                    'Salary': salary.text.strip() if salary else 'N/A',
-                    'Job URL': f"{job_url}" if job_url else None,
-                })
 
-            # Find and click the "Show more jobs" button
+                    # Click en la tarjeta para cargar la descripción
+                    job_card.click()
+                    human_delay(3, 4)
+
+                    # Extraer información visible directamente de la tarjeta
+                    job_title_element = job_card.find_element(By.CLASS_NAME, 'JobCard_jobTitle__GLyJ1')
+                    job_title = job_title_element.text.strip()
+                    company_name = job_card.find_element(By.CLASS_NAME, 'EmployerProfile_compactEmployerName__9MGcV').text.strip()
+                    location = job_card.find_element(By.CLASS_NAME, 'JobCard_location__Ds1fM').text.strip()
+                    job_url = job_title_element.get_attribute('href')
+
+                    # Manejar información opcional
+                    try:
+                        salary = job_card.find_element(By.CLASS_NAME, 'JobCard_salaryEstimate__QpbTW').text.strip()
+                    except Exception:
+                        salary = "N/A"
+
+                    try:
+                        posted_day = job_card.find_element(By.CLASS_NAME, 'JobCard_listingAge__jJsuc').text.strip()
+                    except Exception:
+                        posted_day = "N/A"
+
+                    # Extraer la descripción del trabajo
+                    soup = BeautifulSoup(driver.page_source, 'html.parser')
+                    try:
+                        #job_description = driver.find_element(By.CLASS_NAME, 'JobDetails_jobDescription__uW_fK').text.strip()
+                        job_description = soup.find('div', class_='JobDetails_jobDescription__uW_fK').text.strip()
+                    except Exception:
+                        job_description = "N/A"
+
+                    # Añadir toda la información al diccionario
+                    jobs_data.append({
+                        'Job Title': job_title,
+                        'Company Name': company_name,
+                        'Location': location,
+                        'Salary': salary,
+                        'Posted Day': posted_day,
+                        'Job Description': job_description,
+                        'job url': job_url if job_url else "N/A"
+                    })
+
+
+                except Exception as job_error:
+                    print(f"Error processing job card: {job_error}")
+                    continue
+
+
             try:
-                show_more_button = WebDriverWait(driver, 20).until(
-                    EC.element_to_be_clickable((By.XPATH, '//button[@data-test="load-more"]'))
-                )
-                show_more_button.click()
-                print("Clicked 'Show more jobs' button. Loading more jobs...")
-                human_delay(3, 5)
+                 show_more_button = WebDriverWait(driver, 20).until(
+                     EC.element_to_be_clickable((By.XPATH, '//button[@data-test="load-more"]'))
+                 )
+                 show_more_button.click()
+                 print("Clicked 'Show more jobs' button. Loading more jobs...")
+                 human_delay(3, 4)
 
             except Exception:
-                print("No more 'Show more jobs' button or error occurred.")
-                break
+                 print("No more 'Show more jobs' button or error occurred.")
+                 break
 
         except Exception as e:
             print("Error occurred while loading jobs:", e)
             break
 
-    jobs_df = pd.DataFrame(jobs_data)
-    jobs_df.drop_duplicates(inplace=True)
-    jobs_df.to_csv('glassdoor_jobs.csv', index=False)
+    # Guardar los datos en un archivo CSV
+    df = pd.DataFrame(jobs_data)
+    df.drop_duplicates(inplace=True)
+    df.to_csv('glassdoor_jobs_combinedfull.csv', index=False)
+    print("Scraping complete. Data saved to 'glassdoor_jobs_combined.csv'.")
+
 
 
 if __name__ == "__main__":
+    start_time = time.time()
     # Set up Selenium WebDriver
     options = Options()
     options.headless = False  # Set to True for headless mode
@@ -208,6 +237,10 @@ if __name__ == "__main__":
         search_jobs(driver, "IT", "Ontario, Canada")
         scrape_job_listings(driver)
 
+    
     finally:
         time.sleep(5)
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"Tiempo total de ejecución: {elapsed_time:.2f} segundos")
         driver.quit()
