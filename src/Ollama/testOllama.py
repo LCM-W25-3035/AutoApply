@@ -1,6 +1,6 @@
 import ollama
 
-desiredModel='llama3.1:8b'
+desiredModel='llama3.2'
 questionToAsk='What is the capital of colombia'
 
 response = ollama.chat(model=desiredModel,messages=[
