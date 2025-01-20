@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import os
 from dotenv import load_dotenv
-import time
+
 
 load_dotenv()
 GLASSDOOR_EMAIL = os.getenv('GLASSDOOR_EMAIL')
@@ -149,27 +149,27 @@ def search_jobs(driver, job_title, location):
 
 def scrape_job_listings(driver):
     """Scrapes job listings from the search results."""
-    jobs_data = []  # Lista única para almacenar toda la información
-    processed_jobs = set()
+    jobs_data = []  #Container Job Offer
+    processed_jobs = set() #Unique Job offer
 
     while True:
         new_jobs_found = False
         try:
-            # Esperar a que se carguen las tarjetas de trabajo
+            # Wait until every job card is loaded 
             WebDriverWait(driver, 20).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, 'jobCard'))
             )
             print("Job cards loaded successfully.")
             human_delay(2, 3)
 
-            # Obtener todas las tarjetas de trabajo
+            # Get all job card 
             job_cards = driver.find_elements(By.CLASS_NAME, 'jobCard')
 
             for job_card in job_cards:
                 try:
-                    job_titlee = job_card.text.strip()  # Obtener el título como identificador único
+                    job_titlee = job_card.text.strip()  # Get job title unique
                     if job_titlee in processed_jobs:
-                        continue  # Si ya se procesó, pasar a la siguiente tarjeta
+                        continue  # if processed pass next job card
 
                     new_jobs_found = True  # Indicar que hay una nueva tarjeta
                     processed_jobs.add(job_titlee)  
@@ -247,7 +247,7 @@ def scrape_job_listings(driver):
             print("Error occurred while loading jobs:", e)
             break
 
-    # Guardar los datos en un archivo CSV
+    # Saved Data Into a CSV file
     df = pd.DataFrame(jobs_data)
     df.drop_duplicates(inplace=True)
     df.to_csv('glassdoor_jobs_combined-Machine Learning Engineer.csv', index=False, encoding='utf-8-sig')
