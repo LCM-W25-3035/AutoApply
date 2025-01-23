@@ -1,5 +1,4 @@
-import random
-import time
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -7,10 +6,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.keys import Keys
+from dotenv import load_dotenv
 from bs4 import BeautifulSoup
 import pandas as pd
 import os
-from dotenv import load_dotenv
+import time
+import random
 
 
 load_dotenv()
@@ -91,19 +93,33 @@ def navigate_to_jobs(driver):
         exit()
 
 def dismiss_popup(driver):
-    """Checks for and dismisses popups or overlays."""
+    """Dismiss all modals dynamically if found and restore scrolling."""
     try:
-        # Wait for the popup to appear (if any)
+        # Verificar si el modal existe
+        modal_exists = driver.execute_script("""
+            return document.querySelector("div[class*='modal']") !== null;
+        """)
 
-        # Try to close the popup
-        modal_close_button = WebDriverWait(driver, 5).until(
-                EC.element_to_be_clickable((By.CLASS_NAME, 'modal_closeIcon'))
-            )
-        modal_close_button.click()
-        print("Popup dismissed.")
-        human_delay(1, 2)  # Add a slight delay after dismissing
-    except Exception:
-        print("No popup detected.")
+        if modal_exists:
+            # Si existe, eliminar el modal y restaurar el scroll
+            driver.execute_script("""
+                var modal = document.querySelector("div[class*='modal']");
+                if (modal) modal.remove();
+
+                // Restaurar el scroll en body y html
+                document.body.style.overflow = 'auto';
+                document.documentElement.style.overflow = 'auto';
+            """)
+            print("Popup removed with JavaScript.")
+            job_details_container = driver.find_element(By.CLASS_NAME, 'TwoColumnLayout_jobDetailsContainer__qyvJZ')
+            driver.execute_script("arguments[0].scrollIntoView(true);", job_details_container)
+            print("Right column scrolled into view.")
+        else:
+            print("No popup found to remove.")
+
+    except Exception as e:
+        print(f"Error while checking or removing popup: {e}")
+
 
 def search_jobs(driver, job_title, location):
     """Searches for jobs based on job title and location."""
@@ -113,6 +129,8 @@ def search_jobs(driver, job_title, location):
             EC.presence_of_element_located((By.ID, 'searchBar-jobTitle'))
         )
         job_title_input.clear()
+        job_title_input.send_keys(Keys.CONTROL + 'a')  # Select all text
+        job_title_input.send_keys(Keys.BACKSPACE) 
         job_title_input.send_keys(job_title)
         human_delay(1, 3)
 
@@ -121,33 +139,45 @@ def search_jobs(driver, job_title, location):
             EC.presence_of_element_located((By.ID, 'searchBar-location'))
         )
         location_input.clear()
+        location_input.send_keys(Keys.CONTROL + 'a')  # Select all text
+        location_input.send_keys(Keys.BACKSPACE) 
         location_input.send_keys(location)
         human_delay(1, 3)
         # After typing the location, give it some time for the automatic search to trigger
-        human_delay(10, 11)  # Simulating a short delay after typing
 
+         # Trigger input and change events for location
+        driver.execute_script("""
+            var input = arguments[0];
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+        """, location_input)
+
+        human_delay(2, 4)
+        location_input.send_keys(Keys.ENTER)
+        # Attempt to handle location suggestions
+        try:
+            location_suggestions = WebDriverWait(driver, 5).until(
+                EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.autocomplete_suggestionsList__Wg2ty li'))
+            )
+            for suggestion in location_suggestions:
+                if suggestion.text.strip().lower() == location.lower():
+                    suggestion.click()
+                    print(f"Location suggestion selected: {location}")
+                    break
+        except Exception:
+            print("No location suggestions displayed. Proceeding without selection.")
+
+        # Simulate a short delay and dismiss any popup
+        human_delay(2, 4)
         dismiss_popup(driver)
 
-        # Optionally, if necessary, wait for results to load
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'autocomplete_suggestionsList__Wg2ty')))
-        print("Search results loaded.")
-
-        location_suggestions = WebDriverWait(driver, 10).until(
-            EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.autocomplete_suggestionsList__Wg2ty li'))
-        )
-
-        for suggestion in location_suggestions:
-            if suggestion.text.strip().lower() == location.lower():
-                suggestion.click()  # Click the matching suggestion
-                print(f"Location selected: {location}")
-                break
+        print(f"Search completed for job title: {job_title} and location: {location}")
 
     except Exception as e:
-        print("Error during job search:", e)
-        driver.quit()
-        exit()
+        print(f"Error during job search: {e}")
 
-def scrape_job_listings(driver):
+
+def scrape_job_listings(driver, keyword):
     """Scrapes job listings from the search results."""
     jobs_data = []  #Container Job Offer
     processed_jobs = set() #Unique Job offer
@@ -176,6 +206,7 @@ def scrape_job_listings(driver):
 
                     # Click en la tarjeta para cargar la descripción
                     job_card.click()
+                    dismiss_popup(driver)
                     human_delay(2, 3)
 
                     # Extraer información visible directamente de la tarjeta
@@ -219,12 +250,11 @@ def scrape_job_listings(driver):
                 except Exception as job_error:
                     print(f"Error processing job card: {job_error}")
                     continue
-                    # Guardar los datos en un archivo CSV
 
+                # Save the data as backup
                 jobs_df = pd.DataFrame(jobs_data)
                 jobs_df.drop_duplicates(inplace=True)
-                #df.to_csv('glassdoor_jobs_combinedfull.csv', index=False)
-                jobs_df.to_csv('glassdoor_jobs_backup.csv', index=False, encoding='utf-8-sig')
+                jobs_df.to_csv(f'glassdoor_jobs_backup{keyword}.csv', index=False, encoding='utf-8-sig')
 
                 print("Data saved to 'glassdoor_jobs_backup.csv'.")
 
@@ -250,8 +280,8 @@ def scrape_job_listings(driver):
     # Saved Data Into a CSV file
     df = pd.DataFrame(jobs_data)
     df.drop_duplicates(inplace=True)
-    df.to_csv('glassdoor_jobs_combined-Machine Learning Engineer.csv', index=False, encoding='utf-8-sig')
-    print("Scraping complete. Data saved to 'glassdoor_jobs_combined.csv'.")
+    df.to_csv(f"glassdoor_jobs_{keyword}.csv", index=False, encoding='utf-8-sig')
+    print(f'Scraping complete. Data saved to f"glassdoor_jobs_{keyword}.csv".')
 
 
 
@@ -262,20 +292,41 @@ if __name__ == "__main__":
     options.headless = False  # Set to True for headless mode
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
+    keys =[]
+    with open("keywords.txt", 'r') as file:
+        for line in file:
+            keys.append(line.strip())
+        print(line.strip())
 
-    # Maximize browser window
+    print(keys)
+    # Maximize browser windows
     driver.maximize_window()
 
     try:
         login_to_glassdoor(driver, GLASSDOOR_EMAIL, GLASSDOOR_PASSWORD)
         navigate_to_jobs(driver)
-        search_jobs(driver, "Machine Learning Engineer", "Ontario, Canada")
-        scrape_job_listings(driver)
+        for i in keys:
+            search_jobs(driver, i, "Canada")
+            scrape_job_listings(driver, i)
+        
+        #concating each csv file
+        data_final = pd.DataFrame()
+        for documento in keys: 
+            data1 = pd.read_csv(f"glassdoor_jobs_{documento}.csv")
+            data_final = pd.concat([data_final, data1], ignore_index=True)
+
+        print(data_final.shape)
+
+        data_final = data_final[~data_final.duplicated(keep='first')]
+        data_final.shape
+
+        data_final.to_csv("Jobs-Data_Scraped.csv", index=False)
+
 
     
     finally:
         time.sleep(5)
         end_time = time.time()
         elapsed_time = end_time - start_time
-        print(f"Tiempo total de ejecución: {elapsed_time:.2f} segundos")
+        print(f"Total execution time: {elapsed_time:.2f} Seconds")
         driver.quit()
