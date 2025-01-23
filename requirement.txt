@@ -1,6 +1,5 @@
-random
-time
-selenium==4.8.0
-webdriver-manager==4.8.0
-beautifulsoup4==4.11.1
-pandas==1.5.3
+
+selenium
+webdriver-manager
+beautifulsoup4
+pandas
