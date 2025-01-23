@@ -9,7 +9,7 @@ load_dotenv(find_dotenv())
 # Get the MongoDB connection string from the environment variables
 connection_string = os.environ.get("url")
 
-# Connect to the MongoDB client
+# Connect to the MongoDB clien
 try:
     client = pymongo.MongoClient(connection_string)
     print("Successfully connected to MongoDB Atlas! 🎉")
