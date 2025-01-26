@@ -101,7 +101,7 @@ class MatcherAgent(BaseAgent):
 
                 match_score = int((overlap / total_required) * 100) if total_required > 0 else 0
 
-                # Include jobs with >30% match
+                # Include jobs with >10% match
                 if match_score >= 10:
                     scored_jobs.append(
                         {
