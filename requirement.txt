@@ -8,3 +8,4 @@ scikit-learn
 openai
 pdfminer.six
 swarm
+fpdf
