@@ -4,5 +4,7 @@ webdriver-manager
 beautifulsoup4
 pandas
 ollama 
-pdfminer 
 scikit-learn
+openai
+pdfminer.six
+
