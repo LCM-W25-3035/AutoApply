@@ -1,6 +1,6 @@
 from typing import Dict, Any
 from pdfminer.high_level import extract_text # pip install pdfminer.six
-from Model_Mya_V1.base_agent import BaseAgent
+from .base_agent import BaseAgent
 
 class ExtractorAgent(BaseAgent):
     def __init__(self):

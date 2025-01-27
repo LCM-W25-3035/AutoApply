@@ -1,6 +1,6 @@
 import pandas as pd
 from typing import Dict, Any, List
-from Model_Mya_V1.base_agent import BaseAgent
+from .base_agent import BaseAgent
 import json
 
 class MatcherAgent(BaseAgent):

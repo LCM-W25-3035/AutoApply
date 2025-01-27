@@ -1,5 +1,5 @@
 from typing import Dict, Any
-from Model_Mya_V1.base_agent import BaseAgent
+from .base_agent import BaseAgent
 import json  # For JSON parsing
 import re  # For regex-based cleaning
 
