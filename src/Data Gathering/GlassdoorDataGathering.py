@@ -101,19 +101,20 @@ def dismiss_popup(driver):
         """)
 
         if modal_exists:
-            # Si existe, eliminar el modal y restaurar el scroll
             driver.execute_script("""
-                var modal = document.querySelector("div[class*='modal']");
-                if (modal) modal.remove();
-
-                // Restaurar el scroll en body y html
-                document.body.style.overflow = 'auto';
-                document.documentElement.style.overflow = 'auto';
+                // Locate the close button using its data-test attribute
+                var closeButton = document.querySelector("button[data-test='job-alert-modal-close']");
+                
+                if (closeButton) {
+                    // Simulate a click on the close button
+                    closeButton.click();
+                } else {
+                    console.warn('Close button not found');
+                }
             """)
+
             print("Popup removed with JavaScript.")
-            job_details_container = driver.find_element(By.CLASS_NAME, 'TwoColumnLayout_jobDetailsContainer__qyvJZ')
-            driver.execute_script("arguments[0].scrollIntoView(true);", job_details_container)
-            print("Right column scrolled into view.")
+
         else:
             print("No popup found to remove.")
 
@@ -143,29 +144,10 @@ def search_jobs(driver, job_title, location):
         location_input.send_keys(Keys.BACKSPACE) 
         location_input.send_keys(location)
         human_delay(1, 3)
-        # After typing the location, give it some time for the automatic search to trigger
-
-         # Trigger input and change events for location
-        driver.execute_script("""
-            var input = arguments[0];
-            input.dispatchEvent(new Event('input', { bubbles: true }));
-            input.dispatchEvent(new Event('change', { bubbles: true }));
-        """, location_input)
 
         human_delay(2, 4)
         location_input.send_keys(Keys.ENTER)
-        # Attempt to handle location suggestions
-        try:
-            location_suggestions = WebDriverWait(driver, 5).until(
-                EC.presence_of_all_elements_located((By.CSS_SELECTOR, '.autocomplete_suggestionsList__Wg2ty li'))
-            )
-            for suggestion in location_suggestions:
-                if suggestion.text.strip().lower() == location.lower():
-                    suggestion.click()
-                    print(f"Location suggestion selected: {location}")
-                    break
-        except Exception:
-            print("No location suggestions displayed. Proceeding without selection.")
+
 
         # Simulate a short delay and dismiss any popup
         human_delay(2, 4)
@@ -177,7 +159,7 @@ def search_jobs(driver, job_title, location):
         print(f"Error during job search: {e}")
 
 
-def scrape_job_listings(driver, keyword):
+def scrape_job_listings(driver, keyword, providence):
     """Scrapes job listings from the search results."""
     jobs_data = []  #Container Job Offer
     processed_jobs = set() #Unique Job offer
@@ -205,6 +187,7 @@ def scrape_job_listings(driver, keyword):
                     processed_jobs.add(job_titlee)  
 
                     # Click en la tarjeta para cargar la descripción
+                    dismiss_popup(driver)
                     job_card.click()
                     dismiss_popup(driver)
                     human_delay(2, 3)
@@ -254,7 +237,7 @@ def scrape_job_listings(driver, keyword):
                 # Save the data as backup
                 jobs_df = pd.DataFrame(jobs_data)
                 jobs_df.drop_duplicates(inplace=True)
-                jobs_df.to_csv(f'glassdoor_jobs_backup{keyword}.csv', index=False, encoding='utf-8-sig')
+                jobs_df.to_csv(f'glassdoor_jobs_backup{keyword}{providence}.csv', index=False, encoding='utf-8-sig')
 
                 print("Data saved to 'glassdoor_jobs_backup.csv'.")
 
@@ -280,8 +263,8 @@ def scrape_job_listings(driver, keyword):
     # Saved Data Into a CSV file
     df = pd.DataFrame(jobs_data)
     df.drop_duplicates(inplace=True)
-    df.to_csv(f"glassdoor_jobs_{keyword}.csv", index=False, encoding='utf-8-sig')
-    print(f'Scraping complete. Data saved to f"glassdoor_jobs_{keyword}.csv".')
+    df.to_csv(f"glassdoor_jobs_{keyword}{providence}.csv", index=False, encoding='utf-8-sig')
+    print(f'Scraping complete. Data saved to f"glassdoor_jobs_{keyword}{providence}.csv".')
 
 
 
@@ -293,12 +276,21 @@ if __name__ == "__main__":
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
     keys =[]
-    with open("keywords.txt", 'r') as file:
-        for line in file:
+    providence = []
+    with open("keywords.txt", 'r') as file1:
+        for line in file1:
             keys.append(line.strip())
-        print(line.strip())
+            print(line.strip())
 
     print(keys)
+
+    with open("providence.txt", 'r') as file2:
+        for line in file2:
+            providence.append(line.strip())
+            print(line.strip())
+
+    print(providence)
+
     # Maximize browser windows
     driver.maximize_window()
 
@@ -306,14 +298,16 @@ if __name__ == "__main__":
         login_to_glassdoor(driver, GLASSDOOR_EMAIL, GLASSDOOR_PASSWORD)
         navigate_to_jobs(driver)
         for i in keys:
-            search_jobs(driver, i, "Canada")
-            scrape_job_listings(driver, i)
+            for j in providence:
+                search_jobs(driver, i, j)
+                scrape_job_listings(driver, i, j)
         
         #concating each csv file
         data_final = pd.DataFrame()
         for documento in keys: 
-            data1 = pd.read_csv(f"glassdoor_jobs_{documento}.csv")
-            data_final = pd.concat([data_final, data1], ignore_index=True)
+            for i in providence:
+                data1 = pd.read_csv(f"glassdoor_jobs_{documento}{i}.csv")
+                data_final = pd.concat([data_final, data1], ignore_index=True)
 
         print(data_final.shape)
 

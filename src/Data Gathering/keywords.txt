@@ -1,2 +1,7 @@
-mwd field engineer
-petroleum engineer
+it
+Data Analysis
+business analytics
+data engineer
+machine learning engineer
+LLM Enginner
+data scientist  
