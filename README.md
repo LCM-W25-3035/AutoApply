@@ -1,4 +1,4 @@
-# AutoApply
+updated the job insights 
 
 Job Recommendation and Resume Customization System
 
