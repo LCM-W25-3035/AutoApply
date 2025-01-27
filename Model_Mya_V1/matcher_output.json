@@ -1,0 +1,59 @@
+{
+    "matched_jobs": [
+        {
+            "title": "Data Scientist II at TD Bank",
+            "match_score": "20%",
+            "salary_range": "$73K - $115K (Employer Est.)",
+            "requirements": [
+                "Python",
+                "Cloud",
+                "SQL",
+                "Tableau",
+                "Anti-money Laundering functions",
+                "Data engineering",
+                "Reporting",
+                "Business Intelligence",
+                "Forecasting",
+                "Linear regressions",
+                "Time-series forecasting",
+                "Test & control group setup",
+                "Hypothesis testing",
+                "Analytics",
+                "Problem-solving"
+            ]
+        },
+        {
+            "title": "Data Scientist (12 Month Term) at Canadian Nuclear Laboratories (CNL)",
+            "match_score": "16%",
+            "salary_range": "$85K - $125K (Glassdoor Est.)",
+            "requirements": [
+                "Machine Learning",
+                "e.g.",
+                "anomaly detection",
+                "image analysis",
+                "time-series trend analysis",
+                "Python",
+                "data processing",
+                "statistics",
+                "machine learning",
+                "R",
+                "MATLAB",
+                "SQL",
+                "Object-oriented programming languages",
+                "preferred",
+                "Statistical analysis",
+                "multivariate analysis",
+                "regression analysis",
+                "hypothesis testing",
+                "sampling theory",
+                "Computational modeling",
+                "High-performance computing resources",
+                "Unix systems",
+                "RAVEN",
+                "Dakota"
+            ]
+        }
+    ],
+    "match_timestamp": "2024-03-14",
+    "number_of_matches": 2
+}
