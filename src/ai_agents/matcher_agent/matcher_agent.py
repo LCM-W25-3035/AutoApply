@@ -91,6 +91,9 @@ chain = (
 )
 
 # Realizar consulta
+res = chain.invoke({"question": "What are the soft skills of the candidate"})
+print(res)
+print("next question")
 res = chain.invoke({"question": "What are the tecnical skills of the candidate"})
 print(res)
 

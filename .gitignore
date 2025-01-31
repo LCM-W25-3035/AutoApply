@@ -107,3 +107,6 @@ __pycache__/
 .pytest_cache/
 # ignore logs
 logs/
+
+.scannerwork/
+.coverage/
