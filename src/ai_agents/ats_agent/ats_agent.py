@@ -3,14 +3,14 @@ import logging
 import pandas as pd
 from collections import Counter
 
-
 # Connect with Ollama
 client = OpenAI(
     base_url='http://localhost:11434/v1/',
     api_key='ollama',
 )
 
-file_path = 'data/updated_job_dataset'
+# Load job dataset
+file_path = r'D:\Big Data\Term 3\1. Big Data Capstone Project\updated_job_dataset.csv'
 df = pd.read_csv(file_path)
 
 # Extract and count the most mentioned skills (must-have and nice-to-have combined)
@@ -26,25 +26,25 @@ skill_counter = Counter(skills)
 # Get the 20 most mentioned skills
 top_skills = [skill for skill, _ in skill_counter.most_common(20)]
 
-#  Display questions to the user and control flow
+# Display questions to the user and control flow
 save_answers = {}
 index = 0
 total_questions = len(top_skills)
-# Ask 3 questions in each iteration
+
 while index < total_questions:
-    for i in range(3):  
+    for i in range(3):  # Ask 3 questions in each iteration
         if index < total_questions:
             skill = top_skills[index]
-            print(f"¿You have experience with {skill}? (yes/no)")
+            print(f"Do you have experience with {skill}? (yes/no)")
             answer = input("Your answer: ").strip().lower()
             
             if answer == "yes":
                 while True:
-                    detail = input(f"Describe your experience with {skill} including how you got it and a metric or result achieved: ")
+                    detail = input(f"Describe your experience with {skill}, including how you obtained it and a metric or result achieved: ")
                     
                     # Send response to Ollama for validation
                     validation_prompt = (
-                        f"Analyze the following answer and determine if it clearly explains how the experience was obtained. {skill} "
+                        f"Analyze the following answer and determine if it clearly explains how the experience in {skill} was obtained "
                         f"and whether it includes a quantifiable metric or outcome. If it is insufficient, suggest improvements using action verbs and metrics:\n\n"
                         f"Answer: {detail}")
                     
@@ -68,12 +68,12 @@ while index < total_questions:
     if index >= total_questions:
         break
     
-    follow = input("¿Do you want to continue with more questions?? (yes/no): ").strip().lower()
-    if follow != 'yes':
+    continue_prompt = input("Do you want to continue with more questions? (yes/no): ").strip().lower()
+    if continue_prompt != 'yes':
         break
 
 # Save answers in a dictionary
-with open("answer_user.txt", "w") as file:
+with open("user_answers.txt", "w") as file:
     for skill, detail in save_answers.items():
         file.write(f"Skill: {skill}\nExperience: {detail}\n\n")
 
