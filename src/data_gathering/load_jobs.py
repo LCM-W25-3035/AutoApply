@@ -1,63 +1,73 @@
-from dotenv import load_dotenv, find_dotenv
 import os
+import sys
+import logging
 import pymongo
 import pandas as pd
+from dotenv import load_dotenv, find_dotenv
 
-# Load environment variables from the .env file
+# Configuring logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
+# Loading environment variables from .env file
 load_dotenv(find_dotenv())
 
-# Get the MongoDB connection string from the environment variables
+# Getting MongoDB connection string
 connection_string = os.environ.get("url")
+if not connection_string:
+    logging.error("MongoDB connection string is missing. Set the 'url' environment variable.")
+    sys.exit(1)
 
-# Connect to the MongoDB clien
+# MongoDB connection with proper error handling
 try:
-    client = pymongo.MongoClient(connection_string)
-    print("Successfully connected to MongoDB Atlas! 🎉")
+    with pymongo.MongoClient(connection_string, serverSelectionTimeoutMS=5000) as client:
+        # Checking connection
+        client.admin.command("ping")
+        logging.info("Successfully connected to MongoDB Atlas! 🎉")
+
+        # Selecting database and collection
+        db = client.jobsDB
+        collection = db.jobsCollection
+
+        # Clearing the collection before inserting new data
+        deleted_count = collection.delete_many({}).deleted_count
+        logging.info(f"Deleted {deleted_count} existing documents from 'jobsCollection'.")
+
+        # Reading the Excel file
+        excel_file_path = "Jobs Data.xlsx"
+        if not os.path.exists(excel_file_path):
+            logging.error(f"Excel file not found: {excel_file_path}")
+            sys.exit(1)
+
+        try:
+            data = pd.read_excel(excel_file_path)
+            logging.info(f"Excel file '{excel_file_path}' loaded successfully.")
+        except Exception as e:
+            logging.error(f"Error reading the Excel file: {e}")
+            sys.exit(1)
+
+        # Converting DataFrame to a list of dictionaries
+        data_dict = data.to_dict(orient="records")
+        if not data_dict:
+            logging.warning("Excel file is empty, no data inserted.")
+        else:
+            # Inserting the new data into MongoDB
+            try:
+                collection.insert_many(data_dict, ordered=False)
+                logging.info(f"{len(data_dict)} documents inserted into 'jobsCollection'.")
+            except pymongo.errors.BulkWriteError as bwe:
+                logging.error(f"Error inserting documents: {bwe.details}")
+            except Exception as e:
+                logging.error(f"Unexpected error while inserting documents: {e}")
+                sys.exit(1)
+
+        # Verify inserted data
+        logging.info("Verifying inserted documents:")
+        for doc in collection.find({}, {"_id": 0}):  # Hide `_id` for cleaner output
+            logging.info(doc)
+
+except pymongo.errors.ServerSelectionTimeoutError:
+    logging.error("Could not connect to MongoDB. Check your connection string and network.")
+    sys.exit(1)
 except Exception as e:
-    print(f"Error connecting to MongoDB: {e}")
-    exit()
-
-# Select the database and collection
-db = client.jobsDB  # Name of the database
-collection = db.jobsCollection  # Name of the collection
-
-# Clear the collection before inserting new data
-try:
-    collection.delete_many({})  # Deletes all documents in the collection
-    print("Existing data in the collection has been cleared.")
-except Exception as e:
-    print(f"Error clearing the collection: {e}")
-    exit()
-
-# Read the Excel file using pandas
-excel_file_path = "Jobs Data.xlsx"  # Make sure this file is in the same directory as the script
-try:
-    data = pd.read_excel(excel_file_path)
-    print(f"Excel file '{excel_file_path}' loaded successfully.")
-except FileNotFoundError:
-    print(f"Excel file not found: {excel_file_path}")
-    exit()
-except Exception as e:
-    print(f"Error reading the Excel file: {e}")
-    exit()
-
-# Convert the pandas DataFrame to a list of dictionaries for MongoDB insertion
-data_dict = data.to_dict(orient="records")
-
-# Insert the new data into the collection
-try:
-    collection.insert_many(data_dict)
-    print(f"{len(data_dict)} documents have been inserted into the collection 'jobsCollection'.")
-except pymongo.errors.BulkWriteError as bwe:
-    print(f"Error inserting documents: {bwe.details}")
-except Exception as e:
-    print(f"Unexpected error while inserting documents: {e}")
-    exit()
-
-# Verify the inserted data
-print("Documents in the collection:")
-try:
-    for doc in collection.find():
-        print(doc)
-except Exception as e:
-    print(f"Error retrieving documents from the collection: {e}")
+    logging.error(f"Unexpected error: {e}")
+    sys.exit(1)
