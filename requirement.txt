@@ -10,3 +10,8 @@ pdfminer.six
 swarm
 fpdf
 openai
+pymongo
+sentence_transformers
+tf-keras
+numpy
+pymupdf
