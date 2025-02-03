@@ -1,0 +1,45 @@
+{
+    "skills_analysis": {
+        "technical_skills": {
+            "categories": {
+                "Programming languages": [
+                    "Python"
+                ],
+                "Database management systems": [
+                    "SQL",
+                    "MySQL",
+                    "Postgres"
+                ],
+                "Version control system": [
+                    "Git"
+                ]
+            },
+            "other_skills": [
+                "Time series forecasting techniques",
+                "Productionizing models",
+                "Recommendation engines",
+                "Customer segmentation",
+                "AWS"
+            ]
+        },
+        "years_of_experience": 7,
+        "education": {
+            "level": "B.S.",
+            "field": "Statistics"
+        },
+        "experience_level": "Senior",
+        "key_achievements": [
+            "Deployed a recommendation engine to increase average order size by 7%",
+            "Implemented time series forecasting techniques to predict surge in orders, lowering customer wait by 10 minutes",
+            "Designed a model to increase incentives for drivers during peak hours, increasing driver availability by 22%",
+            "Led a team of 3 data scientists to model the ordering process 5 unique ways, reported results, and made recommendations to increase order output by 9%"
+        ],
+        "domain_expertise": [
+            "Data Science",
+            "Recommendation Engines",
+            "Time Series Forecasting"
+        ]
+    },
+    "analysis_timestamp": "2025-02-02",
+    "confidence_score": 0.85
+}

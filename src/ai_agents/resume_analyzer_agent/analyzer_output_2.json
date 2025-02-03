@@ -1,0 +1,28 @@
+{
+    "skills_analysis": {
+        "technical_skills": {
+            "categories": {
+                "Machine Learning and Statistical Analysis": [],
+                "Data Analysis and Feature Engineering": [],
+                "Predictive Modeling": []
+            },
+            "other_skills": [
+                "Python",
+                "SQL"
+            ]
+        },
+        "years_of_experience": 4,
+        "education": {
+            "level": "M.Sc",
+            "field": "Data Science"
+        },
+        "experience_level": "Mid-level",
+        "key_achievements": [],
+        "domain_expertise": [
+            "Predictive Analytics",
+            "Finance Sector"
+        ]
+    },
+    "analysis_timestamp": "2025-02-02",
+    "confidence_score": 0.85
+}
