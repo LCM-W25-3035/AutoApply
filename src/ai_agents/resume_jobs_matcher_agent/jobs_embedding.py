@@ -24,7 +24,7 @@ db = client[MONGO_DB_NAME]
 collection = db[MONGO_COLLECTION_NAME]
 
 # Fetch Only Jobs That Don't Have an Embedding
-jobs = collection.find({"embedding": {"$exists": False}})
+jobs = collection.find({"Embedding": {"$exists": False}})
 
 job_count = 0  # Counter for processed jobs
 
@@ -39,7 +39,7 @@ for job in jobs:
     job_embedding = embedding_model.encode(job_text).tolist()  # Convert numpy array to list
 
     # Update MongoDB with the new embedding
-    collection.update_one({"_id": job_id}, {"$set": {"embedding": job_embedding}})
+    collection.update_one({"_id": job_id}, {"$set": {"Embedding": job_embedding}})
     
     job_count += 1  # Increment processed job counter
 
