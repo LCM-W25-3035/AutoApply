@@ -79,8 +79,7 @@ class AnalyzerAgent:
 
         return {
             "skills_analysis": parsed_results,
-            "analysis_timestamp": datetime.today().strftime("%Y-%m-%d"),
-            "confidence_score": 0.85 if "error" not in parsed_results else 0.5,
+            "analysis_timestamp": datetime.today().strftime("%Y-%m-%d")
         }
 
     def _query_ollama(self, prompt: str) -> str:
