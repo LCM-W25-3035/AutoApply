@@ -1,0 +1,64 @@
+{
+    "matched_jobs": [
+        {
+            "job_title": "OSP/ Civil Designer",
+            "company": "Legacy DesignTech Inc.",
+            "similarity_score": 0.6789,
+            "job_url": "https://www.glassdoor.ca/job-listing/osp-civil-designer-legacy-designtech-inc-JV_IC4032231_KO0,18_KE19,40.htm?jl=1009598581187"
+        },
+        {
+            "job_title": "Manufacturing Engineer",
+            "company": "Unified Flex Packaging Technologies",
+            "similarity_score": 0.6778,
+            "job_url": "https://www.glassdoor.ca/job-listing/manufacturing-engineer-unified-flex-packaging-technologies-JV_IC2281450_KO0,22_KE23,58.htm?jl=1009601318943"
+        },
+        {
+            "job_title": "Service Desk Analyst",
+            "company": "All Weather At Home",
+            "similarity_score": 0.6616,
+            "job_url": "https://www.glassdoor.ca/job-listing/service-desk-analyst-all-weather-at-home-JV_IC2274961_KO0,20_KE21,40.htm?jl=1009540572147"
+        },
+        {
+            "job_title": "Production Engineer",
+            "company": "Unified Flex Packaging Technologies",
+            "similarity_score": 0.6572,
+            "job_url": "https://www.glassdoor.ca/job-listing/production-engineer-unified-flex-packaging-technologies-JV_IC2281450_KO0,19_KE20,55.htm?jl=1009601322771"
+        },
+        {
+            "job_title": "Process Engineer",
+            "company": "Golden Windows Ltd",
+            "similarity_score": 0.6554,
+            "job_url": "https://www.glassdoor.ca/job-listing/process-engineer-golden-windows-ltd-JV_IC2286008_KO0,16_KE17,35.htm?jl=1009542123665"
+        },
+        {
+            "job_title": "Product Designer/Project Manager, Metal Fabrication",
+            "company": "Canadian Business Machines Ltd.",
+            "similarity_score": 0.6553,
+            "job_url": "https://www.glassdoor.ca/job-listing/product-designer-project-manager-metal-fabrication-canadian-business-machines-ltd-JV_IC2286058_KO0,50_KE51,81.htm?jl=1009601632341"
+        },
+        {
+            "job_title": "Technical Support/Warehouse Customer Service",
+            "company": "HR Vision",
+            "similarity_score": 0.6501,
+            "job_url": "https://www.glassdoor.ca/job-listing/technical-support-warehouse-customer-service-hr-vision-JV_IC2280449_KO0,44_KE45,54.htm?jl=1006547474565"
+        },
+        {
+            "job_title": "Process Engineer - Coordinator",
+            "company": "Magna",
+            "similarity_score": 0.6474,
+            "job_url": "https://www.glassdoor.ca/job-listing/process-engineer-coordinator-magna-JV_IC4036036_KO0,28_KE29,34.htm?jl=1009599782672"
+        },
+        {
+            "job_title": "Project Engineering Specialist",
+            "company": "General Dynamics Land Systems",
+            "similarity_score": 0.6455,
+            "job_url": "https://www.glassdoor.ca/job-listing/project-engineering-specialist-general-dynamics-land-systems-JV_IC2285502_KO0,30_KE31,60.htm?jl=1009527173227"
+        },
+        {
+            "job_title": "Product Engineer",
+            "company": "Vuteq Canada Inc.",
+            "similarity_score": 0.6443,
+            "job_url": "https://www.glassdoor.ca/job-listing/product-engineer-vuteq-canada-inc-JV_IC2281450_KO0,16_KE17,33.htm?jl=1009509830545"
+        }
+    ]
+}

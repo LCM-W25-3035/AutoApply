@@ -1,0 +1,64 @@
+{
+    "matched_jobs": [
+        {
+            "job_title": "Data Engineer - Python and PostgreSQL",
+            "company": "Procom",
+            "similarity_score": 0.7501,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-engineer-python-and-postgresql-procom-JV_IC2281069_KO0,35_KE36,42.htm?jl=1009597148439"
+        },
+        {
+            "job_title": "Senior Data Analyst",
+            "company": "Olsen Consulting",
+            "similarity_score": 0.7238,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-data-analyst-olsen-consulting-JV_IC2275123_KO0,19_KE20,36.htm?jl=1008888307267"
+        },
+        {
+            "job_title": "Senior BI / Data Engineer",
+            "company": "Vantix Systems Inc",
+            "similarity_score": 0.7011,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-bi-data-engineer-vantix-systems-inc-JV_IC2274961_KO0,23_KE24,42.htm?jl=1009225174557"
+        },
+        {
+            "job_title": "IT Application Support -- Data Base Engineer",
+            "company": "Richfit Canada Ltd.",
+            "similarity_score": 0.6926,
+            "job_url": "https://www.glassdoor.ca/job-listing/it-application-support-data-base-engineer-richfit-canada-ltd-JV_IC2275123_KO0,41_KE42,60.htm?jl=1009514838410"
+        },
+        {
+            "job_title": "System Analyst",
+            "company": "Vantix Systems Inc",
+            "similarity_score": 0.6903,
+            "job_url": "https://www.glassdoor.ca/job-listing/system-analyst-vantix-systems-inc-JV_IC2274961_KO0,14_KE15,33.htm?jl=1009609229633"
+        },
+        {
+            "job_title": "Front Office D&A Application Engineer",
+            "company": "Trafigura",
+            "similarity_score": 0.6816,
+            "job_url": "https://www.glassdoor.ca/job-listing/front-office-da-application-engineer-trafigura-JV_IC2275123_KO0,36_KE37,46.htm?jl=1009506876304"
+        },
+        {
+            "job_title": "Systems Analyst (Web / Mobile)",
+            "company": "Vantix Systems Inc",
+            "similarity_score": 0.6673,
+            "job_url": "https://www.glassdoor.ca/job-listing/systems-analyst-web-mobile-vantix-systems-inc-JV_IC2274961_KO0,26_KE27,45.htm?jl=1008067638005"
+        },
+        {
+            "job_title": "Senior Data Analyst",
+            "company": "Vantix Systems Inc",
+            "similarity_score": 0.6629,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-data-analyst-vantix-systems-inc-JV_IC2274961_KO0,19_KE20,38.htm?jl=1009225174556"
+        },
+        {
+            "job_title": "Data Engineer",
+            "company": "Princeton IT Services",
+            "similarity_score": 0.6608,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-engineer-princeton-it-services-JV_IC2275123_KO0,13_KE14,35.htm?jl=1009515311798"
+        },
+        {
+            "job_title": "Senior Financial Analyst",
+            "company": "Core Services Inc",
+            "similarity_score": 0.6594,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-financial-analyst-core-services-inc-JV_IC2286070_KO0,24_KE25,42.htm?jl=1009608950235"
+        }
+    ]
+}
