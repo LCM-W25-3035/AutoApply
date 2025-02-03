@@ -1,0 +1,47 @@
+{
+    "skills_analysis": {
+        "technical_skills": {
+            "categories": {
+                "Data Analysis": [
+                    "SQL",
+                    "Excel/Google Sheets",
+                    "Tableau",
+                    "Google Analytics"
+                ],
+                "Leadership Experience": [
+                    "Problem Solving"
+                ]
+            },
+            "other_skills": [
+                "Python"
+            ]
+        },
+        "years_of_experience": 8,
+        "education": {
+            "level": "Bachelor",
+            "field": "Business"
+        },
+        "experience_level": "Senior",
+        "key_achievements": [
+            "Increased revenue by $16M through data analysis",
+            "Discovered an additional $3M in savings after compiling data on industry trends and internal operating inefficiencies",
+            "Saved companies a combined 800 man hours a month by identifying and solving operating inefficiencies",
+            "Participated in decisions surrounding policy packages that saved the company $3.2M in legal costs"
+        ],
+        "domain_expertise": [
+            "Business Analysis",
+            "Data Analysis"
+        ],
+        "job_titles": [
+            "Business Analyst (Lancer Insurance Company)",
+            "Business Analyst (ThreeBridge Solutions)",
+            "Product Modeling Analyst (Geico)"
+        ],
+        "industries": [
+            "Insurance"
+        ],
+        "professional_summary": "Highly skilled Business Analyst with expertise in data-driven decision making, process improvement, and stakeholder communication."
+    },
+    "analysis_timestamp": "2025-02-03",
+    "confidence_score": 0.85
+}
