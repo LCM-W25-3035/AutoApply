@@ -32,23 +32,23 @@ try:
         deleted_count = collection.delete_many({}).deleted_count
         logging.info(f"Deleted {deleted_count} existing documents from 'jobsCollection'.")
 
-        # Reading the Excel file
-        excel_file_path = "Jobs Data.xlsx"
-        if not os.path.exists(excel_file_path):
-            logging.error(f"Excel file not found: {excel_file_path}")
+        # Loading CSV file
+        csv_file_path = "src\data_gathering\job_dataset.csv"
+        if not os.path.exists(csv_file_path):
+            logging.error(f"CSV file not found: {csv_file_path}")
             sys.exit(1)
 
         try:
-            data = pd.read_excel(excel_file_path)
-            logging.info(f"Excel file '{excel_file_path}' loaded successfully.")
+            data = pd.read_csv(csv_file_path)
+            logging.info(f"CSV file '{csv_file_path}' successfully loaded.")
         except Exception as e:
-            logging.error(f"Error reading the Excel file: {e}")
+            logging.error(f"Error reading the CSV file: {e}")
             sys.exit(1)
 
         # Converting DataFrame to a list of dictionaries
         data_dict = data.to_dict(orient="records")
         if not data_dict:
-            logging.warning("Excel file is empty, no data inserted.")
+            logging.warning("CSV file is empty, no data inserted.")
         else:
             # Inserting the new data into MongoDB
             try:
