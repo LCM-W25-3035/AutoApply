@@ -7,7 +7,7 @@ class ExtractorAgent:
     def __init__(self):
         self.name = "Extractor"
         self.instructions = """Extract and structure information from resumes.
-        Focus on: personal info, work experience, education, skills, and certifications.
+        Focus on: profile, professional summary, personal info, work experience, education, skills, domains, achievements and certifications.
         Provide output in a clear, structured format."""
 
         # Ollama API Client

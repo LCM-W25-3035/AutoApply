@@ -4,8 +4,8 @@ import os
 from extractor_agent import ExtractorAgent
 
 # Define input and output file paths
-input_filepath = os.path.join("src", "resumes", "resume_sample_3.pdf")  
-output_filepath = os.path.join("src", "ai_agents", "pdf_extractor_agent", "extractor_output_3.json")  
+input_filepath = os.path.join("src", "resumes", "resume_sample_2.pdf")  
+output_filepath = os.path.join("src", "ai_agents", "pdf_extractor_agent", "extractor_output_2.json")  
 
 # Create an instance of the ExtractorAgent
 extractor_agent = ExtractorAgent()
