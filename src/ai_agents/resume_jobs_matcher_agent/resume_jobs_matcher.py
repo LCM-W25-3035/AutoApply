@@ -7,8 +7,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from dotenv import load_dotenv
 
 # Define Input and Output File Paths
-input_filepath = os.path.join("src", "ai_agents", "resume_analyzer_agent", "analyzer_output_3.json")
-output_filepath = os.path.join("src", "ai_agents", "resume_jobs_matcher_agent", "matched_jobs_for_resume_3.json")
+input_filepath = os.path.join("src", "ai_agents", "resume_analyzer_agent", "analyzer_output_5.json")
+output_filepath = os.path.join("src", "ai_agents", "resume_jobs_matcher_agent", "matched_jobs_for_resume_5.json")
 
 # Load Embedding Model
 embedding_model = SentenceTransformer("all-mpnet-base-v2")
@@ -19,7 +19,7 @@ load_dotenv()
 # Get MongoDB connection details from environment variables
 MONGO_URI = os.getenv("MONGO_URI")
 MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")
-MONGO_COLLECTION_NAME = os.getenv("MONGO_COLLECTION_NAME")  # Fixed collection name
+MONGO_COLLECTION_NAME = os.getenv("MONGO_COLLECTION_NAME")
 
 if not MONGO_URI or not MONGO_DB_NAME or not MONGO_COLLECTION_NAME:
     print("Error: Missing MongoDB credentials in the .env file.")
@@ -67,7 +67,7 @@ job_titles = skills_analysis.get('job_titles', [])  # Extracted job titles from 
 professional_summary = skills_analysis.get('professional_summary', "No summary available.")
 
 # Extract Must-have Skills from MongoDB Job Listings
-jobs = list(collection.find({"embedding": {"$exists": True}}))
+jobs = list(collection.find({"Embedding": {"$exists": True}}))
 must_have_skills_set = set()
 
 for job in jobs:
@@ -106,7 +106,7 @@ resume_embedding = embedding_model.encode(resume_text).reshape(1, -1)  # Convert
 print("\nResume Embedding Generated (Ready for Matching)")
 
 # Retrieve All Job Embeddings from MongoDB
-jobs = list(collection.find({"embedding": {"$exists": True}}))
+jobs = list(collection.find({"Embedding": {"$exists": True}}))
 
 if not jobs:
     print("No job embeddings found in MongoDB.")
@@ -115,15 +115,15 @@ if not jobs:
 # Compute Similarity Scores
 job_matches = []
 for job in jobs:
-    job_embedding = np.array(job["embedding"]).reshape(1, -1)  # Convert to 2D array
+    job_embedding = np.array(job["Embedding"]).reshape(1, -1)  # Convert to 2D array
     similarity_score = cosine_similarity(resume_embedding, job_embedding)[0][0]
 
     job_matches.append({
         "job_title": job.get("Job Title", "N/A"),
         "company": job.get("Company Name", "N/A"),
         "must_have_skills": job.get("Must-have Skills", "N/A"),
-        "experience_level": job.get("Experience Level", "N/A"),  # Fixed capitalization
-        "education_level": job.get("Education level", "N/A"),  # Fixed capitalization
+        "experience_level": job.get("Experience Level", "N/A"),
+        "education_level": job.get("Education level", "N/A"),
         "similarity_score": round(similarity_score, 4),
         "job_url": job.get("job url", "N/A")
     })
