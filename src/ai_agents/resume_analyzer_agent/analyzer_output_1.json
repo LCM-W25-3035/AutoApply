@@ -1,24 +1,20 @@
 {
     "skills_analysis": {
         "technical_skills": {
-            "categories": {
-                "Programming languages": [
-                    "Python"
-                ],
-                "Database management systems": [
-                    "SQL",
-                    "MySQL",
-                    "Postgres"
-                ],
-                "Version control system": [
-                    "Git"
-                ]
-            },
+            "categories": [
+                "machine learning",
+                "data analysis",
+                "software development"
+            ],
             "other_skills": [
-                "Time series forecasting techniques",
-                "Productionizing models",
-                "Recommendation engines",
-                "Customer segmentation",
+                "Python",
+                "SQL",
+                "NumPy",
+                "Pandas",
+                "Scikit-learn",
+                "Keras",
+                "Flask",
+                "Git",
                 "AWS"
             ]
         },
@@ -27,19 +23,25 @@
             "level": "B.S.",
             "field": "Statistics"
         },
-        "experience_level": "Senior",
+        "experience_level": "Mid-level",
         "key_achievements": [
-            "Deployed a recommendation engine to increase average order size by 7%",
-            "Implemented time series forecasting techniques to predict surge in orders, lowering customer wait by 10 minutes",
-            "Designed a model to increase incentives for drivers during peak hours, increasing driver availability by 22%",
-            "Led a team of 3 data scientists to model the ordering process 5 unique ways, reported results, and made recommendations to increase order output by 9%"
+            "Increased average order size by 7%",
+            "Reduced customer wait time by 10 minutes",
+            "Improved driver availability by 22%",
+            "Built a customer attrition random forest model that improved monthly retention by 12 basis points"
         ],
         "domain_expertise": [
-            "Data Science",
-            "Recommendation Engines",
-            "Time Series Forecasting"
-        ]
+            "Machine learning",
+            "Data analysis",
+            "Software development"
+        ],
+        "job_titles": [
+            "Data Scientist",
+            "Entry-Level Data Analyst"
+        ],
+        "industries": [],
+        "professional_summary": "Highly motivated and detail-oriented Data Scientist with 7+ years of experience in building predictive models, deployment of recommendation engines, and improving customer engagement."
     },
-    "analysis_timestamp": "2025-02-02",
+    "analysis_timestamp": "2025-02-03",
     "confidence_score": 0.85
 }

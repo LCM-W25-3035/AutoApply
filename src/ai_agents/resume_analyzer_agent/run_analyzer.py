@@ -1,11 +1,11 @@
 import asyncio
 import json
 import os
-from analyzer_agent_v2 import AnalyzerAgent
+from analyzer_agent import AnalyzerAgent
 
 # Define input and output file paths
-input_filepath = os.path.join("src", "ai_agents", "pdf_extractor_agent", "extractor_output_1.json")
-output_filepath = os.path.join("src", "ai_agents", "resume_analyzer_agent", "analyzer_output_1_v2.json")
+input_filepath = os.path.join("src", "ai_agents", "pdf_extractor_agent", "extractor_output_3.json")
+output_filepath = os.path.join("src", "ai_agents", "resume_analyzer_agent", "analyzer_output_3.json")
 
 # Create an instance of the AnalyzerAgent (only once)
 analyzer_agent = AnalyzerAgent()

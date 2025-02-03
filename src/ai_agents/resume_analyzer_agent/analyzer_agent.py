@@ -1,7 +1,7 @@
 from typing import Dict, Any
 import json
 from openai import OpenAI
-
+from datetime import datetime
 
 class AnalyzerAgent:
     def __init__(self):
@@ -13,6 +13,9 @@ class AnalyzerAgent:
         4. Experience level (Junior/Mid-level/Senior)
         5. Key achievements
         6. Domain expertise
+        7. Job titles
+        8. Industries
+        9. Professional summary
 
         Format the output as structured JSON data."""
 
@@ -30,7 +33,7 @@ class AnalyzerAgent:
 
         # Ensure structured data exists
         if "structured_data" not in extracted_data:
-            print("❌ Error: Missing 'structured_data' key in input.")
+            print("Error: Missing 'structured_data' key in input.")
             return {"error": "Missing structured_data in input"}
 
         structured_data = extracted_data["structured_data"]
@@ -44,7 +47,10 @@ class AnalyzerAgent:
             "education": {{"level": "Unknown", "field": "Unknown"}},
             "experience_level": "Junior",
             "key_achievements": [],
-            "domain_expertise": []
+            "domain_expertise": [],
+            "job_titles": [],  
+            "industries": [],
+            "professional_summary": ""
         }}
 
         Resume data:
@@ -66,11 +72,14 @@ class AnalyzerAgent:
                 "experience_level": "Junior",
                 "key_achievements": [],
                 "domain_expertise": [],
+                "job_titles": [],  
+                "industries": [],
+                "professional_summary": "",
             }
 
         return {
             "skills_analysis": parsed_results,
-            "analysis_timestamp": "2025-02-02",
+            "analysis_timestamp": datetime.today().strftime("%Y-%m-%d"),
             "confidence_score": 0.85 if "error" not in parsed_results else 0.5,
         }
 
