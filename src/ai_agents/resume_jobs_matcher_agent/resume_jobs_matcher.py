@@ -13,13 +13,13 @@ output_filepath = os.path.join("src", "ai_agents", "resume_jobs_matcher_agent", 
 # Load Embedding Model
 embedding_model = SentenceTransformer("all-mpnet-base-v2")
 
-# Load .env file 
+# Load .env file
 load_dotenv()
 
 # Get MongoDB connection details from environment variables
 MONGO_URI = os.getenv("MONGO_URI")
 MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")
-MONGO_COLLECTION_NAME = os.getenv("MONGO_COLLECTION_NAME")
+MONGO_COLLECTION_NAME = os.getenv("MONGO_COLLECTION_NAME")  # Fixed collection name
 
 if not MONGO_URI or not MONGO_DB_NAME or not MONGO_COLLECTION_NAME:
     print("Error: Missing MongoDB credentials in the .env file.")
@@ -38,18 +38,33 @@ except FileNotFoundError:
     exit()
 
 # Extract Resume Data
+skills_analysis = resume_data.get('skills_analysis', {})
+
+# Extract technical skills (Handle list structure)
 technical_skills = []
-for category, skills in resume_data['skills_analysis']['technical_skills']['categories'].items():
-    technical_skills.extend(skills)
 
-technical_skills.extend(resume_data['skills_analysis']['technical_skills']['other_skills'])
+categories = resume_data['skills_analysis']['technical_skills'].get('categories', {})
 
-years_experience = resume_data['skills_analysis']['years_of_experience']
-experience_level = resume_data['skills_analysis']['experience_level']
-education_level = resume_data['skills_analysis']['education']['level']
-education_field = resume_data['skills_analysis']['education']['field']
-domain_expertise = resume_data['skills_analysis']['domain_expertise']
-key_achievements = resume_data['skills_analysis']['key_achievements']
+if isinstance(categories, dict):  # If categories is a dictionary (expected case)
+    for category, skills in categories.items():
+        technical_skills.extend(skills)
+elif isinstance(categories, list):  # If categories is a list (unexpected but possible)
+    for category_dict in categories:
+        if isinstance(category_dict, dict):  # Ensure it's a dictionary
+            for skills_list in category_dict.values():
+                technical_skills.extend(skills_list)
+
+# Include "other_skills" if available
+technical_skills.extend(resume_data['skills_analysis']['technical_skills'].get('other_skills', []))
+
+years_experience = skills_analysis.get('years_of_experience', "Unknown")
+experience_level = skills_analysis.get('experience_level', "Unknown")
+education_level = skills_analysis.get('education', {}).get('level', "Unknown")
+education_field = skills_analysis.get('education', {}).get('field', "Unknown")
+domain_expertise = skills_analysis.get('domain_expertise', [])
+key_achievements = skills_analysis.get('key_achievements', [])
+job_titles = skills_analysis.get('job_titles', [])  # Extracted job titles from work history
+professional_summary = skills_analysis.get('professional_summary', "No summary available.")
 
 # Extract Must-have Skills from MongoDB Job Listings
 jobs = list(collection.find({"embedding": {"$exists": True}}))
@@ -57,7 +72,7 @@ must_have_skills_set = set()
 
 for job in jobs:
     must_have_skills = job.get("Must-have Skills", [])
-    if isinstance(must_have_skills, str):  
+    if isinstance(must_have_skills, str):
         must_have_skills = must_have_skills.split(", ")  # Convert string to list
     must_have_skills_set.update(must_have_skills)
 
@@ -69,18 +84,19 @@ for skill in technical_skills:
     else:
         weighted_skills.append(skill)
 
-# Extract job title dynamically from domain expertise
-domain_expertise = resume_data["skills_analysis"]["domain_expertise"]
-job_title = domain_expertise[0] if domain_expertise else "Unknown Role"
+# Extract job title dynamically from job history or domain expertise
+job_title = job_titles[0] if job_titles else (domain_expertise[0] if domain_expertise else "Unknown Role")
 
 # Generate Structured Resume Text for Embedding
-resume_text = f"{job_title}. {', '.join(technical_skills)}. " \
-              f"{resume_data['skills_analysis']['experience_level']}-level experience with {resume_data['skills_analysis']['years_of_experience']} years. " \
-              f"Holds a {resume_data['skills_analysis']['education']['level']} in {resume_data['skills_analysis']['education']['field']}. " \
-              f"Expertise in {', '.join(domain_expertise)}."
+resume_text = f"{professional_summary}. " \
+              f"Previous roles: {', '.join(job_titles)}. " \
+              f"{experience_level}-level experience with {years_experience} years. " \
+              f"Holds a {education_level} in {education_field}. " \
+              f"Expertise in {', '.join(domain_expertise)}. " \
+              f"Skills: {', '.join(weighted_skills)}."
 
 if key_achievements:
-    resume_text += f"Key Achievements: {'. '.join(key_achievements)}."
+    resume_text += f" Key Achievements: {'. '.join(key_achievements)}."
 
 print("\nOptimized Resume Text for Embedding:", resume_text)
 
@@ -103,11 +119,11 @@ for job in jobs:
     similarity_score = cosine_similarity(resume_embedding, job_embedding)[0][0]
 
     job_matches.append({
-        "job_title": job["Job Title"],
-        "company": job["Company Name"],
-        "must_have skills": job.get("Must-have Skills", "N/A"),
-        "experience_level": job.get("Experience Level", "N/A"),
-        "education_level": job.get("Education level", "N/A"),
+        "job_title": job.get("Job Title", "N/A"),
+        "company": job.get("Company Name", "N/A"),
+        "must_have_skills": job.get("Must-have Skills", "N/A"),
+        "experience_level": job.get("Experience Level", "N/A"),  # Fixed capitalization
+        "education_level": job.get("Education level", "N/A"),  # Fixed capitalization
         "similarity_score": round(similarity_score, 4),
         "job_url": job.get("job url", "N/A")
     })
