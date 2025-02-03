@@ -1,27 +1,32 @@
 from typing import Dict, Any
-from base_agent import BaseAgent
 import json
+from openai import OpenAI
 
-class AnalyzerAgent(BaseAgent):
+
+class AnalyzerAgent:
     def __init__(self):
-        super().__init__(
-            name="Analyzer",
-            instructions="""Analyze candidate profiles and extract:
-            1. Technical skills (as a list)
-            2. Years of experience (numeric)
-            3. Education level
-            4. Experience level (Junior/Mid-level/Senior)
-            5. Key achievements
-            6. Domain expertise
-            
-            Format the output as structured JSON data.""",
+        self.name = "Analyzer"
+        self.instructions = """Analyze candidate profiles and extract:
+        1. Technical skills (as a list)
+        2. Years of experience (numeric)
+        3. Education level
+        4. Experience level (Junior/Mid-level/Senior)
+        5. Key achievements
+        6. Domain expertise
+
+        Format the output as structured JSON data."""
+
+        # Ollama API Client
+        self.ollama_client = OpenAI(
+            base_url="http://localhost:11434/v1",
+            api_key="ollama",  # required but unused
         )
 
     async def run(self, messages: list) -> Dict[str, Any]:
         """Analyze the extracted resume data"""
         print("🔍 Analyzer: Analyzing candidate profile")
 
-        extracted_data = messages[-1]["content"]  # No eval() needed
+        extracted_data = messages[-1]["content"]
 
         # Ensure structured data exists
         if "structured_data" not in extracted_data:
@@ -68,3 +73,32 @@ class AnalyzerAgent(BaseAgent):
             "analysis_timestamp": "2025-02-02",
             "confidence_score": 0.85 if "error" not in parsed_results else 0.5,
         }
+
+    def _query_ollama(self, prompt: str) -> str:
+        """Query Ollama model with the given prompt"""
+        try:
+            response = self.ollama_client.chat.completions.create(
+                model="llama3.2",  # Updated to llama3.2
+                messages=[
+                    {"role": "system", "content": self.instructions},
+                    {"role": "user", "content": prompt},
+                ],
+                temperature=0.7,
+                max_tokens=2000,
+            )
+            return response.choices[0].message.content
+        except Exception as e:
+            print(f"Error querying Ollama: {str(e)}")
+            raise
+
+    def _parse_json_safely(self, text: str) -> Dict[str, Any]:
+        """Safely parse JSON from text, handling potential errors"""
+        try:
+            start = text.find("{")
+            end = text.rfind("}")
+            if start != -1 and end != -1:
+                json_str = text[start : end + 1]
+                return json.loads(json_str)
+            return {"error": "No JSON content found"}
+        except json.JSONDecodeError:
+            return {"error": "Invalid JSON content"}

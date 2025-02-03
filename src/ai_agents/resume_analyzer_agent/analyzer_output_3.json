@@ -1,0 +1,22 @@
+{
+    "skills_analysis": {
+        "technical_skills": {
+            "categories": {},
+            "other_skills": [
+                "AutoCAD",
+                "Industry Trends & Sales Forecasting",
+                "Knowledge of Technical Diagrams"
+            ]
+        },
+        "years_of_experience": 1,
+        "education": {
+            "level": "Masters",
+            "field": "Industrial Engineering"
+        },
+        "experience_level": "Junior",
+        "key_achievements": [],
+        "domain_expertise": []
+    },
+    "analysis_timestamp": "2025-02-02",
+    "confidence_score": 0.85
+}

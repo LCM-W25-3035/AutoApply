@@ -4,8 +4,8 @@ import os
 from analyzer_agent import AnalyzerAgent
 
 # Define input and output file paths
-input_filepath = os.path.join("src", "ai_agents", "all_agents_v2", "extractor_output_1.json")
-output_filepath = os.path.join("src", "ai_agents", "all_agents_v2", "analyzer_output_1.json")
+input_filepath = os.path.join("src", "ai_agents", "pdf_extractor_agent", "extractor_output_3.json")
+output_filepath = os.path.join("src", "ai_agents", "resume_analyzer_agent", "analyzer_output_3.json")
 
 # Create an instance of the AnalyzerAgent (only once)
 analyzer_agent = AnalyzerAgent()
