@@ -4,6 +4,7 @@ import numpy as np
 import pymongo
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+from dotenv import load_dotenv
 
 # Define Input and Output File Paths
 input_filepath = os.path.join("src", "ai_agents", "resume_analyzer_agent", "analyzer_output_3.json")
@@ -12,11 +13,19 @@ output_filepath = os.path.join("src", "ai_agents", "skills_matcher_agent", "resu
 # Load Embedding Model
 embedding_model = SentenceTransformer("all-mpnet-base-v2")
 
-# MongoDB Connection
-MONGO_URI = "mongodb+srv://DavidRocha:davidoscar@capstone.9ajag.mongodb.net/?retryWrites=true&w=majority&appName=Capstone"
-MONGO_DB_NAME = "jobsDB"
-MONGO_COLLECTION_NAME = "jobsCollection"
+# Load .env file 
+load_dotenv()
 
+# Get MongoDB connection details from environment variables
+MONGO_URI = os.getenv("MONGO_URI")
+MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")
+MONGO_COLLECTION_NAME = os.getenv("MONGO_COLLECTION_NAME")
+
+if not MONGO_URI or not MONGO_DB_NAME or not MONGO_COLLECTION_NAME:
+    print("Error: Missing MongoDB credentials in the .env file.")
+    exit()
+
+# MongoDB Connection
 client = pymongo.MongoClient(MONGO_URI)
 db = client[MONGO_DB_NAME]
 collection = db[MONGO_COLLECTION_NAME]

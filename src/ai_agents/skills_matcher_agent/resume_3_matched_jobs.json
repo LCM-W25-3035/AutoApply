@@ -19,6 +19,12 @@
             "job_url": "https://www.glassdoor.ca/job-listing/service-desk-analyst-all-weather-at-home-JV_IC2274961_KO0,20_KE21,40.htm?jl=1009540572147"
         },
         {
+            "job_title": "Sr. Mechanical engineer",
+            "company": "Arcadis",
+            "similarity_score": 0.658,
+            "job_url": "https://www.glassdoor.ca/job-listing/sr-mechanical-engineer-arcadis-JV_IC2275123_KO0,22_KE23,30.htm?jl=1009588141126"
+        },
+        {
             "job_title": "Production Engineer",
             "company": "Unified Flex Packaging Technologies",
             "similarity_score": 0.6572,
@@ -53,12 +59,6 @@
             "company": "General Dynamics Land Systems",
             "similarity_score": 0.6455,
             "job_url": "https://www.glassdoor.ca/job-listing/project-engineering-specialist-general-dynamics-land-systems-JV_IC2285502_KO0,30_KE31,60.htm?jl=1009527173227"
-        },
-        {
-            "job_title": "Product Engineer",
-            "company": "Vuteq Canada Inc.",
-            "similarity_score": 0.6443,
-            "job_url": "https://www.glassdoor.ca/job-listing/product-engineer-vuteq-canada-inc-JV_IC2281450_KO0,16_KE17,33.htm?jl=1009509830545"
         }
     ]
 }

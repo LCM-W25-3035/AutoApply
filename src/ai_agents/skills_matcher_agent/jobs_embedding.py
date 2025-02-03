@@ -1,20 +1,30 @@
 import pymongo
+import os
 from sentence_transformers import SentenceTransformer
+from dotenv import load_dotenv  # Load environment variables
+
+# Load .env file (stored in the main directory)
+load_dotenv()
+
+# Get MongoDB connection details from environment variables
+MONGO_URI = os.getenv("MONGO_URI")
+MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")
+MONGO_COLLECTION_NAME = os.getenv("MONGO_COLLECTION_NAME")
+
+if not MONGO_URI or not MONGO_DB_NAME or not MONGO_COLLECTION_NAME:
+    print("Error: Missing MongoDB credentials in the .env file.")
+    exit()
 
 # Load Embedding Model
 embedding_model = SentenceTransformer("all-mpnet-base-v2")
 
 # MongoDB Connection
-MONGO_URI = "mongodb+srv://DavidRocha:davidoscar@capstone.9ajag.mongodb.net/?retryWrites=true&w=majority&appName=Capstone"
-MONGO_DB_NAME = "jobsDB"
-MONGO_COLLECTION_NAME = "jobsCollection"
-
 client = pymongo.MongoClient(MONGO_URI)
 db = client[MONGO_DB_NAME]
 collection = db[MONGO_COLLECTION_NAME]
 
-# Fetch All Jobs from MongoDB
-jobs = collection.find({})  # Retrieve all job postings
+# Fetch Only Jobs That Don't Have an Embedding
+jobs = collection.find({"embedding": {"$exists": False}})
 
 job_count = 0  # Counter for processed jobs
 
@@ -33,4 +43,4 @@ for job in jobs:
     
     job_count += 1  # Increment processed job counter
 
-print(f"\nJob embeddings successfully stored for {job_count} jobs in MongoDB!")
+print(f"\nJob embeddings successfully stored for {job_count} missing jobs in MongoDB!")
