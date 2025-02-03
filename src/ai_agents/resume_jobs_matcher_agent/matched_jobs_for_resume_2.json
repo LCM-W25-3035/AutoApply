@@ -1,0 +1,94 @@
+{
+    "matched_jobs": [
+        {
+            "job_title": "Data Engineer",
+            "company": "Wynshop",
+            "must_have skills": "GCP, Big Query, Cloud function, Composer, SQL code, Python",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor’s degree",
+            "similarity_score": 0.7759,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-engineer-wynshop-JV_KO0,13_KE14,21.htm?jl=1009598938757"
+        },
+        {
+            "job_title": "Data Engineer",
+            "company": "Ample Insight Inc.",
+            "must_have skills": "Python, R, Pandas, Numpy, scikit-learn, TensorFlow, Snowflake, relational databases, SQL, ETL workflows",
+            "experience_level": "Mid-level",
+            "education_level": "MS or PhD",
+            "similarity_score": 0.7692,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-engineer-ample-insight-inc-JV_IC2281069_KO0,13_KE14,31.htm?jl=1008985679306"
+        },
+        {
+            "job_title": "Data Scientist / Analyst- Canada- Remote Opportunity",
+            "company": "Exadel Inc",
+            "must_have skills": "SQL, Python, financial data",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's degree in Computer Science, Software Engineering or a relevant work experience.",
+            "similarity_score": 0.7565,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-scientist-analyst-canada-remote-opportunity-exadel-inc-JV_IC2281069_KO0,48_KE49,59.htm?jl=1009513984244"
+        },
+        {
+            "job_title": "Data Engineer - Python and PostgreSQL",
+            "company": "Procom",
+            "must_have skills": "Python, SQL, Spark, Power BI, Linux tools, shell scripting, data modeling, database design, data warehousing, ETL/ELT, data pipelines, cloud architecture and security (Azure, AWS, GCP)",
+            "experience_level": "Senior",
+            "education_level": "University degree or equivalent experience",
+            "similarity_score": 0.7455,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-engineer-python-and-postgresql-procom-JV_IC2281069_KO0,35_KE36,42.htm?jl=1009597148439"
+        },
+        {
+            "job_title": "Data Scientist - Machine Learning",
+            "company": "Ample Insight Inc.",
+            "must_have skills": "Python, Pandas, Numpy, scikit-learn, R, TensorFlow",
+            "experience_level": "Mid-level",
+            "education_level": "BS (or higher) in Computer Science or related engineering field involving coding",
+            "similarity_score": 0.741,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-scientist-machine-learning-ample-insight-inc-JV_IC2281069_KO0,31_KE32,49.htm?jl=1009126057716"
+        },
+        {
+            "job_title": "Data Scientist",
+            "company": "Atlantis IT group",
+            "must_have skills": "Python, sklearn, Keras, PyTorch, numpy, pandas, SQL, NoSQL databases, AWS, Azure, GCP, MLOps",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's Degree",
+            "similarity_score": 0.7358,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-scientist-atlantis-it-group-JV_IC2281069_KO0,14_KE15,32.htm?jl=1008947216691"
+        },
+        {
+            "job_title": "Data Engineer (Azure)",
+            "company": "Tiger Analytics",
+            "must_have skills": "Python, Pyspark, Azure stack, Apache spark, SQL queries, Delta Lake, ETL processing, Java (exposure to)",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's degree",
+            "similarity_score": 0.7323,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-engineer-azure-tiger-analytics-JV_IC2281069_KO0,19_KE20,35.htm?jl=1007430058957"
+        },
+        {
+            "job_title": "Data Engineer - Snowflake",
+            "company": "Tiger Analytics",
+            "must_have skills": "Python, SQL, PySpark, Snowflake Cloud Datawarehouse, DBT tool, Advanced SQL knowledge",
+            "experience_level": "Senior",
+            "education_level": "Bachelor's degree",
+            "similarity_score": 0.7314,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-engineer-snowflake-tiger-analytics-JV_IC2281069_KO0,23_KE24,39.htm?jl=1009585894815"
+        },
+        {
+            "job_title": "Sr Data Engineer",
+            "company": "Atlantis IT group",
+            "must_have skills": "Kafka, Spark, Hadoop, Cassndra, Pastgres, Airflow, Luigi, Azkaban, AWS (specifically Redshift, RDS, EMR, EC2)",
+            "experience_level": "Senior",
+            "education_level": "None specified",
+            "similarity_score": 0.7305,
+            "job_url": "https://www.glassdoor.ca/job-listing/sr-data-engineer-atlantis-it-group-JV_IC2281069_KO0,16_KE17,34.htm?jl=1009588582357"
+        },
+        {
+            "job_title": "Sr. Data Analyst, Sales and Operations",
+            "company": "Sagen",
+            "must_have skills": "Python, PySpark, SQL, Alteryx, Power BI, NumPy, Pandas, Scikit-learn, Spark ML",
+            "experience_level": "N/A",
+            "education_level": "University degree in Computer Science, Mathematics, Statistics or Data Science.",
+            "similarity_score": 0.7251,
+            "job_url": "https://www.glassdoor.ca/job-listing/sr-data-analyst-sales-and-operations-sagen-JV_IC2286067_KO0,36_KE37,42.htm?jl=1009592872560"
+        }
+    ]
+}

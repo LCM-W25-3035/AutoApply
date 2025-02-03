@@ -1,0 +1,94 @@
+{
+    "matched_jobs": [
+        {
+            "job_title": "Sr. Manager, Data Science / ML",
+            "company": "407 ETR",
+            "must_have skills": "Python, GIT, AWS SageMaker, ML libraries, Linear and mixed integer programming",
+            "experience_level": "Mid-level",
+            "education_level": "Master's or PhD degree",
+            "similarity_score": 0.7401,
+            "job_url": "https://www.glassdoor.ca/job-listing/sr-manager-data-science-ml-407-etr-JV_IC2281816_KO0,26_KE27,34.htm?jl=1009585940386"
+        },
+        {
+            "job_title": "Data Engineer, Forecasting Core Data Engineering",
+            "company": "Amazon Development Centre Canada ULC",
+            "must_have skills": "SQL, distributed systems knowledge, scripting language flexibility",
+            "experience_level": "Mid-level",
+            "education_level": "Master's degree",
+            "similarity_score": 0.7371,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-engineer-forecasting-core-data-engineering-amazon-development-centre-canada-ulc-JV_IC2281069_KO0,47_KE48,84.htm?jl=1009559562905"
+        },
+        {
+            "job_title": "Data Scientist",
+            "company": "Rekuten Global",
+            "must_have skills": "SQL, big data and machine learning frameworks (Python/sklearn/pytorch), multiple ML problem types (supervised/unsupervised, classification/regression), software development skills",
+            "experience_level": "Senior",
+            "education_level": "Bachelor's degree in AI/ML, computational mathematics, computer science, statistics, physics or related field (Master's degree strongly preferred)",
+            "similarity_score": 0.7245,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-scientist-rekuten-global-JV_IC2281069_KO0,14_KE15,29.htm?jl=1009342660041"
+        },
+        {
+            "job_title": "Data Scientist / Analyst",
+            "company": "Zenduit Inc",
+            "must_have skills": "Python, TensorFlow, PyTorch, scikit-learn, NLP, deep learning, Generative AI models, Information Retrieval for document question answering, RESTful APIs, Git",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor’s or Master’s in Computer Science, Statistics, Mathematics, or related field",
+            "similarity_score": 0.7228,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-scientist-analyst-zenduit-inc-JV_IC2280741_KO0,22_KE23,34.htm?jl=1009537164373"
+        },
+        {
+            "job_title": "Data Analyst - Automotive Engineer",
+            "company": "Syntronic",
+            "must_have skills": "SQL (MS SQL Server or equivalent), programming with Python, R, C#, experience with ETL processes, data visualization tools like Looker or PowerBI",
+            "experience_level": "Mid-level",
+            "education_level": "Master's degree",
+            "similarity_score": 0.7135,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-analyst-automotive-engineer-syntronic-JV_IC2280158_KO0,32_KE33,42.htm?jl=1009453093021"
+        },
+        {
+            "job_title": "Senior Data Analyst",
+            "company": "RouteThis",
+            "must_have skills": "Advanced Excel, SQL, Kibana, Sigma, PowerBI, Snowflake",
+            "experience_level": "Senior",
+            "education_level": "Bachelor's or Master's degree required (not specified which one), but it is expected that the candidate has a strong educational background in Data Analysis, Statistics, or related fields.",
+            "similarity_score": 0.7127,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-data-analyst-routethis-JV_IC2281069_KO0,19_KE20,29.htm?jl=1009610586787"
+        },
+        {
+            "job_title": "Senior Data Engineer",
+            "company": "Luxoft",
+            "must_have skills": "SQL, Python, Airflow, PySpark, AWS (EMR, Athena), Hadoop",
+            "experience_level": "Senior",
+            "education_level": "Bachelor's degree or equivalent",
+            "similarity_score": 0.712,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-data-engineer-luxoft-JV_IC2281069_KO0,20_KE21,27.htm?jl=1009361687332"
+        },
+        {
+            "job_title": "Data Scientist",
+            "company": "Cogeco",
+            "must_have skills": "Python data science stack, SQL queries, Data mining, Mathematics, Statistical analysis, Machine Learning, Cloud platforms (Google Cloud, AWS, Azure), Pattern recognition, Predictive modeling, Data visualization tools",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor’s degree required",
+            "similarity_score": 0.7116,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-scientist-cogeco-JV_IC2284969_KO0,14_KE15,21.htm?jl=1009589714877"
+        },
+        {
+            "job_title": "Lead Data Scientist",
+            "company": "Geotab",
+            "must_have skills": "Python, SQL, object-oriented programming principles, Big Data tools and Data Mining/Warehousing Programs (preferably Google Cloud BigQuery), TensorFlow, PyTorch, scikit-learn, AirFlow, Beam, Spark, BigQuery",
+            "experience_level": "Senior",
+            "education_level": "Diploma/Degree in Computer Science, Computer Engineering, Electrical Engineering, Data Science or a related field",
+            "similarity_score": 0.7113,
+            "job_url": "https://www.glassdoor.ca/job-listing/lead-data-scientist-geotab-JV_IC2286067_KO0,19_KE20,26.htm?jl=1009580788707"
+        },
+        {
+            "job_title": "Advanced Analytics Specialist",
+            "company": "Intact",
+            "must_have skills": "Snowflake, Python/R, SQL, Oracle, data visualization tools (e.g., Tableau, Power BI), statistical concepts, predictive modeling techniques",
+            "experience_level": "Senior",
+            "education_level": "Master's degree",
+            "similarity_score": 0.7104,
+            "job_url": "https://www.glassdoor.ca/job-listing/advanced-analytics-specialist-intact-JV_IC2281069_KO0,29_KE30,36.htm?jl=1009524766404"
+        }
+    ]
+}

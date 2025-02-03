@@ -1,0 +1,94 @@
+{
+    "matched_jobs": [
+        {
+            "job_title": "Systems Specialist - Part-Time (Contract)",
+            "company": "Milton Community Resource Centre",
+            "must_have skills": "Salesforce administration, CRM or data software maintenance, configuration and development, project management, administrative skills",
+            "experience_level": "Mid-level",
+            "education_level": "Diploma/Degree in Computer Science, Software Development, Information Technology or other relevant programs",
+            "similarity_score": 0.6838,
+            "job_url": "https://www.glassdoor.ca/job-listing/systems-specialist-part-time-contract-milton-community-resource-centre-JV_IC2286058_KO0,37_KE38,70.htm?jl=1009577587972"
+        },
+        {
+            "job_title": "Service Administrator",
+            "company": "Prairie Mobile Communications",
+            "must_have skills": "Proficient with MS Office 365 applications, Strong Excel skills",
+            "experience_level": "Mid-level",
+            "education_level": "High School Diploma",
+            "similarity_score": 0.6768,
+            "job_url": "https://www.glassdoor.ca/job-listing/service-administrator-prairie-mobile-communications-JV_IC2274961_KO0,21_KE22,51.htm?jl=1009438346120"
+        },
+        {
+            "job_title": "Senior Financial Analyst - Trade - 11 months",
+            "company": "The Mason Group",
+            "must_have skills": "Data analysis, trade investment management, sales targeting, financial planning, data visualization, business acumen",
+            "experience_level": "Senior",
+            "education_level": "Bachelor's",
+            "similarity_score": 0.6761,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-financial-analyst-trade-11-months-the-mason-group-JV_IC2280736_KO0,40_KE41,56.htm?jl=1009607133088"
+        },
+        {
+            "job_title": "Human Resources Generalist",
+            "company": "Meridian Lightweight Technologies",
+            "must_have skills": "HRIS systems, Microsoft Office Professional with advanced Excel skills, Ontario Health & Safety Act, Employment Law, and HR legislation, CHRP/CHRL designation",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's Degree",
+            "similarity_score": 0.67,
+            "job_url": "https://www.glassdoor.ca/job-listing/human-resources-generalist-meridian-lightweight-technologies-JV_IC2285502_KO0,26_KE27,60.htm?jl=1009608799645"
+        },
+        {
+            "job_title": "Technical Support Person",
+            "company": "Murrelektronik Canada",
+            "must_have skills": "Industrial Automation Technical Support experience with Rockwell, Siemens, Omron or other plc platforms, Knowledge of PLC’s and field bus networks, Knowledge of Codesys programming, IIOT application experience",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's Degree",
+            "similarity_score": 0.6607,
+            "job_url": "https://www.glassdoor.ca/job-listing/technical-support-person-murrelektronik-canada-JV_IC2280741_KO0,24_KE25,46.htm?jl=1009596999351"
+        },
+        {
+            "job_title": "HRIS Specialist",
+            "company": "Ground Effects",
+            "must_have skills": "UKG, ADP, Ceridian, Smartsheet, MS Office, IATF 16949, Environmental Management System, OSHA Requirements",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's Degree",
+            "similarity_score": 0.6594,
+            "job_url": "https://www.glassdoor.ca/job-listing/hris-specialist-ground-effects-JV_IC2281815_KO0,15_KE16,30.htm?jl=1009567523128"
+        },
+        {
+            "job_title": "Junior IT Support Technician",
+            "company": "MiQ Digital",
+            "must_have skills": "experience working with MDM and Anti-virus solutions, experience working with SaaS apps (Google Workspace, Okta, Slack, Zoom, etc.), experience working with both Windows and MacOS",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's degree (not explicitly stated but implied as required for Minimum 1 years experience)",
+            "similarity_score": 0.6593,
+            "job_url": "https://www.glassdoor.ca/job-listing/junior-it-support-technician-miq-digital-JV_IC2281069_KO0,28_KE29,40.htm?jl=1009610599279"
+        },
+        {
+            "job_title": "Data Analytical or Data Scientist",
+            "company": "Arthur Grand Technologies Inc",
+            "must_have skills": "Proficiency in statistical analysis and modeling, Experience with survey design and research, Ability to manipulate and analyze complex data, Proficiency in query languages and programming/scripting languages",
+            "experience_level": "Senior",
+            "education_level": "Master's",
+            "similarity_score": 0.6527,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-analytical-or-data-scientist-arthur-grand-technologies-inc-JV_IC2281069_KO0,33_KE34,63.htm?jl=1009608702418"
+        },
+        {
+            "job_title": "Business Analyst - Senior",
+            "company": "Procom",
+            "must_have skills": "business analysis, Agile project methodologies, Microsoft DevOps, knowledge of AODA regulations and standards, analytical, problem-solving, decision-making skills, excellent communication skills.",
+            "experience_level": "Senior",
+            "education_level": "Bachelor's degree or higher",
+            "similarity_score": 0.648,
+            "job_url": "https://www.glassdoor.ca/job-listing/business-analyst-senior-procom-JV_IC2281069_KO0,23_KE24,30.htm?jl=1009591423404"
+        },
+        {
+            "job_title": "Customer Experience Representative - Technical Support",
+            "company": "BIS Safety Software",
+            "must_have skills": "Proficiency in computer programs, Microsoft Word, Excel, strong understanding of computer systems and software, advanced customer service skills",
+            "experience_level": "Mid-level",
+            "education_level": "Post-secondary education (bachelor's degree or equivalent)",
+            "similarity_score": 0.6474,
+            "job_url": "https://www.glassdoor.ca/job-listing/customer-experience-representative-technical-support-bis-safety-software-JV_IC2274673_KO0,52_KE53,72.htm?jl=1009588296036"
+        }
+    ]
+}
