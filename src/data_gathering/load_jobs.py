@@ -5,9 +5,6 @@ import pymongo
 import pandas as pd
 from dotenv import load_dotenv, find_dotenv
 
-# Configuring logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
-
 # Loading environment variables from .env file
 load_dotenv(find_dotenv())
 
