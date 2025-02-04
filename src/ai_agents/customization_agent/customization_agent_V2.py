@@ -3,9 +3,6 @@ from docx import Document
 import requests
 import logging
 
-# Basic logging configuration
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
 # Ollama API configuration
 openai.api_base = "http://localhost:11434/v1"
 openai.api_key = "ollama"
@@ -104,6 +101,32 @@ Generate detailed recommendations to customize the CV. Identify:
 """
     return send_prompt_to_ollama(prompt)
 
+# ================================
+# Agent 3: Customizing the CV
+# ================================
+
+def customize_cv(original_cv, cv_skills, job_requirements):
+    """
+    Generates a customized version of the CV by improving the language and structure
+    so that the candidate's skills and experiences are clearly highlighted according
+    to the job description.
+    """
+    prompt = f"""
+Using the information below, generate a revised version of the CV that improves the wording and structure to clearly emphasize the candidate's relevant skills and experiences required by the job offer.
+
+Original CV:
+{original_cv}
+
+Extracted Skills from CV:
+{cv_skills}
+
+Job Description and Requirements:
+{job_requirements}
+
+Please rewrite and reorganize the CV to better showcase the candidate's skills and experience. The new version should have a professional tone and be easy to read.
+"""
+    return send_prompt_to_ollama(prompt)
+
 def main():
     # File paths and job description
     cv_path = "C:/Test/Diana_Mayorga.docx"
@@ -163,8 +186,17 @@ Excellent communication and collaboration skills, with the ability to effectivel
     print("Recommendations to customize the CV:")
     print(recommendations)
 
+    # Step 4: Generate a customized CV
+    logging.info("Generating a customized CV...")
+    customized_cv = customize_cv(cv_content, cv_skills, job_requirements)
+    if not customized_cv:
+        print("Error generating the customized CV.")
+        return
+    print("Customized CV:")
+    print(customized_cv)
+
     # Confirm and save the customized CV
-    user_response = input("Do you want to generate the customized CV with these recommendations? (y/n): ").strip().lower()
+    user_response = input("Do you want to save the customized CV? (y/n): ").strip().lower()
     if user_response == "y":
         save_cv(recommendations, output_path)
     else:
