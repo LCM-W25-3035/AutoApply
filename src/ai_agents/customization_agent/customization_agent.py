@@ -3,9 +3,6 @@ from docx import Document
 import requests
 import logging
 
-# Basic logging configuration
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
 # Ollama API configuration
 openai.api_base = "http://localhost:11434/v1"
 openai.api_key = "ollama"
