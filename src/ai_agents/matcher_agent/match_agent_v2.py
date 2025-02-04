@@ -28,18 +28,21 @@ model = "llama3.2"
 # Cargar dataset de ofertas de trabajo
 df_jobs = pd.read_csv(doc_path_jobs)
 
+column_job_description = "Job Description"
+
 # Verificar si la columna existe
-if "Job Description" not in df_jobs.columns:
+if column_job_description not in df_jobs.columns:
     print("Error: El archivo CSV no contiene la columna 'Job Description'.")
     exit()
 
+
 # Eliminar filas con valores NaN y limpiar texto
-df_jobs = df_jobs.dropna(subset=["Job Description"])
-df_jobs["Job Description"] = df_jobs["Job Description"].astype(str).str.strip()
-df_jobs = df_jobs[df_jobs["Job Description"] != ""]  # Eliminar filas vacías
+df_jobs = df_jobs.dropna(subset=[column_job_description])
+df_jobs[column_job_description] = df_jobs[column_job_description].astype(str).str.strip()
+df_jobs = df_jobs[df_jobs[column_job_description] != ""]  # Eliminar filas vacías
 
 # Seleccionar primeras 11 ofertas de trabajo
-job_descriptions = df_jobs["Job Description"].tolist()[:11]
+job_descriptions = df_jobs[column_job_description].tolist()[:11]
 
 # Depuración: Verificar contenido antes de procesar
 print(f"Cantidad de job descriptions: {len(job_descriptions)}")
