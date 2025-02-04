@@ -212,7 +212,6 @@ def scrape_job_listings(driver, keyword, providence):
                     # Extraer la descripción del trabajo
                     soup = BeautifulSoup(driver.page_source, 'html.parser')
                     try:
-                        #job_description = driver.find_element(By.CLASS_NAME, 'JobDetails_jobDescription__uW_fK').text.strip()
                         job_description = soup.find('div', class_='JobDetails_jobDescription__uW_fK').text.strip()
                     except Exception:
                         job_description = "N/A"
