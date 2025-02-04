@@ -1,0 +1,47 @@
+{
+    "skills_analysis": {
+        "technical_skills": {
+            "categories": [
+                "machine learning",
+                "data analysis",
+                "software development"
+            ],
+            "other_skills": [
+                "Python",
+                "SQL",
+                "NumPy",
+                "Pandas",
+                "Scikit-learn",
+                "Keras",
+                "Flask",
+                "Git",
+                "AWS"
+            ]
+        },
+        "years_of_experience": 7,
+        "education": {
+            "level": "B.S.",
+            "field": "Statistics"
+        },
+        "experience_level": "Mid-level",
+        "key_achievements": [
+            "Increased average order size by 7%",
+            "Reduced customer wait time by 10 minutes",
+            "Improved driver availability by 22%",
+            "Built a customer attrition random forest model that improved monthly retention by 12 basis points"
+        ],
+        "domain_expertise": [
+            "Machine learning",
+            "Data analysis",
+            "Software development"
+        ],
+        "job_titles": [
+            "Data Scientist",
+            "Entry-Level Data Analyst"
+        ],
+        "industries": [],
+        "professional_summary": "Highly motivated and detail-oriented Data Scientist with 7+ years of experience in building predictive models, deployment of recommendation engines, and improving customer engagement."
+    },
+    "analysis_timestamp": "2025-02-03",
+    "confidence_score": 0.85
+}

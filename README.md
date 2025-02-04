@@ -1,5 +1,3 @@
-# AutoApply
-
 Job Recommendation and Resume Customization System
 
 - **Project Board Link:** [GitHub Board Capstone Project AutoApply](https://github.com/users/DavidRochaR/projects/5)

@@ -1,2 +1,112 @@
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs and debug files
+logs/
+*.log
+debug.log
+
+# Dependency directories
+pip-wheel-metadata/
+pip-log.txt
+
+# IDE configurations
+.vscode/
+.idea/
+*.iml
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Coverage reports
+.coverage
+htmlcov/
+*.cover
+*.py,cover
+.cache/
+nosetests.xml
+coverage.xml
+*.mo
+*.pot
+
+# MyPy cache
+.mypy_cache/
+
+# Pytest cache
+.pytest_cache/
+
+# Django & Flask specific
+*.db
+*.sqlite3
+instance/
+*.pyc
+.envrc
+
+# Docker-related
+.dockerignore
+docker-compose.override.yml
+
+# AWS & Cloud
+.aws/
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# SSH and security-related
+*.pem
+*.key
+secrets.json
+config.ini
+.env.local
+.envrc
+
+# Ignore large files accidentally added
+*.h5
+*.pickle
+*.pkl
+*.joblib
+
+# Ignore datasets and models
+data/
+datasets/
+*.csv
+*.tsv
+*.parquet
+*.feather
+models/
+*.h5
+*.onnx
+*.pb
+*.tflite
+*.pt
+*.pth
+# ignore the venv directory
+venv/
+# ignore the .vscode directory
+.vscode
+# ignore the .env file
 .env
-.venv
+# ignore the .pytest_cache directory
+.pytest_cache/
+# ignore the __pycache__ directory
+__pycache__/
+
+# ignore the .pytest_cache directory
+.pytest_cache/
+# ignore logs
+logs/
+
+.scannerwork/
+.coverage/

@@ -1,0 +1,94 @@
+{
+    "matched_jobs": [
+        {
+            "job_title": "Data Engineer",
+            "company": "Ample Insight Inc.",
+            "must_have_skills": "Python, R, Pandas, Numpy, scikit-learn, TensorFlow, Snowflake, relational databases, SQL, ETL workflows",
+            "experience_level": "Mid-level",
+            "education_level": "MS or PhD",
+            "similarity_score": 0.7849,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-engineer-ample-insight-inc-JV_IC2281069_KO0,13_KE14,31.htm?jl=1008985679306"
+        },
+        {
+            "job_title": "Lead Data Scientist (remote)",
+            "company": "Ample Insight Inc.",
+            "must_have_skills": "Python, object oriented programming (OOP) fundamentals, Snowflake, ETL design decisions, experimental design, recommender systems, machine learning",
+            "experience_level": "Mid-level",
+            "education_level": "MS",
+            "similarity_score": 0.7806,
+            "job_url": "https://www.glassdoor.ca/job-listing/lead-data-scientist-remote-ample-insight-inc-JV_IC2281069_KO0,26_KE27,44.htm?jl=1008985166971"
+        },
+        {
+            "job_title": "Data Scientist - Machine Learning",
+            "company": "Ample Insight Inc.",
+            "must_have_skills": "Python, Pandas, Numpy, scikit-learn, R, TensorFlow",
+            "experience_level": "Mid-level",
+            "education_level": "BS (or higher) in Computer Science or related engineering field involving coding",
+            "similarity_score": 0.7703,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-scientist-machine-learning-ample-insight-inc-JV_IC2281069_KO0,31_KE32,49.htm?jl=1009126057716"
+        },
+        {
+            "job_title": "Data Engineer",
+            "company": "Wynshop",
+            "must_have_skills": "GCP, Big Query, Cloud function, Composer, SQL code, Python",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor’s degree",
+            "similarity_score": 0.7699,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-engineer-wynshop-JV_KO0,13_KE14,21.htm?jl=1009598938757"
+        },
+        {
+            "job_title": "Data Scientist",
+            "company": "Cogeco",
+            "must_have_skills": "Python data science stack, SQL queries, Data mining, Mathematics, Statistical analysis, Machine Learning, Cloud platforms (Google Cloud, AWS, Azure), Pattern recognition, Predictive modeling, Data visualization tools",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor’s degree required",
+            "similarity_score": 0.7567,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-scientist-cogeco-JV_IC2284969_KO0,14_KE15,21.htm?jl=1009589714877"
+        },
+        {
+            "job_title": "Data Scientist",
+            "company": "Atlantis IT group",
+            "must_have_skills": "Python, sklearn, Keras, PyTorch, numpy, pandas, SQL, NoSQL databases, AWS, Azure, GCP, MLOps",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's Degree",
+            "similarity_score": 0.7543,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-scientist-atlantis-it-group-JV_IC2281069_KO0,14_KE15,32.htm?jl=1008947216691"
+        },
+        {
+            "job_title": "Data Engineer",
+            "company": "Panacea Direct Inc",
+            "must_have_skills": "Python, PySpark, SQL, Databricks, Snowflake, BigQuery, Redshift, Synapse",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's degree",
+            "similarity_score": 0.7445,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-engineer-panacea-direct-inc-JV_IC2280741_KO0,13_KE14,32.htm?jl=1009589723023"
+        },
+        {
+            "job_title": "Staff Data Scientist",
+            "company": "Curinos",
+            "must_have_skills": "Python-based machine learning frameworks, data and computation management mechanisms, PySpark, Databricks, GenAI concepts including retrieval augmented generation or fine tuning, statistical inference, experiment design, probability, sampling methodologies, regression, classification, clustering, data mining, multi-armed bandits, time series analysis, causal inference analysis, neural networks and deep learning techniques",
+            "experience_level": "N/A",
+            "education_level": "N/A",
+            "similarity_score": 0.7414,
+            "job_url": "https://www.glassdoor.ca/job-listing/staff-data-scientist-curinos-JV_IC2281069_KO0,20_KE21,28.htm?jl=1009531838153"
+        },
+        {
+            "job_title": "Senior Data Engineer",
+            "company": "Luxoft",
+            "must_have_skills": "SQL, Python, Airflow, PySpark, AWS (EMR, Athena), Hadoop",
+            "experience_level": "Senior",
+            "education_level": "Bachelor's degree or equivalent",
+            "similarity_score": 0.7375,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-data-engineer-luxoft-JV_IC2281069_KO0,20_KE21,27.htm?jl=1009361687332"
+        },
+        {
+            "job_title": "Data Scientist / Analyst",
+            "company": "Zenduit Inc",
+            "must_have_skills": "Python, TensorFlow, PyTorch, scikit-learn, NLP, deep learning, Generative AI models, Information Retrieval for document question answering, RESTful APIs, Git",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor’s or Master’s in Computer Science, Statistics, Mathematics, or related field",
+            "similarity_score": 0.737,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-scientist-analyst-zenduit-inc-JV_IC2280741_KO0,22_KE23,34.htm?jl=1009537164373"
+        }
+    ]
+}

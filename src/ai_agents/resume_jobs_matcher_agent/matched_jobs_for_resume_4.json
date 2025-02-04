@@ -1,0 +1,94 @@
+{
+    "matched_jobs": [
+        {
+            "job_title": "Business Analyst",
+            "company": "All Weather At Home",
+            "must_have_skills": "CBAP certification, 5 years direct work experience as a business analyst, University degree in computer science or related field, Strong application integration experience, Ability to troubleshoot business process changes, Industry research and data analysis using SQL",
+            "experience_level": "Senior",
+            "education_level": "University degree",
+            "similarity_score": 0.8044,
+            "job_url": "https://www.glassdoor.ca/job-listing/business-analyst-all-weather-at-home-JV_IC2274961_KO0,16_KE17,36.htm?jl=1009550018040"
+        },
+        {
+            "job_title": "Data Analyst",
+            "company": "LatentView Analytics",
+            "must_have_skills": "SQL, data visualization (Qlik, Tableau, QuickSight), scripting languages (Python, R), Tableau, Qliksense, Excel",
+            "experience_level": "Senior",
+            "education_level": "Bachelor's Degree in Computer Science, Statistics, Economics, Mathematics, Data Analytics, Finance, Advanced Analytics",
+            "similarity_score": 0.7992,
+            "job_url": "https://www.glassdoor.ca/job-listing/data-analyst-latentview-analytics-JV_IC2281069_KO0,12_KE13,33.htm?jl=1009593245990"
+        },
+        {
+            "job_title": "Senior Accountant and Business Intelligence Analyst",
+            "company": "Fenceline Rentals Ltd.",
+            "must_have_skills": "SQL, Tableau, Talend, Python, VBA",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's degree",
+            "similarity_score": 0.7991,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-accountant-and-business-intelligence-analyst-fenceline-rentals-ltd-JV_IC4032231_KO0,51_KE52,73.htm?jl=1009508329752"
+        },
+        {
+            "job_title": "Business Analyst",
+            "company": "Procom",
+            "must_have_skills": "financial systems, ERP platforms, process mapping tools, reporting tools (e.g., Tableau, Power BI, SQL), Agile methodologies, project management frameworks",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's degree",
+            "similarity_score": 0.7768,
+            "job_url": "https://www.glassdoor.ca/job-listing/business-analyst-procom-JV_IC2275428_KO0,16_KE17,23.htm?jl=1009590275333"
+        },
+        {
+            "job_title": "Senior Data Analyst",
+            "company": "RouteThis",
+            "must_have_skills": "Advanced Excel, SQL, Kibana, Sigma, PowerBI, Snowflake",
+            "experience_level": "Senior",
+            "education_level": "Bachelor's or Master's degree required (not specified which one), but it is expected that the candidate has a strong educational background in Data Analysis, Statistics, or related fields.",
+            "similarity_score": 0.7693,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-data-analyst-routethis-JV_IC2281069_KO0,19_KE20,29.htm?jl=1009610586787"
+        },
+        {
+            "job_title": "Senior Business Analyst",
+            "company": "WTW",
+            "must_have_skills": "Microsoft Word, Excel, PowerPoint, group insurance benefits knowledge, advanced technology skills, financial acumen, general accounting, bookkeeping, economics",
+            "experience_level": "Senior",
+            "education_level": "Bachelor’s degree or post-secondary education",
+            "similarity_score": 0.7676,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-business-analyst-wtw-JV_IC2275123_KO0,23_KE24,27.htm?jl=1009556241160"
+        },
+        {
+            "job_title": "Senior Analyst, Data Analytics (18-month Contract)",
+            "company": "Fengate Asset Management",
+            "must_have_skills": "Power BI, SQL, Excel Power Query/VBA, Microsoft Azure services, Data Engineering/Analysis experience, Financial knowledge and analysis",
+            "experience_level": "Senior",
+            "education_level": "Bachelor's degree in Computer Science, Data Science, Finance or a related field",
+            "similarity_score": 0.7658,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-analyst-data-analytics-18-month-contract-fengate-asset-management-JV_IC2286067_KO0,47_KE48,72.htm?jl=1009450262491"
+        },
+        {
+            "job_title": "Consultant, Strategy, Value Creation & Analytics",
+            "company": "BDO",
+            "must_have_skills": "Python, R, PowerBI, SQL, MS Excel, MS Office",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's or Master's degree",
+            "similarity_score": 0.765,
+            "job_url": "https://www.glassdoor.ca/job-listing/consultant-strategy-value-creation-analytics-bdo-JV_IC2281069_KO0,44_KE45,48.htm?jl=1009598024392"
+        },
+        {
+            "job_title": "Senior Data Analyst, Commercial Operations",
+            "company": "Caseware",
+            "must_have_skills": "SQL, data transformation languages, Python, data visualization tools",
+            "experience_level": "Mid-level",
+            "education_level": "Bachelor's",
+            "similarity_score": 0.7626,
+            "job_url": "https://www.glassdoor.ca/job-listing/senior-data-analyst-commercial-operations-caseware-JV_IC2281069_KO0,41_KE42,50.htm?jl=1009589577460"
+        },
+        {
+            "job_title": "Business Analyst",
+            "company": "CanaDream Career Page",
+            "must_have_skills": "Excel (Power Pivot, Index-Match, VBA, Arrays), relational databases and SQL, business intelligence tools (SQL, Power BI, Tableau, Alteryx, Zap BI), analysis tools (R or Python), FP&A tools, financial modeling",
+            "experience_level": "Mid-level",
+            "education_level": "University Degree (Finance/Economics/Statistics background)",
+            "similarity_score": 0.754,
+            "job_url": "https://www.glassdoor.ca/job-listing/business-analyst-canadream-career-page-JV_IC2275123_KO0,16_KE17,38.htm?jl=1009562585997"
+        }
+    ]
+}

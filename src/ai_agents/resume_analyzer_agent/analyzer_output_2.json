@@ -1,0 +1,32 @@
+{
+    "skills_analysis": {
+        "technical_skills": {
+            "categories": {},
+            "other_skills": [
+                "Python",
+                "SQL"
+            ]
+        },
+        "years_of_experience": 4,
+        "education": {
+            "level": "M.Sc.",
+            "field": "Data Science"
+        },
+        "experience_level": "Senior",
+        "key_achievements": [],
+        "domain_expertise": [
+            "Machine Learning",
+            "Statistics"
+        ],
+        "job_titles": [
+            "Data Scientist at DataCo",
+            "Data Analyst at Insight Analytics"
+        ],
+        "industries": [
+            "Finance"
+        ],
+        "professional_summary": "Data Scientist with over 4 years of experience building and deploying machine learning models for predictive analytics."
+    },
+    "analysis_timestamp": "2025-02-03",
+    "confidence_score": 0.85
+}
