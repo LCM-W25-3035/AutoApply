@@ -38,21 +38,19 @@ def send_prompt_to_ollama(prompt, max_tokens=1500):
         "max_tokens": max_tokens
     }
     headers = {"Content-Type": "application/json"}
-    response = None  # Initialize response for error handling
     try:
         logging.info("Sending the following prompt to the server:")
         logging.info(prompt)
         response = requests.post(url, json=payload, headers=headers, timeout=240)
         response.raise_for_status()
         result = response.json()
-        # Depending on the Ollama response, the text may be in "text" or within "choices"
         text = result.get("text", "").strip()
         if not text and "choices" in result:
             text = result["choices"][0].get("text", "").strip()
         return text
     except requests.exceptions.HTTPError as http_err:
         logging.error(f"HTTP error: {http_err}")
-        if response is not None:
+        if response in locals():
             logging.error(f"Server response: {response.text}")
         return ""
     except requests.exceptions.RequestException as req_err:
