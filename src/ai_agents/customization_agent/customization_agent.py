@@ -76,13 +76,17 @@ def send_prompt_to_ollama(prompt):
 
     try:
         logging.info("Sending the following prompt to the server:")
-        logging.info(prompt)  # Logs the prompt for debugging
+        logging.info(prompt)  
         response = requests.post(url, json=payload, timeout=60)
         response.raise_for_status()
-        return response.json().get("text", "").strip()
+        result = response.json()
+        text = result.get("text", "").strip()
+        if not text and "choices" in result:
+            text = result["choices"][0].get("text", "").strip()
+        return text
     except requests.exceptions.HTTPError as http_err:
         logging.error(f"HTTP error: {http_err}")
-        if response is not None:
+        if response in locals():
             logging.error(f"Server response: {response.text}")
         return ""
     except requests.exceptions.RequestException as req_err:
