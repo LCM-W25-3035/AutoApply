@@ -1,3 +1,17 @@
+"""
+chat gpt o1
+first prompt :
+ I have a dataset of jobs offers, the dataset has 7 columns and one of those is job description
+ each record contain information about the jobs in text that means unstructured data (I think Correct me if im wrong)
+so, I want to create a couple of columns more eith this information - 
+Skill (Must-have → technical, 
+Nice-to-have → other skills. Put comma in between please)
+Experience Level (e.g., "Junior" < 3 years, "Mid-level" 3-8 years, "Senior" > 8 years)
+Type (Contract, Full-Time, Part-Time, Internship), 
+so i dont know if is better leveraing the LLM models or try to do it or other site what are my choices
+
+"""
+
 import pandas as pd
 import os
 import logging
@@ -7,8 +21,12 @@ import time
 
 start_time = time.time()
 
+client = OpenAI(
+    base_url='http://localhost:11434/v1/',
+    api_key='ollama',)
+
 # Input and output file paths
-input_file = "Jobs-Data_Scraped.csv" #Up to be modified with the actual path to your input file
+input_file = "Jobs-Data_Scraped.csv" 
 output_file = "updated_job_dataset.csv"
 
 # Check if input file exists
@@ -74,12 +92,6 @@ def process_job_description(description: str):
     Job Description:
     {description}
     """
-
-    # Example usage of a local OLlama endpoint with your custom client
-    client = OpenAI(
-        base_url='http://localhost:11434/v1/',
-        api_key='ollama',
-    )
 
     try:
         response = client.chat.completions.create(

@@ -1,3 +1,14 @@
+"""
+
+OpenAi GPT 4o
+Prompt 1: i want you take this script as base script GlassdoorDataGathering.py, 
+and i got this output test.csv, but im getting the same job description it is bc every 
+job card need to be loaded so, i can see two solution in order to retreive the proper job description, 
+on is create a new script that goes throught every record of the csv file or try to modify the current 
+script what do you say ?
+
+"""
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -275,14 +286,14 @@ if __name__ == "__main__":
     driver = webdriver.Chrome(service=service, options=options)
     keys =[]
     providence = []
-    with open("keywords.txt", 'r') as file1:
+    with open("src/data_gathering/keywords.txt", 'r') as file1:
         for line in file1:
             keys.append(line.strip())
             print(line.strip())
 
     print(keys)
 
-    with open("providence.txt", 'r') as file2:
+    with open("src/data_gathering/providence.txt", 'r') as file2:
         for line in file2:
             providence.append(line.strip())
             print(line.strip())
