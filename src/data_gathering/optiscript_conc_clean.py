@@ -23,7 +23,7 @@ def load_and_combine_data(keywords, provinces):
     
     for keyword in keywords:
         for province in provinces:
-            file_path = f"glassdoor_jobs_{keyword}{province}.csv"
+            file_path = f"src\data_gathering\glassdoor_jobs_{keyword}{province}.csv"
             if os.path.exists(file_path):
                 try:
                     data = pd.read_csv(file_path)
@@ -73,7 +73,7 @@ def main():
     logging.info("Cleaning data...")
     cleaned_data = clean_data(data)
 
-    output_file = "Jobs-Data_Cleaned.csv"
+    output_file = "src\data_gathering\Jobs-Data_Cleaned.csv"
     cleaned_data.to_csv(output_file, index=False, encoding='utf-8-sig')
     logging.info(f"Data successfully saved to {output_file}")
 

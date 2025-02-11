@@ -246,7 +246,7 @@ def scrape_job_listings(driver, keyword, providence):
                 # Save the data as backup
                 jobs_df = pd.DataFrame(jobs_data)
                 jobs_df= jobs_df.drop_duplicates()
-                jobs_df.to_csv(f'glassdoor_jobs_backup{keyword}{providence}.csv', index=False, encoding='utf-8-sig')
+                jobs_df.to_csv(f'src\data_gathering\glassdoor_jobs_backup{keyword}{providence}.csv', index=False, encoding='utf-8-sig')
 
                 print("Data saved to 'glassdoor_jobs_backup.csv'.")
 
@@ -272,7 +272,7 @@ def scrape_job_listings(driver, keyword, providence):
     # Saved Data Into a CSV file
     df = pd.DataFrame(jobs_data)
     df = df.drop_duplicates()
-    df.to_csv(f"glassdoor_jobs_{keyword}{providence}.csv", index=False, encoding='utf-8-sig')
+    df.to_csv(f"src\data_gathering\glassdoor_jobs_{keyword}{providence}.csv", index=False, encoding='utf-8-sig')
     print(f'Scraping complete. Data saved to f"glassdoor_jobs_{keyword}{providence}.csv".')
 
 
@@ -323,7 +323,7 @@ if __name__ == "__main__":
         data_final = data_final[~data_final.duplicated(keep='first')]
         data_final.shape
 
-        data_final.to_csv("Jobs-Data_Scraped.csv", index=False)
+        data_final.to_csv("src\data_gathering\Jobs-Data_Scraped.csv", index=False)
 
 
     
