@@ -7,13 +7,9 @@ import time
 
 start_time = time.time()
 
-client = OpenAI(
-base_url='http://localhost:11434/v1/',
-api_key='ollama',)
-
 # Input and output file paths
-input_file = "src\data_gathering\Jobs-Data_Cleaned.csv.csv"
-output_file = "src\data_gathering\updated_job_dataset.csv"
+input_file = "Jobs-Data_Scraped.csv" #Up to be modified with the actual path to your input file
+output_file = "updated_job_dataset.csv"
 
 # Check if input file exists
 if not os.path.isfile(input_file):
@@ -53,36 +49,44 @@ def parse_raw_content(content: str):
 
     return must_have, nice_to_have, experience_level, contract_type, education_level
 
-
 # Function to process a single job description
 def process_job_description(description: str):
     if pd.isna(description) or not description.strip():
         return "N/A", "N/A", "N/A", "N/A"
+    
+    # Format the prompt — ensure it outputs the exact labels our regex expects
+    prompt = f"""
+    You are a data assistant. Extract and categorize the information from the following job description. 
+    Separate the details into the following categories:
+    1. Must-have skills (technical skills explicitly required in the description).
+    2. Nice-to-have skills (other skills that are preferred but not mandatory like softs skills ).
+    3. Experience Level (categorize as "Junior" (< 3 years), "Mid-level" (3-8 years), or "Senior" (> 8 years)).
+    4. Type of Contract (e.g., "Full-Time", "Part-Time", "Contract", or "Internship").
+    5. Education level (Level of the educations required in the job description).
+
+    Return the output in *exactly* this format (all on separate lines, without empty lines):
+    Must-have skills: <list of technical skills, comma-separated>
+    Nice-to-have skills: <list of additional skills, comma-separated>
+    Experience Level: <Junior / Mid-level / Senior>
+    Type of Contract: <Full-Time / Part-Time / Contract / Internship>
+    Education level: <Level of the educations required>
+
+    Job Description:
+    {description}
+    """
 
     # Example usage of a local OLlama endpoint with your custom client
+    client = OpenAI(
+        base_url='http://localhost:11434/v1/',
+        api_key='ollama',
+    )
+
     try:
         response = client.chat.completions.create(
-            model="llama3",
-            messages=[{"role": "system",
-                       "content": ("You are a data assistant who is able to understand french and english. "
-                                    "Extract and categorize the information from the following job description. "
-                                    "Separate the details into the following categories:\n"
-                                    "1. Must-have skills (technical skills explicitly required in the description).\n"
-                                    "2. Nice-to-have skills (other skills that are preferred but not mandatory like softs skills ).\n"
-                                    "3. Experience Level (categorize as 'Junior' (< 3 years), 'Mid-level' (3-8 years), or 'Senior' (> 8 years)).\n"
-                                    "4. Type of Contract (e.g., 'Full-Time', 'Part-Time', 'Contract', or 'Internship').\n"
-                                    "5. Education level (Level of the educations required in the job description).\n"
-                                    "Return the output in EXACTLY this format in English (each category in its own line, no empty lines):\n"
-                                    "Must-have skills: <list of technical skills, comma-separated>\n"
-                                    "Nice-to-have skills: <list of additional skills, comma-separated>\n"
-                                    "Experience Level: <Junior / Mid-level / Senior>\n"
-                                    "Type of Contract: <Full-Time / Part-Time / Contract / Internship>\n"
-                                    "Education level: <Level of the educations required>"
-                                        )},
-                        {"role": "user", "content":  f"Job Description:\n{description}"},
-                    ],
-            max_tokens=2500,
-            temperature=0.7
+            model="llama3.2",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=1845,
+            temperature=0.73
         )
         
         # OLlama-style response (similar to OpenAI):

@@ -1,6 +1,6 @@
 it
+Data Analysis
 business analytics
-data Analysis
 data engineer
 machine learning engineer
 LLM Enginner

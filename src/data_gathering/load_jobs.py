@@ -5,6 +5,9 @@ import pymongo
 import pandas as pd
 from dotenv import load_dotenv, find_dotenv
 
+# Configuring logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
 # Loading environment variables from .env file
 load_dotenv(find_dotenv())
 
@@ -30,7 +33,7 @@ try:
         logging.info(f"Deleted {deleted_count} existing documents from 'jobsCollection'.")
 
         # Loading CSV file
-        csv_file_path = "src\data_gathering\updated_job_dataset.csv"
+        csv_file_path = "src\data_gathering\job_dataset.csv"
         if not os.path.exists(csv_file_path):
             logging.error(f"CSV file not found: {csv_file_path}")
             sys.exit(1)

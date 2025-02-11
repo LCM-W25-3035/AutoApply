@@ -3,6 +3,9 @@ from docx import Document
 import requests
 import logging
 
+# Basic logging configuration
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 # Ollama API configuration
 openai.api_base = "http://localhost:11434/v1"
 openai.api_key = "ollama"
@@ -29,15 +32,6 @@ def save_cv(content, file_path):
     except Exception as e:
         logging.error(f"Error saving file {file_path}: {e}")
 
-def save_cv_json(data, file_path):
-    """Guarda los datos del CV en formato JSON."""
-    try:
-        with open(file_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
-        logging.info(f"Customized CV data saved in JSON format at: {file_path}")
-    except Exception as e:
-        logging.error(f"Error saving JSON file {file_path}: {e}")
-
 def send_prompt_to_ollama(prompt, max_tokens=1500):
     """Sends a prompt to Ollama and returns the response."""
     url = "http://localhost:11434/v1/completions"
@@ -47,19 +41,21 @@ def send_prompt_to_ollama(prompt, max_tokens=1500):
         "max_tokens": max_tokens
     }
     headers = {"Content-Type": "application/json"}
+    response = None  # Initialize response for error handling
     try:
         logging.info("Sending the following prompt to the server:")
         logging.info(prompt)
         response = requests.post(url, json=payload, headers=headers, timeout=240)
         response.raise_for_status()
         result = response.json()
+        # Depending on the Ollama response, the text may be in "text" or within "choices"
         text = result.get("text", "").strip()
         if not text and "choices" in result:
             text = result["choices"][0].get("text", "").strip()
         return text
     except requests.exceptions.HTTPError as http_err:
         logging.error(f"HTTP error: {http_err}")
-        if response in locals():
+        if response is not None:
             logging.error(f"Server response: {response.text}")
         return ""
     except requests.exceptions.RequestException as req_err:
@@ -108,73 +104,30 @@ Generate detailed recommendations to customize the CV. Identify:
 """
     return send_prompt_to_ollama(prompt)
 
-# ================================
-# Agent 3: Customizing the CV
-# ================================
-
-def customize_cv(original_cv, cv_skills, job_requirements):
-    """
-    Generates a customized version of the CV by improving the language and structure
-    clearly emphasizing the candidate's relevant skills and experiences required by the job offer,
-    while preserving the original sections (Summary, Skills, Experience, Education).
-    """
-    prompt = f"""
-Using the information below, generate a revised version of the CV that improves the wording and structure 
-to clearly emphasize the candidate's relevant skills and experiences required by the job offer. 
-Make sure to preserve the original sections (Summary, Skills, Experience, Education) as they appear in the CV. 
-Do not invent any new content; only enhance the existing information.
-
-Original CV:
-{original_cv}
-
-Extracted Skills from CV:
-{cv_skills}
-
-Job Description and Requirements:
-{job_requirements}
-
-Please rewrite and reorganize the CV to better showcase the candidate's skills and experience. 
-The new version should maintain the sections as originally provided and use a professional tone.
-"""
-    return send_prompt_to_ollama(prompt)
-
 def main():
     # File paths and job description
     cv_path = "C:/Test/Diana_Mayorga.docx"
     output_path = "C:/Test/customized_cv.docx"
-    job_description = """Who You'll Work With
+    job_description = """We are seeking a skilled and passionate Data Analytics Professional to join our 
+    dynamic team at Quarter4 Inc. As a key player in the iGaming industry, we are committed to leveraging 
+    cutting-edge technology and data analytics to enhance our sports projections and provide our customers 
+    with the most accurate insights.
 
-The Data Analyst will be reporting directly to the Director of Operations.
+Key responsibilities:
+Collaborate closely with our Machine Learning, AI and Product teams to analyze historical sports data and identify trends, patterns, and valuable features.
+Develop and implement advanced analytics techniques to improve the accuracy of our sports projections.
+Perform thorough analysis and reporting on our projections, providing insights and recommendations to optimize our betting strategies.
+Work cross-functionally with other teams to integrate data analytics into various aspects of our business operations.
+Stay up-to-date with the latest developments in data analytics, machine learning, and sports betting to continuously improve our methodologies.
 
-What You'll Be Doing
-
-Generate, maintain and deliver detailed customer reports by analyzing and interpreting complex data sets to identify trends, patterns, and actionable insights
-Work with multiple datasets from various sources, combining and restructuring data to create comprehensive datasets that support robust analysis
-Identify opportunities to improve existing reporting processes and systems, implementing best practices in data analysis and visualization
-Maintain thorough documentation of data processes, methodologies, and reporting procedures for reference and compliance purposes
-Track reporting requirements and deadlines
-Ensure completion and accuracy of weekly/monthly/quarterly customer reports
-Develop thorough understanding of customer valued metrics and KPIs
-Work collaboratively with other analytics teams and business subject matter experts to refine personal understanding and ensure consistency in reporting and design
-Understand and communicate standards, SLAs and processes for our metrics and reporting
-Ensure privacy and confidentiality is maintained through all analysis and reporting
-What You Need to Be Successful
-
-Post-secondary degree or diploma, ideally in business and/or data analytics, or related experience
-Minimum 2 years of experience in data analysis, customer reporting, or a similar role
-Advanced Excel skills, including:
-Pivot tables, VLOOKUPs, and complex formula creation
-Experience in creating, running, and troubleshooting macros to automate repetitive tasks, streamlining data processing, and enhancing reporting efficiency
-Experience with Excel’s advanced data manipulation tools, such as Power Query, to efficiently handle large and complex datasets
-Proficiency in SQL for querying and manipulating large datasets
-Experience with Power BI
-Familiarity with data warehousing, ETL processes, and data management best practices
-Skills an Ideal Candidate Would Have
-
-Excellent problem-solving skills with the ability to analyze and interpret complex data sets to derive meaningful insights
-Strong written and verbal communication skills, with the ability to present data-driven insights clearly to non-technical stakeholders
-Meticulous attention to detail, with a strong focus on accuracy and consistency in data analysis
-Ability to work effectively in a collaborative, fast-paced environment.
+Your Skillset:
+Bachelor's or Master's degree in Computer Science, Statistics, Mathematics, or a related field.
+3 to 5+ years of proven experience in data analytics, preferably in the iGaming or related industry.
+Experience analyzing large data sets.
+Proficiency in programming languages such as Python, and MySQL.
+Strong analytical and problem-solving skills, with the ability to interpret complex data sets and draw meaningful insights.
+Experience with data visualization tools such as Tableau or Power BI is a must.
+Excellent communication and collaboration skills, with the ability to effectively communicate technical concepts to non-technical stakeholders.
 """
 
     # Load the CV
@@ -210,17 +163,8 @@ Ability to work effectively in a collaborative, fast-paced environment.
     print("Recommendations to customize the CV:")
     print(recommendations)
 
-    # Step 4: Generate a customized CV
-    logging.info("Generating a customized CV...")
-    customized_cv = customize_cv(cv_content, cv_skills, job_requirements)
-    if not customized_cv:
-        print("Error generating the customized CV.")
-        return
-    print("Customized CV:")
-    print(customized_cv)
-
     # Confirm and save the customized CV
-    user_response = input("Do you want to save the customized CV? (y/n): ").strip().lower()
+    user_response = input("Do you want to generate the customized CV with these recommendations? (y/n): ").strip().lower()
     if user_response == "y":
         save_cv(recommendations, output_path)
     else:

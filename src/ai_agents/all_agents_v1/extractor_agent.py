@@ -15,6 +15,7 @@ class ExtractorAgent(BaseAgent):
         """Process the resume and extract information"""
         print("📄 Extractor: Processing resume")
         
+        # MHS - resume_data = eval(messages[-1]["content"])
         resume_data = messages[-1]["content"]
         
         # Extract text from PDF
