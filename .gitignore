@@ -81,7 +81,6 @@ config.ini
 # Ignore datasets and models
 data/
 datasets/
-*.csv
 *.tsv
 *.parquet
 *.feather
