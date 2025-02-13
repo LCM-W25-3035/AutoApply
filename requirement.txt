@@ -13,9 +13,11 @@ openai
 pymongo
 sentence_transformers
 tf-keras
-numpy
+numpy==1.26.4
+pybind11>=2.12
 pymupdf
 pdfplumber
 camelot
 pytesseract
 pdf2image
+spacy
