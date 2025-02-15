@@ -44,3 +44,7 @@ for job in jobs:
     job_count += 1  # Increment processed job counter
 
 print(f"\nJob embeddings successfully stored for {job_count} missing jobs in MongoDB!")
+
+# Reference
+# (OpenAI first prompt, 2025): How can we generate embeddings for a database collection?
+# (OpenAI last prompt, 2025): Can you show an example of generating embeddings for a database collection?
