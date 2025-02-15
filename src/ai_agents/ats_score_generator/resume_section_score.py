@@ -47,7 +47,7 @@ def extract_and_check_resume_sections(pdf_path):
     return check_resume_sections(resume_text)
 
 if __name__ == "__main__":
-    pdf_path = "src\\resumes\\resume_sample_1.pdf"
+    pdf_path = "src/resumes/resume_sample_4.pdf"
     section_check = extract_and_check_resume_sections(pdf_path)
     print("Sections Found:", section_check["detected_sections"])
     print("Missing Sections:", section_check["missing_sections"])
