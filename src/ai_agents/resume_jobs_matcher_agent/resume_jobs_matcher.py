@@ -136,3 +136,7 @@ with open(output_filepath, "w", encoding="utf-8") as json_file:
     json.dump({"matched_jobs": top_matches}, json_file, ensure_ascii=False, indent=4)
 
 print(f"\nTop 10 Job Matches saved to '{output_filepath}'.")
+
+# Reference
+# (OpenAI first prompt, 2025): How can we match a resume to job listings using embeddings?
+# (OpenAI last prompt, 2025): Can you show an example of matching a resume to job listings using embeddings?
