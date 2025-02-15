@@ -1,13 +1,6 @@
 import pdfplumber
 import camelot
 import pytesseract
-from PIL import Image
-
-try:
-    from pdf2image import convert_from_path
-    poppler_installed = True
-except ImportError:
-    poppler_installed = False
 
 def detect_text_based_tables(pdf_path):
     """Detects tables in a PDF using pdfplumber (text-based tables)."""
@@ -25,19 +18,22 @@ def detect_structured_tables(pdf_path):
         if len(tables) > 0:
             return {"has_table": True, "method": "Camelot"}
     except Exception as e:
-        print(f"Camelot error: {e}")
+        pass
     return {"has_table": False, "method": "Camelot"}
 
 def detect_image_based_tables(pdf_path):
     """Detects tables in image-based PDFs using OCR (pytesseract)."""
-    if not poppler_installed:
-        return {"has_table": False, "method": "OCR (Skipped - Poppler Not Installed)"}
-    
-    images = convert_from_path(pdf_path)
-    for i, img in enumerate(images):
-        text = pytesseract.image_to_string(img)
-        if "|" in text or "----" in text:  # Common table markers
-            return {"has_table": True, "page": i + 1, "method": "OCR"}
+    # Use pdfplumber to extract images and then apply OCR
+    with pdfplumber.open(pdf_path) as pdf:
+        for page_num, page in enumerate(pdf.pages):
+            if page.images:
+                for img in page.images:
+                    # Extract image and apply OCR
+                    x0, y0, x1, y1 = img["x0"], img["y0"], img["x1"], img["y1"]
+                    cropped_image = page.within_bbox((x0, y0, x1, y1)).to_image()
+                    text = pytesseract.image_to_string(cropped_image)
+                    if "|" in text or "----" in text:  # Common table markers
+                        return {"has_table": True, "page": page_num + 1, "method": "OCR"}
     return {"has_table": False, "method": "OCR"}
 
 def detect_images_in_pdf(pdf_path):
@@ -72,9 +68,9 @@ def check_resume_format(pdf_path):
     # Scoring logic
     format_score = 100
     if table_result["has_table"]:
-        format_score -= 50  # Significant deduction for tables
+        format_score -= 50  # Deduct 50 points for tables as they are not ATS-friendly
     if image_result["has_images"]:
-        format_score -= 30  # Deduction for images
+        format_score -= 30  # Deduct 30 points for images as they are not ATS-friendly
     
     return {
         "tables_detected": table_result,
@@ -83,7 +79,7 @@ def check_resume_format(pdf_path):
     }
 
 if __name__ == "__main__":
-    pdf_path = "src\\resumes\\resume_sample_bad_format.pdf"
+    pdf_path = "src/resumes/resume_sample_4.pdf"
     result = check_resume_format(pdf_path)
     
     if result["tables_detected"]["has_table"]:
@@ -96,5 +92,5 @@ if __name__ == "__main__":
     print(f"Resume Formatting Score: {result['format_score']}%")
 
 # Reference
-# (OpenAI first prompt, 2025): How can we use ATS score for the applicant pov? 
-# (OpenAI last prompt, 2025): Is there another function for detecting images? or any other bad format?
+# (OpenAI first prompt, 2025): How do ATS systems evaluate resume formatting? 
+# (OpenAI last prompt, 2025): Is there another function for detecting images? How can I detect images in a pdf file?
