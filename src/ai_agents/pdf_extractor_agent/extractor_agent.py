@@ -65,3 +65,7 @@ class ExtractorAgent:
             return {"error": "No JSON content found"}
         except json.JSONDecodeError:
             return {"error": "Invalid JSON content"}
+
+# Reference
+# (OpenAI first prompt, 2025): How can we extract and structure information from resumes using an Ollama model?
+# (OpenAI last prompt, 2025): Can you show an example of extracting information from a resume using an Ollama model?
