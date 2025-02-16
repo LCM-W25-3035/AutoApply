@@ -79,3 +79,6 @@ with open("user_answers.txt", "w") as file:
 
 print("Answers saved successfully.")
 
+# Reference: 
+# (OpenAI first prompt, 2025): I'm going to work with ollama, and I have to create an agent that studies columns like Job description, Must have skills, Nice to have skills from the data, and start asking questions to the user who wants to apply for that type of jobs to build a Master resume 
+# (OpenAI last prompt, 2025): The agent does not pass any answer as correct, it should pass the answer with an action verb and a metric.
