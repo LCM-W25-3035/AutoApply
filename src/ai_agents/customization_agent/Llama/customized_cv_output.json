@@ -1,0 +1,61 @@
+{
+    "PersonalInfo": {
+        "Name": "Janine Nel",
+        "Email": "email@email.com",
+        "Phone": "386-864-3442"
+    },
+    "Summary": "Results-driven and deadline-focused sales engineer with six years of experience in technical sales. Proven track record of delivering growth results, managing territories up to $350M, and driving significant savings for clients.",
+    "Skills": {
+        "Technical Skills": [
+            "Autodesk AutoCAD",
+            "Industry Trends & Sales Forecasting",
+            "Knowledge of Technical Diagrams"
+        ],
+        "Soft Skills": [
+            "Agile Project Management",
+            "Engineering"
+        ],
+        "Languages": [
+            "English",
+            "Dutch"
+        ]
+    },
+    "Experience": [
+        {
+            "Company": "Engen Oil",
+            "Dates": "May 2022 - May 2022",
+            "Functions": [
+                {
+                    "Function": "Sales Engineer",
+                    "Description": "Recognized and addressed customer needs for filtration and lubrication products and services.",
+                    "Responsibilities": [
+                        "Designed and implemented a highly effective industrial filtration program, resulting in significant savings for customers and increased company profits.",
+                        "Initiated Lubrication Fundamentals classes to educate employees and customers on product information, machine elements, application methods, storing lubricant, and conservation.",
+                        "Acted as a consultant on Best-in-Class Lubrication programs."
+                    ]
+                }
+            ]
+        },
+        {
+            "Company": "Quest Medical",
+            "Dates": "January 2019 - April 2021",
+            "Functions": [
+                {
+                    "Function": "Sales Engineer",
+                    "Description": "Managed day-to-day program management, customer relationships, and estimation of medical programs for critical Fortune 500 clients.",
+                    "Responsibilities": [
+                        "Designed and presented tailored technical solutions to top-32 state automotive dealers, driving sales from $3M to $18M over five years.",
+                        "Supervised logistics and proof of concept pilots worth up to $800,000.",
+                        "Exceeded yearly quota by 145% and provided 97.5% satisfaction support to managed territory."
+                    ]
+                }
+            ]
+        }
+    ],
+    "Education": [
+        {
+            "Institution": "Harvard University",
+            "Note": "Please note that the dates listed are not correct, as per the original CV (January 2019 - present does not match May 2022)."
+        }
+    ]
+}
