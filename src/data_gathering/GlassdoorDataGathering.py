@@ -1,3 +1,21 @@
+"""
+
+OpenAi GPT 4o
+Prompt 1: i want you take this script as base script GlassdoorDataGathering.py, 
+and i got this output test.csv, but im getting the same job description it is bc every 
+job card need to be loaded so, i can see two solution in order to retreive the proper job description, 
+on is create a new script that goes throught every record of the csv file or try to modify the current 
+script what do you say ?
+
+middle prompt : I'm having an issue, let me put you in context, Im programming In Python I'm using a list in a bucle,
+ I'm trying to scrape a website to extract job offers I'm using selenium and bs4 to parse the HTML, 
+ for un feature and using a web driver method .find to locate the job description and in the rest feature im using .
+ find of bs4, at this time I'm extracting 30 jobs offers, I'm not clicking the button for shoe more offer, 
+ how ever the I'm getting 900 hundred records I checked the output and for the first 30  record I'm retrieving all the features 
+ with but with the same job description, and the record 31 to 60 the rest feature are duplicates but with the second job description 
+ in all records from 31 to 61 so it is taking per every job offer is creating a record with all job description 30 times by 30 is 900
+"""
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -212,7 +230,6 @@ def scrape_job_listings(driver, keyword, providence):
                     # Extraer la descripción del trabajo
                     soup = BeautifulSoup(driver.page_source, 'html.parser')
                     try:
-                        #job_description = driver.find_element(By.CLASS_NAME, 'JobDetails_jobDescription__uW_fK').text.strip()
                         job_description = soup.find('div', class_='JobDetails_jobDescription__uW_fK').text.strip()
                     except Exception:
                         job_description = "N/A"
@@ -235,8 +252,8 @@ def scrape_job_listings(driver, keyword, providence):
 
                 # Save the data as backup
                 jobs_df = pd.DataFrame(jobs_data)
-                jobs_df.drop_duplicates(inplace=True)
-                jobs_df.to_csv(f'glassdoor_jobs_backup{keyword}{providence}.csv', index=False, encoding='utf-8-sig')
+                jobs_df= jobs_df.drop_duplicates()
+                jobs_df.to_csv(f'src\data_gathering\glassdoor_jobs_backup{keyword}{providence}.csv', index=False, encoding='utf-8-sig')
 
                 print("Data saved to 'glassdoor_jobs_backup.csv'.")
 
@@ -261,8 +278,8 @@ def scrape_job_listings(driver, keyword, providence):
 
     # Saved Data Into a CSV file
     df = pd.DataFrame(jobs_data)
-    df.drop_duplicates(inplace=True)
-    df.to_csv(f"glassdoor_jobs_{keyword}{providence}.csv", index=False, encoding='utf-8-sig')
+    df = df.drop_duplicates()
+    df.to_csv(f"src\data_gathering\glassdoor_jobs_{keyword}{providence}.csv", index=False, encoding='utf-8-sig')
     print(f'Scraping complete. Data saved to f"glassdoor_jobs_{keyword}{providence}.csv".')
 
 
@@ -276,14 +293,14 @@ if __name__ == "__main__":
     driver = webdriver.Chrome(service=service, options=options)
     keys =[]
     providence = []
-    with open("keywords.txt", 'r') as file1:
+    with open("src/data_gathering/keywords.txt", 'r') as file1:
         for line in file1:
             keys.append(line.strip())
             print(line.strip())
 
     print(keys)
 
-    with open("providence.txt", 'r') as file2:
+    with open("src/data_gathering/providence.txt", 'r') as file2:
         for line in file2:
             providence.append(line.strip())
             print(line.strip())
@@ -313,7 +330,7 @@ if __name__ == "__main__":
         data_final = data_final[~data_final.duplicated(keep='first')]
         data_final.shape
 
-        data_final.to_csv("Jobs-Data_Scraped.csv", index=False)
+        data_final.to_csv("src\data_gathering\Jobs-Data_Scraped.csv", index=False)
 
 
     
