@@ -2,6 +2,7 @@ import streamlit as st
 import pymongo
 import pandas as pd
 import option1
+import option2
 
 # MongoDB Connection
 MONGO_URI="mongodb+srv://DavidRocha:davidoscar@capstone.9ajag.mongodb.net/?retryWrites=true&w=majority&appName=Capstone"
@@ -25,42 +26,50 @@ def main():
     if option == "-> Tailor my resume for a specific job opportunity":
         option1.run()  # Calls the function from option1.py
 
-    elif option == "-> Find the best job matches and optimize my resume accordingly":
-        filter_jobs = st.checkbox("Would you like to filter job listings?")
+    if option == "-> Find the best job matches and optimize my resume accordingly":
+        option2.run()
+
+    # elif option == "-> Find the best job matches and optimize my resume accordingly":
+    #     filter_jobs = st.checkbox("Would you like to filter job listings?")
         
-        if filter_jobs:
-            locations = [job['_id'] for job in collection.aggregate([
-                {"$group": {"_id": "$Location", "count": {"$sum": 1}}},
-                {"$sort": {"count": -1}}
-            ])]
-            selected_location = st.selectbox("Choose a location:", ["All"] + locations)
+    #     if filter_jobs:
+    #         locations = [job['_id'] for job in collection.aggregate([
+    #             {"$group": {"_id": "$Location", "count": {"$sum": 1}}},
+    #             {"$sort": {"count": -1}}
+    #         ])]
+    #         selected_location = st.selectbox("Choose a location:", ["All"] + locations)
             
-            experience_levels = ["Junior", "Semi Senior", "Senior"]
-            selected_experience = st.selectbox("Select your experience level:", ["All"] + experience_levels)
+    #         experience_levels = ["Junior", "Semi Senior", "Senior"]
+    #         selected_experience = st.selectbox("Select your experience level:", ["All"] + experience_levels)
             
-            it_roles = [job['Role'] for job in collection.find({}, {"Role": 1, "_id": 0})]
-            it_roles = list(set(it_roles))
-            selected_role = st.selectbox("Select your IT role:", ["All"] + it_roles)
+    #         it_roles = [job['Role'] for job in collection.find({}, {"Role": 1, "_id": 0})]
+    #         it_roles = list(set(it_roles))
+    #         selected_role = st.selectbox("Select your IT role:", ["All"] + it_roles)
             
-            query = {}
-            if selected_location != "All":
-                query["Location"] = selected_location
-            if selected_experience != "All":
-                query["ExperienceLevel"] = selected_experience
-            if selected_role != "All":
-                query["Role"] = selected_role
+    #         query = {}
+    #         if selected_location != "All":
+    #             query["Location"] = selected_location
+    #         if selected_experience != "All":
+    #             query["ExperienceLevel"] = selected_experience
+    #         if selected_role != "All":
+    #             query["Role"] = selected_role
             
-            job_offers = list(collection.find(query))
-        else:
-            job_offers = list(collection.find())
+    #         job_offers = list(collection.find(query))
+    #     else:
+    #         job_offers = list(collection.find())
         
-        st.write(f"Total job opportunities available: {len(job_offers)}")
+    #     st.write(f"Total job opportunities available: {len(job_offers)}")
         
-        uploaded_cv = st.file_uploader("Upload your resume (PDF or DOCX)", type=["pdf", "docx"])
-        if uploaded_cv:
-            best_matches = find_best_jobs(uploaded_cv, job_offers)
-            st.write("Top 10 Matching Job Opportunities:")
-            st.dataframe(best_matches)
+    #     uploaded_cv = st.file_uploader("Upload your resume (PDF or DOCX)", type=["pdf", "docx"])
+    #     if uploaded_cv:
+    #         best_matches = find_best_jobs(uploaded_cv, job_offers)
+    #         st.write("Top 10 Matching Job Opportunities:")
+    #         st.dataframe(best_matches)
 
 if __name__ == "__main__":
     main()
+
+# references:
+# references1: https://ai.google.dev/gemini-api/docs/quickstart?lang=python&hl=es-419 
+# references2: https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/System_instructions.ipynb?hl=es-419#scrollTo=b_5PfTJ-8htn
+# references3: https://docs.streamlit.io/develop/api-reference/widgets/st.radio

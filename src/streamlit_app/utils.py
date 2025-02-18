@@ -271,3 +271,90 @@ def find_best_jobs(cv_file, job_offers):
     ]
     
     return pd.DataFrame(best_jobs)
+
+
+
+
+""" First Prompt in chatgpt
+I need that when a resume in PDF format is read, a .json file is generated that can be recreated as best as possible. I want them to be {{
+      "technical_skills": [A],
+      "soft_skills": [B],
+      "years_of_experience": C,
+      "education": [
+       {{
+       "name": "",
+       "place": "D",}}
+       ],
+       "experience_level": "E",
+       "key_achievements": [
+       {{
+        "achievement": "F",
+        "context": "F"
+        }}
+        ],
+        "domain_expertise": [G],
+        "job_titles": [H],  
+        "industries": [I],
+        "professional_summary": "J"
+        }}
+"""
+
+""" Last Prompt in chatgpt
+You are an HR analyst and you receive resumes and must analyze them to answer:
+A. Identify and list all ***hard skills*** (e.g., programming languages, frameworks, libraries, databases, cloud platforms, and tools) explicitly mentioned in the resume.
+B. Identify and list all ***soft skills*** (e.g., leadership, teamwork, adaptability, problem solving, communication, critical thinking, emotional intelligence) found in the resume and that you can also infer from the resume.
+C. How many years of total professional experience does the candidate have?
+D. Identify and list all educational information, degree, institution, location, start date, end date
+E. What is the candidate's highest level of experience based on job roles, industries, and responsibilities?
+F. Identify and list all of the candidate's work experience candidate:
+- A list of dictionaries where in each dictionary there is a job that the candidate had.
+- The dictionary should have the job title, company, location, start date, end date and all the achievements or responsibilities that the CV has in that particular position.
+- The same information for all jobs
+G. Find the professional summary.
+H. All languages ​​and skills, if you don't find them in the candidate ignore and delete this section
+I. All certifications that the candidate has, if you don't find them delete this section
+J. Find the professional summary.
+
+Returns only the JSON response in the exact structure shown below, without explanations or additional text:
+
+{
+"technical_skills": [A],
+"soft_skills": [B],
+"years_of_experience": C,
+"education": [
+{
+"degree": D,
+"institution": D,
+"location": D,
+"start_date":D,
+"end_date":D
+}
+],
+"experience_level": E,
+"work_experience": [
+{
+"job_title":F ,
+"company": F,
+"location": F,
+"start_date":F,
+"end_date":F ,
+"achievement": [F
+]
+}
+],
+"professional_summary": G,
+"languages": [
+{
+"language": H,
+"proficiency": H
+}
+],
+"certifications": [
+{
+"name": I,
+"issuing_organization": I,
+"issuing_year": I
+}
+]
+}"
+"""
