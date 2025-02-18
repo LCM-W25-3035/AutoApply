@@ -62,3 +62,7 @@ async def test_analyzer():
 
 if __name__ == "__main__":
     asyncio.run(test_analyzer())
+
+# Reference
+# (Open AI first prompt, 2025): How to write a script that reads data from Json file?
+# (Open AI last prompt, 2025): How to ensure the script include error handling, and debug logging?
