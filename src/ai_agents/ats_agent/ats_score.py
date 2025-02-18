@@ -46,4 +46,4 @@ print(ats_result)
 
 # Reference: 
 # (OpenAI first prompt, 2025): I am going to work with Gemini, and I need an agent to read a PDF resume and perform an ATS evaluation, with a score for that resume and recommendations.
-# (OpenAI last prompt, 2025): The ATS also includes the match with a job posting that the user places
+# (OpenAI last prompt, 2025): 
