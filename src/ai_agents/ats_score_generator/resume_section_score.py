@@ -20,21 +20,32 @@ def check_resume_sections(resume_text):
     Validate that the resume contains ATS-friendly section headers using NLP-based semantic matching.
     Returns a completeness score (0-100%) based on section presence.
     """
+    # Initialize an empty set to store detected section headers
     detected_sections = set()
     
+    # Process each line of the resume text
     for line in resume_text.split("\n"):
-        line = line.strip()
-        if line:
+        line = line.strip() # Remove leading/trailing whitespaces
+        if line: # Skip empty lines
+            # Encode the line and valid sections for semantic similarity
             section_embedding = model.encode(line, convert_to_tensor=True)
             valid_embeddings = model.encode(VALID_SECTIONS, convert_to_tensor=True)
+
+            # Calculate the cosine similarity between the resume line and valid sections
             similarity_scores = util.pytorch_cos_sim(section_embedding, valid_embeddings)
+
+            # Identify the best match section and its similarity score
             best_match_idx = similarity_scores.argmax().item()
             best_match_score = similarity_scores[0][best_match_idx].item()
             
+            # If the best match score is above 0.80, consider it a valid section
             if best_match_score > 0.80:
                 detected_sections.add(VALID_SECTIONS[best_match_idx])
     
+    # Identify missing sections
     missing_sections = [s for s in VALID_SECTIONS if s not in detected_sections]
+
+    # Calculate the section completeness score
     section_score = round((len(detected_sections) / len(VALID_SECTIONS)) * 100, 2)
     
     return {"detected_sections": list(detected_sections), "missing_sections": missing_sections, "section_score": section_score}

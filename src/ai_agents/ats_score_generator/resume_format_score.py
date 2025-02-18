@@ -8,18 +8,18 @@ def detect_text_based_tables(pdf_path):
         for page_num, page in enumerate(pdf.pages):
             tables = page.extract_tables()
             if tables and any(len(row) > 1 for table in tables for row in table):
-                return {"has_table": True, "page": page_num + 1, "method": "pdfplumber"}
-    return {"has_table": False, "method": "pdfplumber"}
+                return {"has_table": True, "page": page_num + 1}
+    return {"has_table": False}
 
 def detect_structured_tables(pdf_path):
     """Detects structured tables in a PDF using Camelot."""
     try:
         tables = camelot.read_pdf(pdf_path, pages='all')
         if len(tables) > 0:
-            return {"has_table": True, "method": "Camelot"}
+            return {"has_table": True}
     except Exception as e:
         pass
-    return {"has_table": False, "method": "Camelot"}
+    return {"has_table": False}
 
 def detect_image_based_tables(pdf_path):
     """Detects tables in image-based PDFs using OCR (pytesseract)."""
@@ -33,8 +33,8 @@ def detect_image_based_tables(pdf_path):
                     cropped_image = page.within_bbox((x0, y0, x1, y1)).to_image()
                     text = pytesseract.image_to_string(cropped_image)
                     if "|" in text or "----" in text:  # Common table markers
-                        return {"has_table": True, "page": page_num + 1, "method": "OCR"}
-    return {"has_table": False, "method": "OCR"}
+                        return {"has_table": True, "page": page_num + 1}
+    return {"has_table": False}
 
 def detect_images_in_pdf(pdf_path):
     """Detects if a PDF contains images, which may not be ATS-friendly."""
@@ -58,7 +58,7 @@ def detect_tables_in_resume(pdf_path):
     if image_table_result["has_table"]:
         return image_table_result
     
-    return {"has_table": False, "method": "None"}
+    return {"has_table": False}
 
 def check_resume_format(pdf_path):
     """Checks for common ATS-unfriendly formatting issues (tables, images) and returns a score."""
@@ -79,7 +79,7 @@ def check_resume_format(pdf_path):
     }
 
 if __name__ == "__main__":
-    pdf_path = "src/resumes/resume_sample_4.pdf"
+    pdf_path = "src/resumes/resume_sample_bad_format.pdf"
     result = check_resume_format(pdf_path)
     
     if result["tables_detected"]["has_table"]:
