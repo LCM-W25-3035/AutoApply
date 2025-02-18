@@ -2,9 +2,13 @@
 """
 
 OpenAi GPT 4o
-Prompt 1: I have a dataset of jobs offers, the dataset has 7 columns and one of those is job description each record contain information about the jobs in text that means unstructured data (I think Correct me if im wrong) so, I want to create a couple of columns more eith this information - Skill (Must-have → technical, Nice-to-have → other skills. Put comma in between please)
+Prompt 1: I have a dataset of jobs offers, the dataset has 7 columns and one of those is job description
+ each record contain information about the jobs in text that means unstructured data (I think Correct me 
+ if im wrong) so, I want to create a couple of columns more eith this information -
+   Skill (Must-have → technical, Nice-to-have → other skills. Put comma in between please)
 - Experience Level (e.g., "Junior" < 3 years, "Mid-level" 3-8 years, "Senior" > 8 years)
-- Type (Contract, Full-Time, Part-Time, Internship), so i dont know if is better leveraing the LLM models or try to do it or other site what are my choices
+- Type (Contract, Full-Time, Part-Time, Internship), so i dont know if is better leveraing the 
+LLM models or try to do it or other site what are my choices
 
 """
 
