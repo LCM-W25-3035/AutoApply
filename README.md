@@ -1,4 +1,4 @@
-Job Recommendation and Resume Customization System
+extracted the data from octoparse for job posting using linkedin and indeed template 
 
 - **Project Board Link:** [GitHub Board Capstone Project AutoApply](https://github.com/users/DavidRochaR/projects/5)
 - **Documentation Link:** [Master document](https://mylambton.sharepoint.com/:f:/r/sites/CapstoneProject-JobRecommendationandResumeCustomizationSyste/Shared%20Documents/General/Documentation?csf=1&web=1&e=SS23Uk)
