@@ -12,13 +12,25 @@ def extract_text_from_pdf(pdf_path):
 
 def identify_action_verbs(resume_text):
     """Identifies action-oriented verbs dynamically using NLP."""
+
+    # Process the resume text using the spaCy NLP model ("en_core_web_sm")    
     doc = nlp(resume_text)
+
+    # Initialize an empty set to store unique action verbs found in the resume
     verbs_found = set()
     
+    # Iterate through each token (word) in the processed text
     for token in doc:
+
+        # Check if the tocken is a verb and has the dependency tag of "ROOT", "advcl", or "xcomp"
+
+        # ROOT: The main verb of the sentence (e.g. She **leads** the team)
+        # advcl: A clause that functions as an adverb modifying a verb (e.g. She imrpoved efficiency by **streamlining** processes)
+        # xcomp: A clause that functions as the complement of a verb (e.g. She helped **optimize** the system)
         if token.pos_ == "VERB" and token.dep_ in {"ROOT", "advcl", "xcomp"}:  
             verbs_found.add(token.lemma_)
     
+    # Return the list of unique action verbs found in the resume
     return list(verbs_found)
 
 def rank_action_verbs(verbs):
