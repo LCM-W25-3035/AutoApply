@@ -1,3 +1,4 @@
+#Reference: https://github.com/cullenwatson/JobSpy/blob/main/README.md
 # %%
 import csv
 from jobspy import scrape_jobs
