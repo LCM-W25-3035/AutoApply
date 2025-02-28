@@ -1,0 +1,112 @@
+{
+    "technical_skills": [
+        "Machine Learning Model Development",
+        "Statistical Data Analysis",
+        "Cloud Computing",
+        "Data Pipeline Optimization",
+        "Model Deployment in Production",
+        "Geospatial Data Analysis",
+        "Data Visualization and Reporting",
+        "Continuous Integration and Delivery (CI/CD) for ML Models",
+        "Data Analytics",
+        "Python Programming",
+        "R-Studio",
+        "GitHub",
+        "Docker",
+        "SQL",
+        "AWS Lambda",
+        "AWS Step Functions",
+        "AWS ECR",
+        "Hadoop",
+        "Spark",
+        "HBase",
+        "Phoenix",
+        "Cassandra",
+        "MongoDB",
+        "Sqoop",
+        "Flume",
+        "Kafka",
+        "Oozie",
+        "Machine Learning",
+        "Deep Learning",
+        "Artificial Intelligence",
+        "Natural Language Processing",
+        "Neural Networks",
+        "Social Media Analytics",
+        "Linux",
+        "Oracle",
+        "ETL Development",
+        "PowerBI",
+        "Tableau",
+        "AWS",
+        "GCP",
+        "Numpy",
+        "Polars"
+    ],
+    "soft_skills": [
+        "Problem-Solving",
+        "Effective Communication",
+        "Team Collaboration",
+        "Critical Thinking",
+        "Leadership",
+        "Adaptability",
+        "Innovation",
+        "Collaboration"
+    ],
+    "years_of_experience": 5,
+    "education": [
+        {
+            "degree": "Postgraduate Certificate in Big Data Analytics",
+            "institution": "Lambton College",
+            "location": "Canada",
+            "start_date": "2024",
+            "end_date": "Present"
+        },
+        {
+            "degree": "Bachelor of Statistics",
+            "institution": "Universidad del Valle",
+            "location": "Colombia",
+            "start_date": null,
+            "end_date": "2018"
+        },
+        {
+            "degree": "Specialization in Business Intelligence and Big Data",
+            "institution": "Universidad del Valle",
+            "location": "Colombia",
+            "start_date": null,
+            "end_date": "2018"
+        }
+    ],
+    "experience_level": "Senior",
+    "work_experience": [
+        {
+            "job_title": "MLOps Engineer",
+            "company": "Teamcore",
+            "location": "Remote",
+            "start_date": "January 2024",
+            "end_date": "Present",
+            "achievement": [
+                "Built and maintained workflows using AWS services, including SQS for message queue management, Lambda for task orchestration, Step Functions for data processing, S3 for scalable data storage, and ECR for deploying containerized Python images with the correct libraries for optimal deployment and execution of the models.",
+                "Standardized and optimized the continuous delivery pipeline for existing retail machine learning models, improving deployment efficiency and ensuring consistent high performance across production environments.",
+                "Contributed to migrating machine learning models from AWS to Google Cloud Platform (GCP), enhancing scalability, reducing infrastructure costs, and streamlining cloud operations."
+            ]
+        },
+        {
+            "job_title": "Senior Data Scientist / Semi Senior Data Scientist / Junior Data Scientist",
+            "company": "Grupo Bit",
+            "location": "Colombia",
+            "start_date": "February 2019",
+            "end_date": "December 2024",
+            "achievement": [
+                "Extensive experience using Ubuntu as my operating system and working with Docker images for Python to generate the correct library versions and deploy containers. My work involved regular use of the Unix command line for system management and executing various tasks. The use of Ubuntu eliminated 100% of compatibility issues with programs, and Docker facilitated the maintenance of models.",
+                "Designed and implemented an AWS pipeline for continuous integration of Lambda functions, triggered by code updates in GitHub. This solution eliminated 100% of deployment errors and reduced deployment time by 80%, ensuring seamless integration and rapid delivery of updates while maintaining high system reliability.",
+                "Programming and deployed machine learning, deep learning, and statistical models in Python to generate actionable business insights, including a Recommendation System that increased client sales by 21%.",
+                "Designed and deployed econometric models with exogenous data, applying data analytics to uncover additional insights beyond the client's data, creating new business opportunities. These insights increased information consumption by 15%.",
+                "Took the initiative to research and calculate recommendation system metrics using a partition matrix, and developed an alternative data processing approach that reduced processing time and cut costs by up to 50%. Driven by curiosity and a focus on innovation, I researched and implemented new technologies, including the Jax library, to leverage GPU computational power, achieving a 95% reduction in processing time.",
+                "Optimized algorithms for a forecasting model by leveraging Python, Numpy, and Polars libraries, resulting in a 98.47% improvement in processing time and an 85% reduction in peak memory usage for efficient implementation.",
+                "Collaborated with cross-functional teams to develop client-focused communication channels, earning first place for innovation in the Grupo Bit Business Challenge."
+            ]
+        }
+    ],
+    "professional_summary": "Results-driven Data Scientist with extensive experience in machine learning model development, MLOps, and cloud-based \nsolutions, currently pursuing a post-graduation degree in Big Data Analytics. Proven expertise in implementing high-\nperformance models that optimize business operations. Adept at collaborating with cross-functional teams to deliver \nactionable insights and innovative solutions. Recognized for streamlining pipelines, improving scalability, and enhancing \ndecision-making processes in data-driven environments. Skilled in leveraging tools like Python, R, AWS, and GCP for model \ndeployment, automation, and data analysis."
+}
