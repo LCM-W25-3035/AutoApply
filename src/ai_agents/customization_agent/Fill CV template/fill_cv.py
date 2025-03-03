@@ -11,6 +11,8 @@ from docx.oxml import OxmlElement
 import json
 
 class CVGenerator:
+    CUSTOM_BULLET_STYLE = 'Custom Bullet'
+    
     def __init__(self, template_path):
         self.doc = Document(template_path)
         self.setup_styles()
@@ -27,8 +29,8 @@ class CVGenerator:
         style.paragraph_format.space_before = Pt(0)
         
         # Custom bullet style
-        if 'Custom Bullet' not in styles:
-            bullet_style = styles.add_style('Custom Bullet', WD_STYLE_TYPE.PARAGRAPH)
+        if self.CUSTOM_BULLET_STYLE not in styles:
+            bullet_style = styles.add_style(self.CUSTOM_BULLET_STYLE, WD_STYLE_TYPE.PARAGRAPH)
             bullet_style.base_style = styles['Normal']
             bullet_style.paragraph_format.left_indent = Inches(0.25)
             bullet_style.paragraph_format.first_line_indent = Inches(-0.25)
@@ -36,7 +38,7 @@ class CVGenerator:
     def add_bullet_paragraph(self, text):
         """Add a bullet point paragraph"""
         paragraph = self.doc.add_paragraph()
-        paragraph.style = 'Custom Bullet'
+        paragraph.style = self.CUSTOM_BULLET_STYLE
         paragraph.paragraph_format.left_indent = Inches(0.25)
         paragraph.paragraph_format.first_line_indent = Inches(-0.25)
         paragraph.add_run('• ').bold = True
@@ -57,13 +59,13 @@ class CVGenerator:
     def add_horizontal_line(self, paragraph):
         """Add horizontal line after section titles"""
         p = paragraph._p
-        pPr = p.get_or_add_pPr()
-        bottomBorder = OxmlElement('w:pBdr')
+        p_pr = p.get_or_add_pPr()
+        bottom_border = OxmlElement('w:pBdr')
         bottom = OxmlElement('w:bottom')
         bottom.set(qn('w:val'), 'single')
         bottom.set(qn('w:sz'), '6')
-        bottomBorder.append(bottom)
-        pPr.append(bottomBorder)
+        bottom_border.append(bottom)
+        p_pr.append(bottom_border)
         
     def add_right_aligned_text(self, paragraph, text):
         """Add right-aligned text to a paragraph using tab stops"""
@@ -71,7 +73,7 @@ class CVGenerator:
         paragraph.paragraph_format.tab_stops.clear_all()
         
         # Add a right-aligned tab stop at 6 inches
-        tab_stop = paragraph.paragraph_format.tab_stops.add_tab_stop(
+        paragraph.paragraph_format.tab_stops.add_tab_stop(
             Inches(6), WD_TAB_ALIGNMENT.RIGHT
         )
         
@@ -171,11 +173,4 @@ if __name__ == "__main__":
         'customized_cv_output.json',
         'template1.docx',
         'cv_filled.docx'
-    )
-
-if __name__ == "__main__":
-    generate_cv(
-        'C:/Users/diana/OneDrive/Escritorio/Test/customized_cv_output.json',
-        'C:/Users/diana/OneDrive/Escritorio/Test/template1.docx',
-        'C:/Users/diana/OneDrive/Escritorio/Test/cv_filled.docx'
     )
