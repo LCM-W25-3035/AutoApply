@@ -58,8 +58,14 @@ def extract_cv_information(uploaded_pdf):
         -Issuing organization
         -Year issued
         -If no certifications are found, exclude this section from the final JSON.
+    10. Personal information:
+        -Name
+        -Phone
+        -Email
+        -Addres
+        -Identify and list Social media links
 
-    10. Output Format:
+    11. Output Format:
         -Return only the JSON response in the exact structure below.
         -Do not include any explanations, extra text, or formatting beyond the JSON itself.
 
@@ -101,7 +107,14 @@ def extract_cv_information(uploaded_pdf):
             "issuing_organization":I,
             "year_issued": I
             }
-        ]
+        ],
+        "personal_information":{
+            "name": J,
+            "phone": J,
+            "email": J,
+            "addres": J,
+            "social_media":[J]
+        }
         }
     """
 
@@ -113,7 +126,6 @@ def extract_cv_information(uploaded_pdf):
 
     response = model.generate_content(f"The resume to analyze is {pdf_text}")
     cleaned_response = response.text.strip("```json\n").strip("```").replace("\n", "")
-    st.write(f"Output Gemini: {cleaned_response}")
 
     json_file = json.loads(cleaned_response)
     # Save the result to the output file
@@ -241,7 +253,132 @@ def extract_job_posting_information(uploaded_job):
 
     response = model.generate_content(f"The job posting to analyze is {pdf_text}")
     cleaned_response = response.text.strip("```json\n").strip("```").replace("\n", "")
-    st.write(f"Output Gemini: {cleaned_response}")
+
+    json_file = json.loads(cleaned_response)
+    # Save the result to the output file
+    output_filepath = "resume/job_posting.json"
+    with open(output_filepath, "w", encoding="utf-8") as file_save:
+        json.dump(json_file, file_save, ensure_ascii=False, indent=4)
+        print(f"Output saved to '{output_filepath}'.")
+
+
+
+def extract_job_posting_information_from_str(uploaded_job):
+
+    pdf_text = uploaded_job
+
+    system_instructions = """
+    You are a job market analyst specializing in processing and analyzing job postings. 
+    Your task is to extract key information from a given job listing and structure it into a JSON format. 
+    The extracted data should include:
+
+    1. Job Information:
+        -The job title of the position.
+    2. Company Information:
+        -The company name offering the position.
+        -The industry in which the company operates.
+        -The location where the job is based.
+        -Whether the job is remote-friendly (true/false).
+    3. Employment Type & Experience Level:
+        -The employment type (e.g., Full-time, Part-time, Contract, Internship).
+        -The experience level required (e.g., Junior, Mid, Senior, Lead).
+        -The minimum years of experience required.
+    4. Salary Information:
+        -The salary range (minimum and maximum salary).
+        -The currency in which the salary is offered.
+        -The payment frequency (e.g., Hourly, Monthly, Annual).
+    5. Job Description:
+        -A short summary of the job description provided in the job posting.
+    6. Responsibilities:
+        -A list of job responsibilities as mentioned in the posting.
+    7. Requirements:
+        -A list of all mandatory job requirements specified in the posting.
+    8. Skills Required:
+        -Identify and list all technical skills required for the job.
+        -Identify and list all soft skills required or implied in the posting.
+    9. Education & Certifications (Optional: If not found, omit these sections):
+        -Identify the minimum education level required (degree and field of study).
+        -List any preferred institutions mentioned in the job description.
+        -Identify any required certifications, including the certification name and issuing organization.
+    10. Language Requirements (Optional: If not found, omit this section):
+        -Identify all languages required for the job, along with the proficiency level.
+    11. Benefits & Perks (Optional: If not found, omit this section):
+        -Extract and list all benefits mentioned in the job posting (e.g., health insurance, remote work, bonuses, flexible hours).
+    12. Application Information:
+        -The application deadline (if provided).
+        -The job posting date (if available).
+        -The official application link where candidates can apply.
+
+    13. Output Format:
+        -Return ONLY the JSON response in the exact structure below.
+        -Do NOT include any explanations, comments, or extra text beyond the JSON itself.
+
+        {
+        "job_title": "A",
+        "company": {
+            "name": "B",
+            "industry": "C",
+            "location": "D",
+            "remote": E
+        },
+        "employment_type": "F",
+        "experience_level": "G",
+        "years_of_experience_required": H,
+        "salary_range": {
+            "min": I,
+            "max": J,
+            "currency": "K",
+            "payment_frequency": "L"
+        },
+        "job_description": "M",
+        "responsibilities": [
+            "N"
+        ],
+        "requirements": [
+            "O"
+        ],
+        "technical_skills": [
+            "P"
+        ],
+        "soft_skills": [
+            "Q"
+        ],
+        "education_required": [
+            {
+            "degree": "R",
+            "field_of_study": "S",
+            "preferred_institutions": ["T"]
+            }
+        ],
+        "certifications_required": [
+            {
+            "name": "U",
+            "issuing_organization": "V"
+            }
+        ],
+        "languages_required": [
+            {
+            "language": "W",
+            "proficiency": "X"
+            }
+        ],
+        "benefits": [
+            "Y"
+        ],
+        "application_deadline": "Z",
+        "job_posting_date": "AA",
+        "application_link": "BB"
+        }
+    """
+
+    genai.configure(api_key = your_api_key)
+    model = genai.GenerativeModel(
+    "models/gemini-2.0-flash",
+    system_instruction=system_instructions,
+    )
+
+    response = model.generate_content(f"The job posting to analyze is {pdf_text}")
+    cleaned_response = response.text.strip("```json\n").strip("```").replace("\n", "")
 
     json_file = json.loads(cleaned_response)
     # Save the result to the output file

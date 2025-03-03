@@ -1,5 +1,4 @@
 # option1.py
-from app import MONGO_DB_NAME, MONGO_JOBS_COLLECTION, MONGO_URI
 import pymongo
 from pypdf import PdfReader
 import docx
@@ -12,12 +11,12 @@ import io
 from io import BytesIO
 from utils import extract_cv_information, extract_job_posting_information
 
-client_mongo = pymongo.MongoClient(MONGO_URI)
-db = client_mongo[MONGO_DB_NAME]
-collection = db[MONGO_JOBS_COLLECTION]
-
-
 def run():
+
+    st.markdown("<h1 style='text-align: center; font-size: 50px;'>Find the best job matches</h1>", unsafe_allow_html=True)
+    
+    st.write("Here you can upload your resume and find the best job matches.")
+
     uploaded_cv = st.file_uploader("Upload your PDF resume", type=["pdf"])
     job_filter_selection = st.radio("Do you like to filter your job search?", ["Option 1: YES", "Option 2: NO"], index=None)
     
@@ -38,3 +37,8 @@ def run():
         extract_job_posting_information(uploaded_job)
         customize_resume(uploaded_cv)
         # st.download_button("Download Tailored Resume", customized_cv, file_name="Tailored_Resume.pdf")
+
+        # Button to go back
+    if st.button("⬅️ Back to Home"):
+        st.session_state.page = "Home"
+        st.rerun()
