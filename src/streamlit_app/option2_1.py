@@ -15,7 +15,7 @@ def run():
     collection = db[MONGO_JOBS_COLLECTION]
 
     # Load jobs from MongoDB
-    jobs_data = list(collection.find({}).limit(5000))  # Retrieve everything
+    jobs_data = list(collection.find({}))  # Retrieve everything
 
     if not jobs_data:
         st.error("No job postings found in the database.")
@@ -27,7 +27,7 @@ def run():
 
     # Convert to DataFrame
     df = pd.DataFrame(jobs_data)
-    df.rename(columns={"_id": "Job ID", "Title": "Job Title", "Location": "City", "Keyword": "Category"}, inplace=True)
+    df.rename(columns={"_id": "Job ID", "Title": "Job Title", "Location": "City", "job_category_app": "Category"}, inplace=True)
 
     # Ensure "Category" is a list
     df["Category"] = df["Category"].apply(lambda x: x if isinstance(x, list) else [])
@@ -82,16 +82,7 @@ def run():
     st.dataframe(filtered_df.iloc[start_idx:end_idx])
 
     # Job Selection
-    job_id_input = st.text_input("Enter the Job ID to proceed:", key="job_id_input")
-
-    if job_id_input:
-        if job_id_input in filtered_df["Job ID"].astype(str).values:
-            st.success(f"✅ Job ID {job_id_input} selected! Proceeding to the next step...")
-            st.session_state.selected_job_id = job_id_input
-            st.session_state.page = "Option1_4"
-            st.rerun()
-        else:
-            st.error("⚠️ Invalid Job ID. Please enter a valid ID from the table.")
+    print(filtered_df.shape)
 
     # Back to Home
     if st.button("⬅️ Back to Home"):

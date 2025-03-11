@@ -8,7 +8,9 @@ from io import BytesIO
 import numpy as np
 
 
-your_api_key = ""
+your_api_key = "AIzaSyAAhEq8NyaV8t9IQjSHdF7XhgF69GQW95U"
+model_gemini = "models/gemini-2.0-flash"
+clean_json = "```json\n"
 
 def extract_cv_information(uploaded_pdf):
     # Read the PDF content using pypdf
@@ -120,12 +122,12 @@ def extract_cv_information(uploaded_pdf):
 
     genai.configure(api_key = your_api_key)
     model = genai.GenerativeModel(
-    "models/gemini-2.0-flash",
+    model_gemini,
     system_instruction=system_instructions,
     )
 
     response = model.generate_content(f"The resume to analyze is {pdf_text}")
-    cleaned_response = response.text.strip("```json\n").strip("```").replace("\n", "")
+    cleaned_response = response.text.strip(clean_json).strip("```").replace("\n", "")
 
     json_file = json.loads(cleaned_response)
     # Save the result to the output file
@@ -247,12 +249,12 @@ def extract_job_posting_information(uploaded_job):
 
     genai.configure(api_key = your_api_key)
     model = genai.GenerativeModel(
-    "models/gemini-2.0-flash",
+    model_gemini,
     system_instruction=system_instructions,
     )
 
     response = model.generate_content(f"The job posting to analyze is {pdf_text}")
-    cleaned_response = response.text.strip("```json\n").strip("```").replace("\n", "")
+    cleaned_response = response.text.strip(clean_json).strip("```").replace("\n", "")
 
     json_file = json.loads(cleaned_response)
     # Save the result to the output file
@@ -373,12 +375,12 @@ def extract_job_posting_information_from_str(uploaded_job):
 
     genai.configure(api_key = your_api_key)
     model = genai.GenerativeModel(
-    "models/gemini-2.0-flash",
+    model_gemini,
     system_instruction=system_instructions,
     )
 
     response = model.generate_content(f"The job posting to analyze is {pdf_text}")
-    cleaned_response = response.text.strip("```json\n").strip("```").replace("\n", "")
+    cleaned_response = response.text.strip(clean_json).strip("```").replace("\n", "")
 
     json_file = json.loads(cleaned_response)
     # Save the result to the output file
@@ -409,6 +411,71 @@ def find_best_jobs(cv_file, job_offers):
     
     return pd.DataFrame(best_jobs)
 
+
+def skills_missing():
+    # Extract skills from resume and job posting
+    cv_skills = set(cv_data.get("technical_skills", []))
+    job_skills = set(job_data.get("technical_skills", []))
+
+    # Identify missing skills (limit to 5)
+    missing_skills = list(job_skills - cv_skills)[:5]
+
+    for skill in missing_skills:
+        print(f"Do you have experience with {skill}? (yes/no)")
+        answer = input("Your answer: ").strip().lower()
+
+        if answer == "yes":
+            while True:
+                # Ask the user to describe their experience with the skill
+                detail = input(f"Describe your experience with {skill}, including how you obtained it and a metric or result achieved: ")
+
+                # Validate the response with Gemini
+                validation_prompt = (
+                    f"Evaluate the following response regarding experience with {skill}. "
+                    f"Ensure it includes:\n"
+                    f"- A clear explanation of how the experience was obtained.\n"
+                    f"- At least one action verb describing what was done.\n"
+                    f"- A quantifiable metric or measurable impact.\n\n"
+                    f"Response to evaluate:\n{detail}\n\n"
+                    f"### Evaluation Criteria ###\n"
+                    f"- If the response meets all criteria, return: 'Evaluation: ✅ Strong response.'\n"
+                    f"- If the response is missing details, return: 'Evaluation: ❌ Needs improvement.' "
+                    f"and provide a suggestion with an example of how the response should be structured.\n\n"
+                    f"### Example of a strong response ###\n"
+                    f"'Implemented a predictive maintenance system using Python, reducing machine downtime by 25% over six months.'\n\n"
+                )
+
+                try:
+                    response = model.generate_content(validation_prompt)
+                    feedback = response.text.strip()
+                    print("\n🔹 Gemini Response:\n", feedback)  # Display Gemini's response for debugging
+
+                    # If the response is strong, save it and exit the loop
+                    if re.search(r"✅ Strong response", feedback, re.IGNORECASE):
+                        save_answers[skill] = detail
+                        break
+
+                    # If the response needs improvement, show feedback and an example
+                    if re.search(r"❌ Needs improvement", feedback, re.IGNORECASE):
+                        print("\n⚠️ Your answer needs improvement.")
+
+                        # Extract a strong response example from Gemini's feedback
+                        example_match = re.search(r"Example of a strong response:\s*(.+)", feedback, re.IGNORECASE)
+                        if example_match:
+                            print(f"\n🔄 Example of how you should structure your answer:\n{example_match.group(1).strip()}")
+
+                        print("\nPlease try again with more detail using action verbs and metrics.")
+
+                except Exception as e:
+                    print(f"\n❌ Error communicating with Gemini: {e}")
+                    print("Skipping this skill...")
+                    break
+
+    # Save responses to a JSON file
+    with open("user_answers.json", "w") as file:
+        json.dump(save_answers, file, indent=4)
+
+    print("\n✅ Answers saved successfully.")
 
 
 

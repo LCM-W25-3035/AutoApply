@@ -34,14 +34,14 @@ if st.session_state.page == "Home":
     st.write("")  
 
     option = st.radio("What would you like to do?", [
-        "Option 1: Tailor my resume for a specific job opportunity",
-        "Option 2: Find the best job matches and optimize my resume accordingly"
+        "Option 1: Tailor my resume for a specific job",
+        "Option 2: Find the best job matches with our AI recommender"
     ], index=None, key="paso_0")
     
-    if option == "Option 1: Tailor my resume for a specific job opportunity":
+    if option == "Option 1: Tailor my resume for a specific job":
         go_to_page("Option1")
 
-    if option == "Option 2: Find the best job matches and optimize my resume accordingly":
+    if option == "Option 2: Find the best job matches with our AI recommender":
         go_to_page("Option2")
 
 # Load pages dynamically
@@ -69,3 +69,7 @@ elif st.session_state.page == "Option1_4":
 elif st.session_state.page == "Option2":
     import option2
     option2.run()
+
+elif st.session_state.page == "Option2_1":
+    import option2_1
+    option2_1.run()
