@@ -3,6 +3,7 @@ from utils import extract_cv_information, extract_job_posting_information_from_s
 import pymongo
 import pandas as pd
 from bson import ObjectId  # Required for handling MongoDB ObjectId
+var_back_to_job_seleccion = "⬅️ Back to Job Selection"
 
 def run():
     st.markdown("<h1 style='text-align: center; font-size: 50px;'>Tailor My Resume for the Selected Job</h1>", unsafe_allow_html=True)
@@ -10,7 +11,7 @@ def run():
     # Ensure a job was selected in the previous step
     if "selected_job_id" not in st.session_state or st.session_state.selected_job_id is None:
         st.error("⚠️ No job selected. Please go back and select a job first.")
-        if st.button("⬅️ Back to Job Selection"):
+        if st.button(var_back_to_job_seleccion):
             st.session_state.page = "Option1_2"
             st.rerun()
         return
@@ -33,7 +34,7 @@ def run():
 
     if not selected_job:
         st.error("⚠️ Selected job not found in the database. Please go back and choose another job.")
-        if st.button("⬅️ Back to Job Selection"):
+        if st.button(var_back_to_job_seleccion):
             st.session_state.page = "Option1_2"
             st.rerun()
         return
@@ -61,7 +62,7 @@ def run():
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        if st.button("⬅️ Back to Job Selection"):
+        if st.button(var_back_to_job_seleccion):
             st.session_state.page = "Option1_2"
             st.rerun()
 
