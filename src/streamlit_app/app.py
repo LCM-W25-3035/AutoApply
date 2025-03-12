@@ -73,3 +73,7 @@ elif st.session_state.page == "Option2":
 elif st.session_state.page == "Option2_1":
     import option2_1
     option2_1.run()
+
+elif st.session_state.page == "Option2_2":
+    import option2_2
+    option2_2.run()

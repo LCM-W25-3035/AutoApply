@@ -8,7 +8,7 @@ import streamlit as st
 import google.generativeai as genai
 import io
 from io import BytesIO
-from utils import extract_cv_information, extract_job_posting_information, skills_missing
+from utils import extract_cv_information, extract_job_posting_information, customize_cv, generate_cv #skills_missing
 import pymongo
 
 def run():
@@ -28,7 +28,10 @@ def run():
     if ((uploaded_cv is not None) and (uploaded_job is not None)):
         extract_cv_information(uploaded_cv)
         extract_job_posting_information(uploaded_job)
-        skills_missing()
+        customize_cv()
+        generate_cv()
+        
+        #  skills_missing()
 
         st.write("Your resume for this application should be:")
 

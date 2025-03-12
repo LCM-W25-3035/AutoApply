@@ -15,7 +15,7 @@ def run():
     collection = db[MONGO_JOBS_COLLECTION]
 
     # Load jobs from MongoDB
-    jobs_data = list(collection.find({}).limit(5000))  # Retrieve everything
+    jobs_data = list(collection.find({}))  # Retrieve everything
 
     if not jobs_data:
         st.error("No job postings found in the database.")
@@ -27,31 +27,29 @@ def run():
 
     # Convert to DataFrame
     df = pd.DataFrame(jobs_data)
-    df.rename(columns={"_id": "Job ID", "Title": "Job Title", "Location": "City", "Keyword": "Category"}, inplace=True)
-
-    # Ensure "Category" is a list
-    df["Category"] = df["Category"].apply(lambda x: x if isinstance(x, list) else [])
+    df = df.rename(columns={"_id": "Job ID", "Title": "Job Title", "Location": "City", "Keyword": "Category"})
+ 
+    # Fill NaN values
+    df["Category"] = df["Category"].fillna("Not Determined")
+    df["City"] = df["City"].fillna("Unknown")
+    
+    # Normalize text format
+    df["Category"] = df["Category"].str.title()
+    df["City"] = df["City"].str.title()
+    
+    print(df.head(2))
+    # Extract unique categories and cities
+    category_options = ["All"] + sorted(df["Category"].unique().tolist())
+    city_options = ["All"] + sorted(df["City"].unique().tolist())
 
     # Sidebar Filters
     st.sidebar.header("🔍 Filter Jobs")
-    
-    category_options = [
-        "All",
-        "Software Development", "Data Science & Machine Learning", "Data Engineering",
-        "Cloud & DevOps", "Cybersecurity", "Business Intelligence & Data Analytics",
-        "IT Support & SysAdmin", "Product Management & Agile Roles", "AI Research & NLP",
-        "Blockchain & Web3", "Embedded Systems & IoT", "Game Development",
-        "Networking & Telecommunications", "Quality Assurance (QA) & Testing",
-        "IT Sales & Pre-Sales"
-    ]
-    
-    city_options = ["All"] + sorted(df["City"].dropna().unique().tolist())
-    
-    selected_city = st.sidebar.selectbox("Select City", city_options)
-    selected_category = st.sidebar.selectbox("Select Category", category_options)
 
     # Apply Filters
     filtered_df = df.copy()
+
+    selected_city = st.sidebar.selectbox("Select City", city_options)
+    selected_category = st.sidebar.selectbox("Select Category", category_options)
 
     if selected_city != "All":
         filtered_df = filtered_df[filtered_df["City"] == selected_city]
