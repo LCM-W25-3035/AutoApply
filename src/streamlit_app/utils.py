@@ -839,3 +839,52 @@ def resume_education_info_personal():
     with open(output_filepath, "w", encoding="utf-8") as file_save:
         json.dump(output_file, file_save, ensure_ascii=False, indent=4)
         print(f"Output saved to '{output_filepath}'.")
+
+######################
+
+def resume_promt_summary():
+    # Specify the path to the file you want to read
+    input_filepath = f"resume/resume.json"
+
+    with open(input_filepath, "r", encoding="utf-8") as file_load:
+       resume = json.load(file_load)
+    
+    # Specify the path to the file you want to read
+    input_filepath = f"resume/job_posting.json"
+
+    with open(input_filepath, "r", encoding="utf-8") as file_load:
+       job_offer = json.load(file_load)
+    
+
+    system_instructions ="""
+    You are an HR specialist skilled in processing and analyzing resumes.
+    Your task is to generate a concise and professional summary strictly based on the provided resume.
+
+    **Instructions:**
+    - Use only the information available in the resume. Do not infer or add any details that are not explicitly mentioned.
+    - Focus on highlighting relevant experience, skills, and qualifications.
+    - Ensure clarity, coherence, and alignment with the job offer.
+    - The response must be in JSON format only, without any explanations or additional text.
+
+    **Output Format:**
+    {
+        "professional_summary": "Generated summary here"
+    }
+    """
+
+    genai.configure(api_key = your_api_key)
+    model = genai.GenerativeModel(
+    model_gemini,
+    system_instruction=system_instructions,
+    )
+
+    response = model.generate_content(f"The resume to analyze is {resume} and the job offer is {job_offer}")
+    cleaned_response = response.text.strip(clean_json).strip("```").replace("\n", "")
+
+    json_file = json.loads(cleaned_response)
+    print("The real json line 209", json_file)
+    # Save the result to the output file
+    output_filepath = f"resume/resume_summary.json"
+    with open(output_filepath, "w", encoding="utf-8") as file_save:
+        json.dump(json_file, file_save, ensure_ascii=False, indent=4)
+        print(f"Output saved to '{output_filepath}'.")
