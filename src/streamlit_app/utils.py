@@ -821,3 +821,21 @@ Returns only the JSON response in the exact structure shown below, without expla
 ]
 }"
 """
+###############################################
+def resume_education_info_personal():
+    # Specify the path to the file you want to read
+    input_filepath = f"resume/resume.json"
+
+    with open(input_filepath, "r", encoding="utf-8") as file_load:
+       original_cv = json.load(file_load)
+    
+    output_file = {
+        "personal_information": original_cv.get("personal_information", {}),
+        "education": original_cv.get("education", {})
+    }
+
+    # Save the result to the output file
+    output_filepath = f"resume/resume_education_info_personal.json"
+    with open(output_filepath, "w", encoding="utf-8") as file_save:
+        json.dump(output_file, file_save, ensure_ascii=False, indent=4)
+        print(f"Output saved to '{output_filepath}'.")
