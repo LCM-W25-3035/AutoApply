@@ -17,7 +17,7 @@ def detect_structured_tables(pdf_path):
         tables = camelot.read_pdf(pdf_path, pages='all')
         if len(tables) > 0:
             return {"has_table": True}
-    except Exception as e:
+    except Exception:
         pass
     return {"has_table": False}
 
