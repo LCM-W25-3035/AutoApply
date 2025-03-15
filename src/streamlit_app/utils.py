@@ -1209,3 +1209,247 @@ Returns only the JSON response in the exact structure shown below, without expla
 }"
 """
 
+# Reference
+# (OpenAI, ChatGPT o1, first prompt, 2025): I have this template in Word, this Json, both have the same keys, guide me to make a code that reeplace the information in the template with the info in Json
+# (Claude, 3.5 Sonnet, last prompt, 2025): The template is not filling completly good, help me to correct the format
+
+import re
+import json
+import os
+from docx import Document
+from docx.shared import Pt, Inches
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
+from docx.enum.style import WD_STYLE_TYPE
+from docx.oxml.ns import qn
+from docx.oxml import OxmlElement
+# from docx2pdf import convert
+
+def split_into_sentences(text):
+    print("split_into_sentences line", 839)
+    """Splits the text into sentences using punctuation."""
+    print(text)
+    sentences = re.split(r'(?<=[.!?])\s+', text.strip())
+    print(sentences)
+    output = [s.strip() for s in sentences if s.strip()]
+    print("split_into_sentences line", 844)
+    return output
+    
+
+class CVGenerator:
+    CUSTOM_BULLET_STYLE = 'Custom Bullet'
+    
+    def _init_(self, template_path):
+        self.doc = Document(template_path)
+        self.setup_styles()
+        
+    def setup_styles(self):
+        print("setup_styles line", 852)
+        """Set up document styles."""
+        styles = self.doc.styles
+        
+        # Normal style
+        style = styles['Normal']
+        style.font.name = 'Calibri'
+        style.font.size = Pt(11)
+        style.paragraph_format.space_after = Pt(0)
+        style.paragraph_format.space_before = Pt(0)
+        
+        # Custom bullet style
+        if self.CUSTOM_BULLET_STYLE not in styles:
+            bullet_style = styles.add_style(self.CUSTOM_BULLET_STYLE, WD_STYLE_TYPE.PARAGRAPH)
+            bullet_style.base_style = styles['Normal']
+            bullet_style.paragraph_format.left_indent = Inches(0.25)
+            bullet_style.paragraph_format.first_line_indent = Inches(-0.25)
+            
+    def add_bullet_paragraph(self, text):
+        print("add_bullet_paragraph line", 871)
+        """Add a bullet point paragraph."""
+        paragraph = self.doc.add_paragraph()
+        paragraph.style = self.CUSTOM_BULLET_STYLE
+        paragraph.paragraph_format.left_indent = Inches(0.25)
+        paragraph.paragraph_format.first_line_indent = Inches(-0.25)
+        run_bullet = paragraph.add_run('• ')
+        run_bullet.bold = True
+        paragraph.add_run(text.strip())
+        return paragraph
+        
+    def add_section_title(self, title):
+        print("add_section_title line", 883)
+        """Add a section title with proper formatting."""
+        # Add space before section
+        spacing_para = self.doc.add_paragraph()
+        spacing_para.paragraph_format.space_before = Pt(12)
+        
+        # Section title
+        paragraph = self.doc.add_paragraph()
+        paragraph.add_run(title).bold = True
+        self.add_horizontal_line(paragraph)
+        
+    def add_horizontal_line(self, paragraph):
+        print("add_horizontal_line line", 895)
+        """Add a horizontal line after a section title."""
+        p = paragraph._p
+        p_pr = p.get_or_add_pPr()
+        bottom_border = OxmlElement('w:pBdr')
+        bottom = OxmlElement('w:bottom')
+        bottom.set(qn('w:val'), 'single')
+        bottom.set(qn('w:sz'), '6')
+        bottom_border.append(bottom)
+        p_pr.append(bottom_border)
+        
+    def add_right_aligned_text(self, paragraph, text):
+        print("add_right_aligned_text line", 907)
+        """Add right aligned text to a paragraph using tab stops."""
+        paragraph.paragraph_format.tab_stops.clear_all()
+        paragraph.paragraph_format.tab_stops.add_tab_stop(
+            Inches(8), WD_TAB_ALIGNMENT.RIGHT
+        )
+        paragraph.add_run('\t' + text)
+        
+    def fill_cv(self, data):
+        print("fill_cv line", 916)
+        """Fill the CV with the provided data."""
+        # Clear the document
+        for paragraph in self.doc.paragraphs[:]:
+            p = paragraph._element
+            p.getparent().remove(p)
+            
+        # Name
+        print("fill_cv line", 924)
+        name_paragraph = self.doc.add_paragraph()
+        name_text = data.get('personal_information', {}).get('name', '')
+        name_run = name_paragraph.add_run(name_text)
+        name_run.bold = True
+        name_run.font.size = Pt(48)
+
+        print("fill_cv line", 931)
+        # Contact information (including Social Media)
+        personal_info = data.get('personal_information', {})
+        address = personal_info.get('addres', '')
+        phone = personal_info.get('phone', '')
+        email = personal_info.get('email', '')
+        social_list = personal_info.get('social_media', [])
+        social = ", ".join(social_list) if isinstance(social_list, list) else social_list
+
+        print("fill_cv line", 940)
+        # Create a contact string that only includes non-empty fields
+        contact_parts = [address, phone, email, social]
+        contact = " | ".join([str(part) for part in contact_parts if part])
+        
+        print("fill_cv line", 945)
+        contact_paragraph = self.doc.add_paragraph()
+        contact_paragraph.add_run(contact)
+        contact_paragraph.paragraph_format.space_after = Pt(12)
+        
+        # Summary (justified)
+        print("fill_cv line", 951)
+        self.add_section_title("Summary")
+        summary_text = data.get('professional_summary', '')
+        summary_para = self.doc.add_paragraph()
+        summary_para.add_run(summary_text)
+        summary_para.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+        summary_para.paragraph_format.space_after = Pt(12)
+        
+        # Experience
+        print("fill_cv line", 960)
+        self.add_section_title("Experience")
+        for exp in data.get('work_experience', []):
+            print("fill_cv line 963", exp)
+            exp_para = self.doc.add_paragraph()
+            exp_para.paragraph_format.space_before = Pt(12)
+            job_title = exp.get('job_title', '')
+            company = exp.get('company', '')
+            location = exp.get('location', '')
+            exp_text = f"{job_title} | {company} | {location}"
+            exp_run = exp_para.add_run(exp_text)
+            exp_run.bold = True
+            start_date = exp.get('start_date', '')
+            end_date = exp.get('end_date', '')
+            dates_text = f"{start_date} - {end_date}"
+            self.add_right_aligned_text(exp_para, dates_text)
+            
+            # Functions (bullet points, justified)
+            functions_text = exp.get('achievement', '')
+            # functions = split_into_sentences(functions_text)
+            functions = functions_text
+            for function in functions:
+                if function.strip():
+                    bullet_para = self.add_bullet_paragraph(function)
+                    bullet_para.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+                    bullet_para.paragraph_format.space_after = Pt(3)
+                    
+        # Education
+        print("fill_cv line", 986)
+        self.add_section_title("Education")
+        for edu in data.get('education', []):
+            edu_para = self.doc.add_paragraph()
+            edu_para.paragraph_format.space_before = Pt(6)
+            institution = edu.get('institution', '')
+            edu_run = edu_para.add_run(f"{institution}")
+            edu_run.bold = True
+            dates = edu.get('end_date', '')
+            self.add_right_aligned_text(edu_para, dates)
+            
+            degree_para = self.doc.add_paragraph()
+            degree_para.add_run(edu.get('degree', ''))
+            degree_para.paragraph_format.space_after = Pt(6)
+            
+        # Skills in columns
+        print("fill_cv line", 1003)
+        self.add_section_title("Skills")
+        skills_list = data.get('skills', [])  # Obtener la lista directamente
+        skills = [skill.strip() for skill in skills_list if isinstance(skill, str)]
+
+        num_columns = 3  # Change to 2 if preferred
+        num_skills = len(skills)
+        num_rows = (num_skills + num_columns - 1) // num_columns
+        
+        table = self.doc.add_table(rows=num_rows, cols=num_columns)
+        table.autofit = True
+        
+        print("fill_cv line", 1015)
+        skill_index = 0
+        for r in range(num_rows):
+            row_cells = table.rows[r].cells
+            for c in range(num_columns):
+                if skill_index < num_skills:
+                    paragraph = row_cells[c].paragraphs[0]
+                    run = paragraph.add_run('• ' + skills[skill_index])
+                    run.font.size = Pt(11)
+                    skill_index += 1
+                else:
+                    row_cells[c].text = ""
+    
+    def save(self, output_path):
+        """Save the document to the specified path."""
+        self.doc.save(output_path)
+            
+def generate_cv():
+    json_file_path = f"resume/resume_final_to_word.json"
+    template_path = f"template/template1.docx"
+    """Generate CV from JSON data"""
+    try:
+        with open(json_file_path, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+        
+        print("json_final to word linea 1020",data)
+        user_name = data.get('personal_information', {}).get('name', 'Unknown').strip()
+        user_name = " ".join(user_name.title().split())
+        output_path = f"output/{user_name}_customization.docx"  
+
+       # Create and save the Word version
+        generator = CVGenerator(template_path)
+        generator.fill_cv(data)
+        generator.save(output_path)
+        print(f"Word CV generated successfully: {output_path}")
+        
+        # Convert the Word file to PDF
+        # pdf_output = os.path.splitext(output_path)[0] + ".pdf"
+        # convert(output_path, pdf_output)
+        # print(f"PDF CV generated successfully: {pdf_output}")
+        
+        return True
+        
+    except Exception as e:
+        print(f"Error generating CV: {str(e)}")
+        return False
