@@ -498,3 +498,49 @@ def resume_improve_experience():
     # Display updated result
     import json
     print(json.dumps(resume_update, indent=4))
+
+import re
+model_gemini = "models/gemini-2.0-flash"
+def validate_with_gemini(skill, detail):
+    validation_prompt = (
+        f"Evaluate the following response regarding experience with {skill}. "
+        f"Ensure it includes:\n"
+        f"- A clear explanation of how the experience was obtained.\n"
+        f"- At least one action verb describing what was done.\n"
+        f"- At least one quantifiable metric or measurable impact, which can be either:\n"
+        f"  - A percentage improvement (e.g., 'Increased efficiency by 25%').\n"
+        f"  - A numerical value (e.g., 'Led a team of 10 engineers').\n\n"
+        f"Response to evaluate:\n{detail}\n\n"
+        f"### Evaluation Criteria ###\n"
+        f"- If the response meets all criteria, return: 'Evaluation: ✅ Strong response.'\n"
+        f"- If the response is missing details, return: 'Evaluation: ❌ Needs improvement.' "
+        f"and provide a rewritten version of the response following a strong format.\n\n"
+        f"### Example of a strong response ###\n"
+        f"'Implemented a predictive maintenance system using Python, reducing machine downtime by 25% over six months.'\n"
+        f"'Led a team of 10 engineers in developing an AI-driven analytics tool, improving operational efficiency by 20%.'\n\n"
+        f"Now, if the response needs improvement, provide a corrected version formatted as:\n"
+        f"'Example: [Your improved response here]'"
+    )
+    
+    genai.configure(api_key = your_api_key)
+    model = genai.GenerativeModel(
+    model_gemini,
+    system_instruction=validation_prompt,
+    )
+
+    try:
+        response = model.generate_content(validation_prompt)
+        feedback = response.text.strip()
+
+        if "✅ Strong response" in feedback:
+            return True, feedback
+        elif "❌ Needs improvement" in feedback:
+            improved_response_match = re.search(r"Example:\s*(.+)", feedback, re.IGNORECASE)
+            if improved_response_match:
+                example = improved_response_match.group(1).strip()
+            else:
+                example = "Ensure you include a percentage or numerical value, such as 'Reduced processing time by 30%' or 'Led a team of 5 engineers'."
+            return False, example
+    except Exception as e:
+        print(f"Error communicating with Gemini: {e}")
+        return False, "Ensure you include a percentage or numerical value."
