@@ -8,8 +8,9 @@ import streamlit as st
 import google.generativeai as genai
 import io
 from io import BytesIO
-from utils import extract_cv_information, extract_job_posting_information, customize_cv, generate_cv #skills_missing
+from utils import save_improved_resume,resume_improve_experience2,extract_cv_information, extract_job_posting_information, generate_cv,resume_education_info_personal,resume_promt_summary,resume_delete_experience_not_related,resume_skills,join_all_resume_json, resume_improve_experience 
 import pymongo
+import json
 
 def run():
     st.markdown("<h1 style='text-align: center; font-size: 50px;'>Tailor my resume for a specific job opportunity</h1>", unsafe_allow_html=True)
@@ -28,11 +29,12 @@ def run():
     if ((uploaded_cv is not None) and (uploaded_job is not None)):
         extract_cv_information(uploaded_cv)
         extract_job_posting_information(uploaded_job)
-        customize_cv()
-        generate_cv()
-        
-        #  skills_missing()
-
+        resume_education_info_personal()
+        resume_promt_summary()
+        resume_skills()
+        resume_delete_experience_not_related()
+        resume_improve_experience()
+        join_all_resume_json()     
         st.write("Your resume for this application should be:")
 
     if st.button("⬅️ Back to Home"):

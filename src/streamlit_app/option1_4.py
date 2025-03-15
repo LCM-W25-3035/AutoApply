@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import extract_cv_information, extract_job_posting_information_from_str
+from utils import extract_cv_information, extract_job_posting_information_from_str, customize_cv, generate_cv
 import pymongo
 import pandas as pd
 from bson import ObjectId  # Required for handling MongoDB ObjectId
@@ -55,7 +55,6 @@ def run():
 
         extract_cv_information(uploaded_cv)
         extract_job_posting_information_from_str(job_description)
-        st.write("Your resume for this application should be:")
         st.write("✅ Your resume has been tailored for this job application!")
 
     # Navigation buttons

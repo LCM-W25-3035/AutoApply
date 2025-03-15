@@ -58,8 +58,8 @@ elif st.session_state.page == "Option1_2":
     option1_2.run()
 
 elif st.session_state.page == "Option1_3":
-    import option1_3
-    option1_3.run()
+    import fail_option1_3
+    fail_option1_3.run()
 
 elif st.session_state.page == "Option1_4":
     import option1_4
