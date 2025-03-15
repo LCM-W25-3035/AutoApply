@@ -367,3 +367,134 @@ def resume_delete_experience_not_related():
     with open(output_filepath, "w", encoding="utf-8") as file_save:
         json.dump(json_file, file_save, ensure_ascii=False, indent=4)
         print(f"Output saved to '{output_filepath}'.")
+
+def resume_improve_experience():
+    import json
+    # Load the resume data
+    file_path = "resume/resume_delete_experience_not_relate.json"
+
+    with open(file_path, "r", encoding="utf-8") as file_load:
+        resume_data = json.load(file_load)
+
+    st.write("### Improving Work Experience Achievements")
+    work_experience = resume_data.get("work_experience", [])
+
+    if "work_experience" not in st.session_state:
+        st.session_state.work_experience = work_experience
+
+    # Process achievements and validate them
+    for job in work_experience:
+        print(f"\nEvaluating achievements for: {job['job_title']} at {job['company']}\n")
+        for i, achievement in enumerate(job["achievement"]):
+            while True:
+                is_valid, feedback = validate_with_gemini(job['job_title'], achievement)
+                if is_valid:
+                    print(f"✅ Valid achievement: {achievement}")
+                    break
+                else:
+                    print(f"\n❌ Needs improvement: {achievement}")
+                    print(f"Suggested improvement: {feedback}")
+                    achievement = input("Please rewrite the achievement with improvements: ")
+            
+            # Save the validated achievement
+            job["achievement"][i] = achievement
+
+    # Save the updated JSON file
+    output_file = "resume/resume_updated.json"
+    with open(output_file, "w", encoding="utf-8") as file:
+        json.dump(resume_data, file, indent=4, ensure_ascii=False)
+
+    ### Add more skills
+    input_filepath = f"resume/resume_missing_skills.json"
+    with open(input_filepath, "r", encoding="utf-8") as file_load:
+        missing_skills = json.load(file_load)
+
+    # Process missing technical and soft skills
+    
+    # Extract company names from work experience
+    companies = list({exp["key"] for exp in resume_data.get("work_experience", [])})
+
+    # Dictionary to store user responses
+    save_answers = {}
+
+    """Prompts the user for missing skills, asks for the company, and validates responses with Gemini."""
+    for skill_type, skills in missing_skills.items():  # Iterate over "technical_skills" and "soft_skills"
+        for skill in skills:  # Iterate over the skills within each type
+            answer = input(f"Do you have experience with {skill}? (yes/no): ").strip().lower()
+
+            if answer == "yes":
+                # Display a numbered list of companies
+                print("\nSelect the company where you gained experience with this skill:")
+                for i, company in enumerate(companies, 1):
+                    print(f"{i}. {company}")
+
+                while True:
+                    try:
+                        company_index = int(input("Enter the number corresponding to the company: ").strip())
+                        if 1 <= company_index <= len(companies):
+                            selected_company = companies[company_index - 1]
+                            break
+                        else:
+                            print("Invalid selection. Please enter a valid number from the list.")
+                    except ValueError:
+                        print("Invalid input. Please enter a number.")
+
+                while True:
+                    detail = input(f"Describe your experience with {skill}, including how you obtained it and a metric or result achieved: ")
+
+                    is_valid, feedback = validate_with_gemini(skill, detail)
+
+                    if is_valid:
+                        if selected_company not in save_answers:
+                            save_answers[selected_company] = {"technical_skills": {}, "soft_skills": {}}
+                        save_answers[selected_company][skill_type][skill] = detail  # Use skill_type for classification
+                        print("Response accepted.")
+                        break
+                    else:
+                        print("Your answer needs improvement.")
+                        print(f"Example: {feedback}")
+                        print("Please try again with more detail.")
+
+    # Save user responses to a JSON file
+    with open("resume/resume_user_answers.json", "w") as file:
+        json.dump(save_answers, file, indent=4)
+
+    # Join user answers with resume update
+    
+    input_filepath = "resume/resume_updated.json"
+    with open(input_filepath, "r", encoding="utf-8") as file_load:
+        resume_update = json.load(file_load)
+
+    input_filepath = "resume/resume_user_answers.json"
+    with open(input_filepath, "r", encoding="utf-8") as file_load:
+        user_answers = json.load(file_load)
+    
+    # Check if user_answers is empty
+    if not user_answers:
+        with open("resume/resume_final_experience.json", "w") as file:
+            json.dump(resume_update, file, indent=4)
+    else:
+        # Iterate over work experiences in resume_update
+        for experience in resume_update["work_experience"]:
+            job_key = experience["key"]  # Get the key of the work experience
+
+            if job_key in user_answers:  # Check if there is additional information in user_answers
+                new_achievements = []
+
+                # Add technical skills achievements
+                for skill, detail in user_answers[job_key].get("technical_skills", {}).items():
+                    new_achievements.append(f"Technical Skill - {skill}: {detail}")
+
+                # Add soft skills achievements
+                for skill, detail in user_answers[job_key].get("soft_skills", {}).items():
+                    new_achievements.append(f"Soft Skill - {skill}: {detail}")
+
+                # Extend existing achievements with the new ones
+                experience["achievement"].extend(new_achievements)
+        
+        with open("resume/resume_final_experience.json", "w") as file:
+            json.dump(resume_update, file, indent=4)
+
+    # Display updated result
+    import json
+    print(json.dumps(resume_update, indent=4))
