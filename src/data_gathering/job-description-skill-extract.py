@@ -130,10 +130,9 @@ df[var_tipe_of_contract] = "N/A"
 df[var_education_level] = "N/A"
 
 # Process each job description
-df[["keywordss","Must-have Skills", "Nice-to-have Skills", "Experience Level", "Type of Contract", "Education level"]] = (
-df[["Must-have Skills", "Nice-to-have Skills", var_experience_level, var_tipe_of_contract, var_education_level]] = (
+df[["keywordss","Must-have Skills", "Nice-to-have Skills", "Experience Level", "Type of Contract", "Education level"]] = \
     df["Job Description"].apply(lambda desc: pd.Series(process_job_description(desc)))
-)
+
 
 # Save the updated dataset
 df.to_csv(output_file, index=False, encoding="utf-8")
