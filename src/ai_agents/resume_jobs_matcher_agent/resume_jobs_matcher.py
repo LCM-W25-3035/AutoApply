@@ -85,8 +85,13 @@ for skill in technical_skills:
         weighted_skills.append(skill)
 
 # Extract job title dynamically from job history or domain expertise
-job_title = job_titles[0] if job_titles else (domain_expertise[0] if domain_expertise else "Unknown Role")
-
+if job_titles:
+    job_title = job_titles[0]
+elif domain_expertise:
+    job_title = domain_expertise[0]
+else:
+    job_title = "Unknown Role"
+    
 # Generate Structured Resume Text for Embedding
 resume_text = f"{professional_summary}. " \
               f"Previous roles: {', '.join(job_titles)}. " \

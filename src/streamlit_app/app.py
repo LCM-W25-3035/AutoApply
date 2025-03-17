@@ -1,66 +1,79 @@
 import streamlit as st
-import pymongo
 import pandas as pd
-import option1
 
-# MongoDB Connection
-MONGO_URI="mongodb+srv://DavidRocha:davidoscar@capstone.9ajag.mongodb.net/?retryWrites=true&w=majority&appName=Capstone"
-MONGO_DB_NAME="jobsDB"
-MONGO_JOBS_COLLECTION="jobsCollection"
+st.set_page_config(page_title="AutoApply App", layout="wide")
 
-client_mongo = pymongo.MongoClient(MONGO_URI)
-db = client_mongo[MONGO_DB_NAME]
-collection = db[MONGO_JOBS_COLLECTION]
+# CSS for styling
+st.markdown("""
+    <style>     
+        h1 {
+            font-size: 60px !important;
+            text-align: center !important;
+            color: #FF5733 !important;
+        }
 
-def main():
-    st.title("Welcome to AutoApply App")
-    st.write("Your all-in-one solution for enhancing and customizing your resume to secure your dream job!")
-    
+        p {
+            font-size: 20px !important;
+            text-align: left !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Initialize session state
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
+
+def go_to_page(page_name):
+    st.session_state.page = page_name
+    st.rerun()
+
+if st.session_state.page == "Home":
+    st.markdown("<h1 style='font-size: 60px; text-align: center; color: #FF5733;'>Welcome to AutoApply App</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size: 24px; text-align: center;'>Your all-in-one solution for enhancing and customizing your resume to secure your dream job!</p>", unsafe_allow_html=True)
+
+    st.write("")  
+
     option = st.radio("What would you like to do?", [
-        # "1. Enhance my resume for complete my skills and create cv master",
-        "-> Tailor my resume for a specific job opportunity",
-        "-> Find the best job matches and optimize my resume accordingly"
-    ], index=None)
+        "Option 1: Tailor my resume for a specific job",
+        "Option 2: Find the best job matches with our AI recommender"
+    ], index=None, key="paso_0")
     
-    if option == "-> Tailor my resume for a specific job opportunity":
-        option1.run()  # Calls the function from option1.py
+    if option == "Option 1: Tailor my resume for a specific job":
+        go_to_page("Option1")
 
-    elif option == "-> Find the best job matches and optimize my resume accordingly":
-        filter_jobs = st.checkbox("Would you like to filter job listings?")
-        
-        if filter_jobs:
-            locations = [job['_id'] for job in collection.aggregate([
-                {"$group": {"_id": "$Location", "count": {"$sum": 1}}},
-                {"$sort": {"count": -1}}
-            ])]
-            selected_location = st.selectbox("Choose a location:", ["All"] + locations)
-            
-            experience_levels = ["Junior", "Semi Senior", "Senior"]
-            selected_experience = st.selectbox("Select your experience level:", ["All"] + experience_levels)
-            
-            it_roles = [job['Role'] for job in collection.find({}, {"Role": 1, "_id": 0})]
-            it_roles = list(set(it_roles))
-            selected_role = st.selectbox("Select your IT role:", ["All"] + it_roles)
-            
-            query = {}
-            if selected_location != "All":
-                query["Location"] = selected_location
-            if selected_experience != "All":
-                query["ExperienceLevel"] = selected_experience
-            if selected_role != "All":
-                query["Role"] = selected_role
-            
-            job_offers = list(collection.find(query))
-        else:
-            job_offers = list(collection.find())
-        
-        st.write(f"Total job opportunities available: {len(job_offers)}")
-        
-        uploaded_cv = st.file_uploader("Upload your resume (PDF or DOCX)", type=["pdf", "docx"])
-        if uploaded_cv:
-            best_matches = find_best_jobs(uploaded_cv, job_offers)
-            st.write("Top 10 Matching Job Opportunities:")
-            st.dataframe(best_matches)
+    if option == "Option 2: Find the best job matches with our AI recommender":
+        go_to_page("Option2")
 
-if __name__ == "__main__":
-    main()
+# Load pages dynamically
+elif st.session_state.page == "Option1":
+    import option1
+    option1.run()
+
+elif st.session_state.page == "Option1_1":
+    import option1_1
+    option1_1.run()
+
+elif st.session_state.page == "Option1_2":
+    import option1_2
+    option1_2.run()
+
+elif st.session_state.page == "Option1_3":
+    import fail_option1_3
+    fail_option1_3.run()
+
+elif st.session_state.page == "Option1_4":
+    import option1_4
+    option1_4.run()
+
+
+elif st.session_state.page == "Option2":
+    import option2
+    option2.run()
+
+elif st.session_state.page == "Option2_1":
+    import option2_1
+    option2_1.run()
+
+elif st.session_state.page == "Option2_2":
+    import option2_2
+    option2_2.run()

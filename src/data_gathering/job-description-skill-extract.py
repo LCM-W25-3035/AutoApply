@@ -21,6 +21,10 @@ import time
 
 start_time = time.time()
 
+var_experience_level = "Experience Level"
+var_tipe_of_contract = "Type of Contract"
+var_education_level = "Education level"
+
 client = OpenAI(
 base_url='http://localhost:11434/v1/',
 api_key='ollama',)
@@ -62,9 +66,9 @@ def parse_raw_content(content: str):
     keywords = extract_field(content, "Keywords")
     must_have = extract_field(content, "Must-have skills")
     nice_to_have = extract_field(content, "Nice-to-have skills")
-    experience_level = extract_field(content, "Experience Level")
-    contract_type = extract_field(content, "Type of Contract")
-    education_level = extract_field(content, "Education level")
+    experience_level = extract_field(content, var_experience_level)
+    contract_type = extract_field(content, var_tipe_of_contract)
+    education_level = extract_field(content, var_education_level)
 
     return keywords, must_have, nice_to_have, experience_level, contract_type, education_level
 
@@ -121,12 +125,13 @@ def process_job_description(description: str):
 df["keywordss"] = "N/A"
 df["Must-have Skills"] = "N/A"
 df["Nice-to-have Skills"] = "N/A"
-df["Experience Level"] = "N/A"
-df["Type of Contract"] = "N/A"
-df["Education level"] = "N/A"
+df[var_experience_level] = "N/A"
+df[var_tipe_of_contract] = "N/A"
+df[var_education_level] = "N/A"
 
 # Process each job description
 df[["keywordss","Must-have Skills", "Nice-to-have Skills", "Experience Level", "Type of Contract", "Education level"]] = (
+df[["Must-have Skills", "Nice-to-have Skills", var_experience_level, var_tipe_of_contract, var_education_level]] = (
     df["Job Description"].apply(lambda desc: pd.Series(process_job_description(desc)))
 )
 
