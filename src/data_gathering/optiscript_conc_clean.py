@@ -46,6 +46,8 @@ def clean_data(df):
 
     # Standardize column names
     df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
+    blank_rows = df.isna().all(axis=1) | df.eq("").all(axis=1)
+    df = df[~blank_rows]
 
     # Remove leading/trailing whitespace in string columns
     for col in df.select_dtypes(include=['object']).columns:

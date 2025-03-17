@@ -30,7 +30,7 @@ try:
         logging.info(f"Deleted {deleted_count} existing documents from 'jobsCollection'.")
 
         # Loading CSV file
-        csv_file_path = "src\data_gathering\updated_job_dataset.csv"
+        csv_file_path = "src\data_gathering\FullDataset.csv"
         if not os.path.exists(csv_file_path):
             logging.error(f"CSV file not found: {csv_file_path}")
             sys.exit(1)
