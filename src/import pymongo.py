@@ -1,5 +1,6 @@
 import pymongo 
 # testin carol pull
+# testing2 carol pull
 # MongoDB Connection
 MONGO_URI = "mongodb+srv://DavidRocha:davidoscar@capstone.9ajag.mongodb.net/?retryWrites=true&w=majority&appName=Capstone"
 MONGO_DB_NAME = "jobsDB"
