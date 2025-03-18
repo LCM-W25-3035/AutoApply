@@ -1,4 +1,4 @@
-extracted the data from octoparse for job posting using linkedin and indeed template 
+Created the draft presentation on research paper .
 
 - **Project Board Link:** [GitHub Board Capstone Project AutoApply](https://github.com/users/DavidRochaR/projects/5)
 - **Documentation Link:** [Master document](https://mylambton.sharepoint.com/:w:/r/sites/CapstoneProject-JobRecommendationandResumeCustomizationSyste/Shared%20Documents/General/Documentation/Master%20Document%20-%20Group4.docx?d=w8e9e02192ab34fe1acfa0c066b9fcf7c&csf=1&web=1&e=8TO6ss)
