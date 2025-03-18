@@ -1,3 +1,8 @@
+# Reference: 
+# (OpenAI first prompt, 2025): From the resume.json I must analyze in the key work experience, each achievement in each company if it meets the criteria that we have already been managing in the prompt and if it does not meet, 
+#   I must mention it and help you build it with examples until reaching a correct answer
+# (OpenAI last prompt, 2025): The idea is to keep the prompt that we had already achieved with missing skills but now evaluate the skills that the user does have
+
 import google.generativeai as genai
 import json
 import re  

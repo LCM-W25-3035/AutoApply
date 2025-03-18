@@ -4,7 +4,7 @@ import re
 from collections import Counter
 
 # Configure Gemini API
-API_KEY = "YOUR_API_KEY_HERE"
+API_KEY = ""
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel('gemini-2.0-flash')
 
