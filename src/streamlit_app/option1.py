@@ -19,4 +19,6 @@ def run():
         go_to_page("Option1_2")
 
     if st.button("⬅️ Back to Home"):
+        if "app_initialized" in st.session_state:
+            del st.session_state.app_initialized
         go_to_page("Home")

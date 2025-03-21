@@ -1,5 +1,7 @@
 import streamlit as st
-import pandas as pd
+import os
+import shutil
+
 
 st.set_page_config(page_title="AutoApply App", layout="wide")
 
@@ -19,9 +21,25 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+def delete_folders():
+    "Delete the 'resume' and 'output' folders if they exist."
+    folders_to_delete = ["resume", "output"]
+
+    for folder in folders_to_delete:
+        if os.path.exists(folder):
+            shutil.rmtree(folder)
+            print(f"Deleted folder: {folder}")
+        os.makedirs(folder, exist_ok=True)
+
+if "app_initialized" not in st.session_state:
+    st.session_state.app_initialized = True  
+    delete_folders()
+
+
 # Initialize session state
 if "page" not in st.session_state:
-    st.session_state.page = "Home"
+    st.session_state.page = "Home" 
+
 
 def go_to_page(page_name):
     st.session_state.page = page_name
@@ -57,13 +75,13 @@ elif st.session_state.page == "Option1_2":
     import option1_2
     option1_2.run()
 
-elif st.session_state.page == "Option1_3":
-    import fail_option1_3
-    fail_option1_3.run()
-
 elif st.session_state.page == "Option1_4":
     import option1_4
     option1_4.run()
+
+elif st.session_state.page == "improve_skills":
+    import improve_skills
+    improve_skills.run()
 
 
 elif st.session_state.page == "Option2":
@@ -77,3 +95,13 @@ elif st.session_state.page == "Option2_1":
 elif st.session_state.page == "Option2_2":
     import option2_2
     option2_2.run()
+
+elif st.session_state.page == "add_skills":
+    print("entro")
+    import add_skills
+    add_skills.run()
+
+elif st.session_state.page == "customization_cv":
+    import customization_cv
+    customization_cv.run()
+

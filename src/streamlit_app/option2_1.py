@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from pypdf import PdfReader
 
 def run():
     st.markdown("""
@@ -19,14 +20,14 @@ def run():
         if file_extension == "txt":
             resume_text = uploaded_file.getvalue().decode("utf-8")
         elif file_extension == "pdf":
-            import PyPDF2
-            reader = PyPDF2.PdfReader(uploaded_file)
+            reader = PdfReader(uploaded_file)
             resume_text = "\n".join([page.extract_text() for page in reader.pages if page.extract_text()])
         else:
             st.error("Unsupported file format. Please upload a .txt or .pdf file.")
             return
         
-        st.session_state["uploaded_cv"] = resume_text
+        st.session_state["uploaded_cv_pdf"] = uploaded_file
+        st.session_state["uploaded_cv_str"] = resume_text
         
         # Extract job descriptions
         filtered_df = st.session_state['filtered_jobs']
@@ -58,7 +59,7 @@ def run():
                 if st.button(f"Select {index}", key=f"select_{index}"):
                     st.session_state["selected_jobs"].append(row.to_dict())
 
-        st.write("### Job Selected by You")
+        st.write("### Job Selected By You")
         st.dataframe(pd.DataFrame(st.session_state["selected_jobs"]))
         
         # Proceed button

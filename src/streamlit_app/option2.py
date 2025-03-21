@@ -9,9 +9,9 @@ def run():
     """, unsafe_allow_html=True)
 
     # MongoDB Connection
-    MONGO_URI = "mongodb+srv://DavidRocha:davidoscar@capstone.9ajag.mongodb.net/?retryWrites=true&w=majority&appName=Capstone"
-    MONGO_DB_NAME = "jobsDB"
-    MONGO_JOBS_COLLECTION = "jobsCollection"
+    MONGO_URI = st.secrets["api_keys"]["MONGODB_URI"]
+    MONGO_DB_NAME = st.secrets["api_keys"]["MONGODB_NAME"]
+    MONGO_JOBS_COLLECTION = st.secrets["api_keys"]["MONGODB_JOBS_COLLECTION"]
 
     client_mongo = pymongo.MongoClient(MONGO_URI)
     db = client_mongo[MONGO_DB_NAME]
@@ -93,5 +93,7 @@ def run():
     # Back to Home
     if st.button("⬅️ Back to Home"):
         st.session_state.page = "Home"
+        if "app_initialized" in st.session_state:
+            del st.session_state.app_initialized
         st.rerun()
 
