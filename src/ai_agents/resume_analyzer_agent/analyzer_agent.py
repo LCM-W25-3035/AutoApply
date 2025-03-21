@@ -110,3 +110,7 @@ class AnalyzerAgent:
             return {"error": "No JSON content found"}
         except json.JSONDecodeError:
             return {"error": "Invalid JSON content"}
+        
+# Reference
+# (OpenAI first prompt, 2025): How can we use Ollama model to analyze candidate profiles and extract key information?
+# (OpenAI last prompt, 2025): Can you show an example of using Ollama to analyze a candidate profile and extract key information?

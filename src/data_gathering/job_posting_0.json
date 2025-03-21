@@ -1,0 +1,66 @@
+{
+    "job_title": "Senior Data Engineer",
+    "company": {
+        "name": "Wenco International Mining Systems",
+        "industry": "Mining and Material Movement",
+        "location": "Not specified",
+        "remote": false
+    },
+    "employment_type": "Not specified",
+    "experience_level": "Senior",
+    "years_of_experience_required": 7,
+    "salary_range": {
+        "min": 140000,
+        "max": 160000,
+        "currency": "CAD",
+        "payment_frequency": "Annual"
+    },
+    "job_description": "Wenco is seeking a highly skilled and experienced Senior Data Engineer to join their Cloud Platform, focusing on designing and building scalable, efficient, and secure data pipelines to meet the organization’s growing data needs, supporting data-driven decision-making and analytics initiatives.",
+    "responsibilities": [
+        "Design and Build Scalable Data Pipelines: Architect and implement robust, scalable ETLELT pipelines using tools such as DBT and Snowflake, ensuring high performance, availability, and security.",
+        "Data Lake Management: Develop, maintain, and optimize data lakes for structured and unstructured data, ensuring data is accessible, secure, and efficiently stored.",
+        "Real-time Data Streaming: Work with streaming platforms (e.g., Kafka, Kinesis, or others) to enable real-time data ingestion and processing.",
+        "Data Governance: Lead and enforce data governance frameworks to ensure data quality, consistency, and integrity across the organization. Implement and maintain policies and procedures for data stewardship, data lineage, and data security, data obfuscation, data disposal.",
+        "Work with stakeholders to create, and maintain policies related to data governance",
+        "Collaboration and Stakeholder Engagement: Collaborate with data scientists, analysts, and other engineers to ensure data pipelines meet business requirements and are aligned with company objectives.",
+        "Performance Optimization: Monitor, troubleshoot, and optimize data processes and pipelines for efficiency and scalability.",
+        "Documentation and Best Practices: Maintain detailed documentation of all processes, data flows, and pipelines. Establish and promote data engineering best practices within the team."
+    ],
+    "requirements": [
+        "7+ years of experience in data engineering or related fields.",
+        "Proficiency in SQL and strong experience with dbt for data transformation.",
+        "Expertise with Snowflake or similar cloud data platforms.",
+        "Strong understanding of data lakes, data warehousing, and data modeling concepts.",
+        "Proven experience with data governance processes, including data quality management, data lineage tracking, and compliance with privacy regulations (e.g., GDPR, CCPA).",
+        "Experience with real-time data streaming technologies such as Kafka, Kinesis, or equivalent.",
+        "Familiarity with cloud platforms such as AWS, Azure, or GCP.",
+        "Experience with Python or other programming languages for data engineering tasks.",
+        "Strong understanding of ETLELT pipelines and orchestration tools .",
+        "Ability to work independently and collaboratively in a fast-paced environment.",
+        "Excellent problem-solving and communication skills."
+    ],
+    "technical_skills": [
+        "SQL",
+        "dbt",
+        "Snowflake",
+        "Kafka",
+        "Kinesis",
+        "AWS",
+        "Azure",
+        "GCP",
+        "Python"
+    ],
+    "soft_skills": [
+        "Problem-solving",
+        "Communication",
+        "Collaboration",
+        "Data-driven decision-making"
+    ],
+    "education_required": [],
+    "certifications_required": [],
+    "languages_required": [],
+    "benefits": [],
+    "application_deadline": null,
+    "job_posting_date": null,
+    "application_link": null
+}

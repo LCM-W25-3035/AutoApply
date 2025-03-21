@@ -1,9 +1,14 @@
+# Reference
+# (OpenAI, ChatGPT o1, first prompt, 2025): Now I will create a version of the agent conecting with Gemini API, give me the example to call Gemini insted of Llama
+# (OpenAI, ChatGPT o1, last prompt, 2025): There is an error with genai.client
+
 import logging
 import json
 import google.generativeai as genai
+#test commit carol
 
 # Set your Gemini API key here
-GEMINI_API_KEY = "AIzaSyBxnN2idTpBhoVynBdXLJsyHX-qDMcVFaM"
+GEMINI_API_KEY = "KEY"
 
 # Configure the API key once at the start
 genai.configure(api_key=GEMINI_API_KEY)

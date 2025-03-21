@@ -1,6 +1,0 @@
-Skill: Excel
-Experience: elaborated with excel all reports monthly for each customer 95% on time during my last 5 years as a commercial engineer
-
-Skill: data analysis
-Experience: I analyzed database trends for 25 customers and implemented changes that resulted in a 30% increase in production efficiency 
-

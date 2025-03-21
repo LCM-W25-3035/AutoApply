@@ -1,0 +1,93 @@
+{
+    "job_title": "Data Engineer – Azure and Microsoft Fabric Specialist",
+    "company": {
+        "name": "Nova DBA",
+        "industry": "IT Consulting",
+        "location": "Remote",
+        "remote": true
+    },
+    "employment_type": "Full-time",
+    "experience_level": null,
+    "years_of_experience_required": null,
+    "salary_range": {
+        "min": null,
+        "max": null,
+        "currency": null,
+        "payment_frequency": null
+    },
+    "job_description": "We are seeking a Data Engineer with expertise in Azure and Microsoft Fabric to join our Data Services team. In this client-facing role, you will design and implement data warehouses, create ETL pipelines, and deliver Power BI reports. This role requires adaptability and collaboration, as each project varies based on client constraints and needs.",
+    "responsibilities": [
+        "Develop and maintain scalable data workflows for seamless integration and transformation.",
+        "Automate data ingestion and processing pipelines to support analytics and reporting.",
+        "Design and optimize Power BI dashboards and reports.",
+        "Align data models with business objectives.",
+        "Ensure data practices meet regulatory standards (e.g., GDPR, CCPA, HIPAA).",
+        "Implement robust data governance frameworks using Microsoft Purview.",
+        "Work closely with project managers, database administrators, and client teams.",
+        "Communicate technical concepts effectively in both French and English to non-technical stakeholders.",
+        "Monitor and optimize data pipelines and storage environments for peak performance."
+    ],
+    "requirements": [
+        "Expertise with Microsoft Fabric and Power BI.",
+        "Proficiency in SQL and familiarity with SSIS.",
+        "Strong experience with data warehousing and big data projects.",
+        "Knowledge of Azure storage solutions and their use cases."
+    ],
+    "technical_skills": [
+        "Microsoft Fabric",
+        "Power BI",
+        "SQL",
+        "SSIS",
+        "Azure storage solutions",
+        "Synapse",
+        "Apache Spark",
+        "PySpark"
+    ],
+    "soft_skills": [
+        "Adaptability",
+        "Collaboration",
+        "Communication"
+    ],
+    "certifications_required": [
+        {
+            "name": "Azure Data Engineer Associate",
+            "issuing_organization": null
+        },
+        {
+            "name": "Microsoft Fabric Engineer Associate",
+            "issuing_organization": null
+        },
+        {
+            "name": "Azure Administrator Associate",
+            "issuing_organization": null
+        },
+        {
+            "name": "Azure Solution Architect Expert",
+            "issuing_organization": null
+        }
+    ],
+    "languages_required": [
+        {
+            "language": "French",
+            "proficiency": null
+        },
+        {
+            "language": "English",
+            "proficiency": null
+        }
+    ],
+    "benefits": [
+        "Flexible working arrangements (remote and on-site)",
+        "Opportunities for professional growth through certifications and skill development programs",
+        "A collaborative and supportive work culture",
+        "Work on diverse, impactful projects across industries",
+        "Company events",
+        "Dental care",
+        "Paid time off",
+        "Vision care",
+        "Extended health care"
+    ],
+    "application_deadline": null,
+    "job_posting_date": null,
+    "application_link": null
+}

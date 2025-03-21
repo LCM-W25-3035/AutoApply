@@ -1,3 +1,12 @@
+"""Chat GPT o1"""
+"""Write a Python script that reads lists of keywords and provinces from two text files, keywords.txt 
+and providence.txt, respectively, then iterates over all CSV files named using each combination of 
+keyword and province (e.g., glassdoor_jobs_{keyword}{province}.csv), combines them into a single pandas 
+DataFrame, cleans the data by dropping empty columns and duplicates, standardizing column names, and 
+trimming whitespace, and finally saves the consolidated, cleaned result to src\data_gathering\Jobs-Data_Cleaned.csv. 
+This script should log its activity (informational messages, errors, and warnings) with the logging module, 
+handle missing files gracefully, and exit if no valid data is found."""
+
 import pandas as pd
 import os
 import logging
@@ -46,6 +55,8 @@ def clean_data(df):
 
     # Standardize column names
     df.columns = df.columns.str.strip().str.lower().str.replace(' ', '_')
+    blank_rows = df.isna().all(axis=1) | df.eq("").all(axis=1)
+    df = df[~blank_rows]
 
     # Remove leading/trailing whitespace in string columns
     for col in df.select_dtypes(include=['object']).columns:

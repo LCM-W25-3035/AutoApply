@@ -1,3 +1,14 @@
+"""Chat GPT o1"""
+"""Write a Python script that uses python-dotenv (load_dotenv and find_dotenv) 
+to read environment variables from a .env file—specifically, a "url" variable for MongoDB—logs messages 
+with the logging module, and uses pymongo (MongoClient) with a five-second serverSelectionTimeoutMS to 
+connect to a MongoDB database named jobsDB and a collection jobsCollection. It should delete existing 
+documents in that collection, read src\data_gathering\updated_job_dataset.csv into a pandas DataFrame, 
+convert the DataFrame to a list of dictionaries, and insert the records into MongoDB. Handle any errors 
+such as missing environment variables, CSV load failures, or BulkWriteError exceptions gracefully, 
+logging errors before exiting. Finally, verify the inserted data by retrieving and logging each 
+document (excluding _id)."""
+
 import os
 import sys
 import logging
@@ -30,7 +41,7 @@ try:
         logging.info(f"Deleted {deleted_count} existing documents from 'jobsCollection'.")
 
         # Loading CSV file
-        csv_file_path = "src\data_gathering\updated_job_dataset.csv"
+        csv_file_path = "src\data_gathering\FullDataset.csv"
         if not os.path.exists(csv_file_path):
             logging.error(f"CSV file not found: {csv_file_path}")
             sys.exit(1)

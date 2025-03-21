@@ -85,8 +85,13 @@ for skill in technical_skills:
         weighted_skills.append(skill)
 
 # Extract job title dynamically from job history or domain expertise
-job_title = job_titles[0] if job_titles else (domain_expertise[0] if domain_expertise else "Unknown Role")
-
+if job_titles:
+    job_title = job_titles[0]
+elif domain_expertise:
+    job_title = domain_expertise[0]
+else:
+    job_title = "Unknown Role"
+    
 # Generate Structured Resume Text for Embedding
 resume_text = f"{professional_summary}. " \
               f"Previous roles: {', '.join(job_titles)}. " \
@@ -136,3 +141,7 @@ with open(output_filepath, "w", encoding="utf-8") as json_file:
     json.dump({"matched_jobs": top_matches}, json_file, ensure_ascii=False, indent=4)
 
 print(f"\nTop 10 Job Matches saved to '{output_filepath}'.")
+
+# Reference
+# (OpenAI first prompt, 2025): How can we match a resume to job listings using embeddings?
+# (OpenAI last prompt, 2025): Can you show an example of matching a resume to job listings using embeddings?

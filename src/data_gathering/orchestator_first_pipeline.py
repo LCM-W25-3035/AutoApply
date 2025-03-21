@@ -8,7 +8,7 @@ Prompt: How can i create a python Orchestrator script that can execute different
 import subprocess
 
 # List of the scripts
-scripts = ["src\data_gathering\GlassdoorDataGathering.py","src\data_gathering\optiscript_conc_clean.py" ,"src\data_gathering\job-description-skill-extract.py","src\data_gathering\load_jobs.py",]
+scripts = ["src\data_gathering\GlassdoorDataGathering.py","src\data_gathering\optiscript_conc_clean.py", "src\data_gathering\trans.py" ,"src\data_gathering\job-description-skill-extract.py","src\data_gathering\load_jobs.py",]
 
 def ejecutar_script(script):
     try:

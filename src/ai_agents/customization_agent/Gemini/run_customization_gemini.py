@@ -1,3 +1,6 @@
+# Reference
+# (OpenAI, ChatGPT o1, first prompt, 2025): Now I will create a version of the agent conecting with Gemini API, give me the example to call Gemini insted of Llama
+
 import asyncio
 import json
 import os
