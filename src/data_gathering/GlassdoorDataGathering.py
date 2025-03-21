@@ -36,6 +36,19 @@ load_dotenv()
 GLASSDOOR_EMAIL = os.getenv('GLASSDOOR_EMAIL')
 GLASSDOOR_PASSWORD = os.getenv('GLASSDOOR_PASSWORD')
 
+def load_list_from_file(file_path):
+    items = []
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                item = line.strip()
+                if item:
+                    items.append(item)
+        print(f"Loaded {len(items)} items from {file_path}")
+    except FileNotFoundError:
+        print(f"[File not found] {file_path}")
+    return items
+
 def human_delay(min_seconds, max_seconds):
     """Adds a random delay to simulate human-like browsing behavior."""
     delay_time = random.uniform(min_seconds, max_seconds)
@@ -112,7 +125,7 @@ def navigate_to_jobs(driver):
 def dismiss_popup(driver):
     """Dismiss all modals dynamically if found and restore scrolling."""
     try:
-        # Verificar si el modal existe
+        # verify if the modal exist
         modal_exists = driver.execute_script("""
             return document.querySelector("div[class*='modal']") !== null;
         """)
@@ -200,23 +213,23 @@ def scrape_job_listings(driver, keyword, providence):
                     if job_titlee in processed_jobs:
                         continue  # if processed pass next job card
 
-                    new_jobs_found = True  # Indicar que hay una nueva tarjeta
+                    new_jobs_found = True  # show that a new job card was found
                     processed_jobs.add(job_titlee)  
 
-                    # Click en la tarjeta para cargar la descripción
+                    # Click on the card to load the descriptions 
                     dismiss_popup(driver)
                     job_card.click()
                     dismiss_popup(driver)
                     human_delay(2, 3)
 
-                    # Extraer información visible directamente de la tarjeta
+                    # Exctract information visible on the card 
                     job_title_element = job_card.find_element(By.CLASS_NAME, 'JobCard_jobTitle__GLyJ1')
                     job_title = job_title_element.text.strip()
                     company_name = job_card.find_element(By.CLASS_NAME, 'EmployerProfile_compactEmployerName__9MGcV').text.strip()
                     location = job_card.find_element(By.CLASS_NAME, 'JobCard_location__Ds1fM').text.strip()
                     job_url = job_title_element.get_attribute('href')
 
-                    # Manejar información opcional
+                    # handle aditional information
                     try:
                         salary = job_card.find_element(By.CLASS_NAME, 'JobCard_salaryEstimate__QpbTW').text.strip()
                     except Exception:
@@ -227,14 +240,14 @@ def scrape_job_listings(driver, keyword, providence):
                     except Exception:
                         posted_day = "N/A"
 
-                    # Extraer la descripción del trabajo
+                    #exctractyhe job description 
                     soup = BeautifulSoup(driver.page_source, 'html.parser')
                     try:
                         job_description = soup.find('div', class_='JobDetails_jobDescription__uW_fK').text.strip()
                     except Exception:
                         job_description = "N/A"
 
-                    # Añadir toda la información al diccionario
+                    #add all information in the directory 
                     jobs_data.append({
                         'Job Title': job_title,
                         'Company Name': company_name,
@@ -291,22 +304,9 @@ if __name__ == "__main__":
     options.headless = False  # Set to True for headless mode
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
-    keys =[]
-    providence = []
-    with open("src/data_gathering/keywords.txt", 'r') as file1:
-        for line in file1:
-            keys.append(line.strip())
-            print(line.strip())
 
-    print(keys)
-
-    with open("src/data_gathering/providence.txt", 'r') as file2:
-        for line in file2:
-            providence.append(line.strip())
-            print(line.strip())
-
-    print(providence)
-
+    keys = load_list_from_file("src/data_gathering/keywords.txt")
+    providence = load_list_from_file("src/data_gathering/providence.txt")
     # Maximize browser windows
     driver.maximize_window()
 
@@ -331,7 +331,6 @@ if __name__ == "__main__":
         data_final.shape
 
         data_final.to_csv("src\data_gathering\Jobs-Data_Scraped.csv", index=False)
-
 
     
     finally:
