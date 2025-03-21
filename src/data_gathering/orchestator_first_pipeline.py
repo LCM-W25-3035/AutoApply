@@ -1,7 +1,7 @@
 """
 
 OpenAi GPT 4o
-Prompt: How can i create a python Orchestrator script
+Prompt: How can i create a python Orchestrator script that can execute different scripts in order
 
 """
 

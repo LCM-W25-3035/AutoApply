@@ -7,6 +7,13 @@ job card need to be loaded so, i can see two solution in order to retreive the p
 on is create a new script that goes throught every record of the csv file or try to modify the current 
 script what do you say ?
 
+middle prompt : I'm having an issue, let me put you in context, Im programming In Python I'm using a list in a bucle,
+ I'm trying to scrape a website to extract job offers I'm using selenium and bs4 to parse the HTML, 
+ for un feature and using a web driver method .find to locate the job description and in the rest feature im using .
+ find of bs4, at this time I'm extracting 30 jobs offers, I'm not clicking the button for shoe more offer, 
+ how ever the I'm getting 900 hundred records I checked the output and for the first 30  record I'm retrieving all the features 
+ with but with the same job description, and the record 31 to 60 the rest feature are duplicates but with the second job description 
+ in all records from 31 to 61 so it is taking per every job offer is creating a record with all job description 30 times by 30 is 900
 """
 
 from selenium import webdriver
