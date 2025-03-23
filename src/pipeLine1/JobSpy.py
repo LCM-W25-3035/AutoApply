@@ -33,6 +33,7 @@ for search_keyword in search_keywords:
 # %%
 import os
 import pandas as pd
+pd.options.mode.chained_assignment = None  # Disable SettingWithCopyWarning
 
 def load_csv_files(folder_path):
     df_list = []
