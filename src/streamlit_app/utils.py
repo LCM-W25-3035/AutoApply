@@ -992,7 +992,7 @@ class CVGenerator:
         """Add right aligned text to a paragraph using tab stops."""
         paragraph.paragraph_format.tab_stops.clear_all()
         paragraph.paragraph_format.tab_stops.add_tab_stop(
-            Inches(8), WD_TAB_ALIGNMENT.RIGHT
+            Inches(6), WD_TAB_ALIGNMENT.RIGHT
         )
         paragraph.add_run('\t' + text)
         
@@ -1044,7 +1044,10 @@ class CVGenerator:
         print("fill_cv line", 960)
         self.add_section_title("Experience")
         for exp in data.get('work_experience', []):
-            print("fill_cv line 963", exp)
+            achievements = exp.get('achievement', [])
+            if not achievements or (isinstance(achievements, list) and not any(item.strip() for item in achievements)):
+                continue
+                
             exp_para = self.doc.add_paragraph()
             exp_para.paragraph_format.space_before = Pt(12)
             job_title = exp.get('job_title', '')
