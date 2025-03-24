@@ -1,6 +1,7 @@
 # %%
 import os
 import pandas as pd
+pd.options.mode.chained_assignment = None  # Disable SettingWithCopyWarning
 
 def load_csv_files(folder_path):
     all_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
@@ -51,10 +52,37 @@ dataframe.columns
 # %%
 # Compare data from two different DataFrames and display unique records from the first DataFrame
 def find_unique_records(df1, df2, criteria_columns):
+    # Standardizing column names for merging
+    df1 = df1.rename(columns={
+        'Title': 'Job Title',
+        'Posted_By': 'Company Name',
+        'Search_Location': 'Provincia'
+    })
+    
+    # Normalize text formatting to avoid mismatches
+    for col in criteria_columns:
+        df1[col] = df1[col].str.strip().str.lower()
+        df2[col] = df2[col].str.strip().str.lower()
+
+    print("\n=== Checking Merging Process ===")
+    print("df1 sample:\n", df1[criteria_columns].head())
+    print("df2 sample:\n", df2[criteria_columns].head())
+
     merged_df = df1.merge(df2, on=criteria_columns, how='left', indicator=True)
+    
+    # Print how many records matched
+    print("\n=== Merge Results ===")
+    print(merged_df['_merge'].value_counts())  # Counts of left_only, right_only, both
+
     unique_records = merged_df[merged_df['_merge'] == 'left_only'].drop(columns=['_merge'])
-    #unique_records = unique_records.dropna(axis=1) #dropna inconsistent output. do not use
-    return unique_records.iloc[:, 0:9]
+
+    print("\n=== Unique Records Found ===")
+    print(unique_records)
+
+    return unique_records
+
+
+
 
 
 df1 = dataframe  # First DataFrame
@@ -77,6 +105,7 @@ df5=pd.read_csv(r'C:\CAROL\Personal\Canada\Lambton\3rd Term\2025W-T3 BDM 3035 - 
 
 #combine Octoparse and Jobspy job dataset
 df4 = pd.concat([df4, df5], ignore_index=True)
+
 
 #jobs from Oscar scraped from Glassdoor
 df2 = pd.read_csv(r'C:\CAROL\Personal\Canada\Lambton\3rd Term\2025W-T3 BDM 3035 - Big Data Capstone Project 01 (DSMM Group 1)\Oscar\Jobs-Data_Scraped.csv')
