@@ -27,7 +27,7 @@ def run():
         st.write(f"**Hint to Improve achievement:** {to_improve['feedback']}")
         # improved_achievement = st.text_input("Please rewrite the achievement with improvements:", value=to_improve["feedback"])
         improved_achievement = st.text_input(
-            "Please rewrite the achievement with improvements:",
+            "Please describe your achievement, including how you obtained it and a metric or result achieved",
             key = to_improve['achievement']
         )
         print(improved_achievement)

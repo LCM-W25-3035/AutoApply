@@ -1,8 +1,3 @@
-# Reference: 
-# (OpenAI first prompt, 2025): I need to implement an application in Streamlit to improve the user's resume by adding skills 
-#   and validating achievements according to the structure we manage in Skills Missing
-# (OpenAI last prompt, 2025): Each achievement should still be saved in user_answer.json
-
 import json
 import streamlit as st
 import pandas as pd
@@ -30,7 +25,7 @@ def run():
         choice = st.selectbox(f"Do you have experience with {add_skill}?", ("yes", "no"))
 
         if choice == "no":
-            st.session_state.skills_add_achievements.pop(0)  # # Remove the first skill if you select "no"
+            st.session_state.skills_add_achievements.pop(0)  # Eliminar la primera habilidad si selecciona "no"
             st.warning(f"Removed skill: {add_skill}")
             st.rerun()
         else:

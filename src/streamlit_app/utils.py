@@ -5,11 +5,105 @@ import google.generativeai as genai
 from pypdf import PdfReader
 from io import BytesIO
 import re
-
+import nltk
+import yake
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import string
 
 your_api_key = st.secrets["api_keys"]["GEMINI_API_KEY"]
 model_gemini = "models/gemini-2.0-flash"
 clean_json = "```json\n"
+
+# Download necessary NLTK resources
+nltk.download('wordnet')
+nltk.download('stopwords')
+# Function to clean text with lemmatization
+lemmatizer = WordNetLemmatizer()
+
+# Initialize YAKE keyword extractor
+custom_kw_extractor = yake.KeywordExtractor(
+    lan="en",
+    n=2,
+    dedupLim=0.8,
+    top=40
+)
+
+# Function to clean text
+def clean_text(text):
+    if not isinstance(text, str) or not text.strip():
+        return ""
+
+    text = text.lower()  # Convert to lowercase
+    text = re.sub(r'\d+', '', text)  # Remove numbers
+    text = text.translate(str.maketrans("", "", string.punctuation))  # Remove punctuation
+    text = re.sub(r'\s+', ' ', text).strip()  # Remove extra spaces
+
+    # Remove stopwords
+    stop_words = set(stopwords.words("english"))
+    words = text.split()
+    text = " ".join([word for word in words if word not in stop_words])
+
+    return text
+
+
+
+def clean_text_with_lemmatization(text):
+    text = clean_text(text)
+    words = text.split()
+    return " ".join([lemmatizer.lemmatize(word) for word in words])
+
+def normalize_keywords(raw_keywords_set):
+    normalized_keywords = set()
+
+    for kw in raw_keywords_set:
+        words = kw.strip().lower().split()
+
+        if len(words) == 1:
+            normalized_keywords.add(words[0])  # Una sola palabra, agregar tal cual
+        elif len(words) >= 2:
+            # Ordenar solo las dos primeras palabras (para evitar "sql python" vs "python sql")
+            sorted_bigram = " ".join(sorted(words[:2]))
+            normalized_keywords.add(sorted_bigram)
+
+    return normalized_keywords
+
+
+def extract_key_words_from_cv():
+    # Load resume data
+    with open("resume/resume.json", "r", encoding="utf-8") as file:
+        resume_data = json.load(file)
+
+    # Final keyword set
+    keyword_set = set()
+
+    # Process each skill separately
+    for skill in resume_data["technical_skills"] + resume_data["soft_skills"]:
+        cleaned_skill = clean_text_with_lemmatization(skill)
+
+        if " " not in cleaned_skill:  
+            # If it's a single-word skill, keep it as is
+            keyword_set.add(cleaned_skill)
+        else:
+            # Extract keywords using YAKE (Max 2-word phrases)
+            keywords = custom_kw_extractor.extract_keywords(cleaned_skill)
+            
+            for kw in keywords:
+                words = kw[0].split()
+                if len(words) == 1:
+                    keyword_set.add(words[0])  # Single word stays as is
+                else:
+                    keyword_set.add(" ".join(sorted(words[:2])))  # Max 2 words, sorted
+    
+    keyword_set = {tuple(sorted(kw.split())) for kw in keyword_set}
+    return keyword_set
+
+def jaccard_similarity(set1, set2):
+    if not set1 or not set2:
+        return 0.0
+    intersection = len(set1.intersection(set2))
+    union = len(set1.union(set2))
+    return intersection / union
 
 def join_all_resume_json():
     input_filepath = "resume/resume_education_info_personal.json"

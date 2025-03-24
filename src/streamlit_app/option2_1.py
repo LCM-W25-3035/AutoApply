@@ -1,8 +1,11 @@
 import streamlit as st
 import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-from pypdf import PdfReader
+from utils import extract_key_words_from_cv, extract_cv_information, jaccard_similarity
+
+def normalize_keyword_list(keyword_list):
+    if not isinstance(keyword_list, list):
+        return set()
+    return set(tuple(sorted(word_list)) for word_list in keyword_list if isinstance(word_list, list))
 
 def run():
     st.markdown("""
@@ -15,61 +18,34 @@ def run():
     
     if uploaded_file is not None:
         # Read file
-        file_extension = uploaded_file.name.split(".")[-1]
-        
-        if file_extension == "txt":
-            resume_text = uploaded_file.getvalue().decode("utf-8")
-        elif file_extension == "pdf":
-            reader = PdfReader(uploaded_file)
-            resume_text = "\n".join([page.extract_text() for page in reader.pages if page.extract_text()])
-        else:
-            st.error("Unsupported file format. Please upload a .txt or .pdf file.")
-            return
-        
-        st.session_state["uploaded_cv_pdf"] = uploaded_file
-        st.session_state["uploaded_cv_str"] = resume_text
-        
+        extract_cv_information(uploaded_file)
+        keyword_set = extract_key_words_from_cv()
+
         # Extract job descriptions
         filtered_df = st.session_state['filtered_jobs']
-        job_descriptions = filtered_df["Job Description"].astype(str).tolist()
-        
-        # Compute TF-IDF vectors
-        vectorizer = TfidfVectorizer(stop_words='english')
-        job_vectors = vectorizer.fit_transform(job_descriptions)
-        resume_vector = vectorizer.transform([resume_text])
-        
-        # Compute cosine similarity
-        similarities = cosine_similarity(resume_vector, job_vectors)[0]
-        filtered_df["similarity"] = similarities
-        
-        # Get top 10 most relevant jobs
-        top_matches = filtered_df.sort_values(by="similarity", ascending=False).head(10)
-        
-        st.write("### 🏆 Top 10 Job Matches for You")
-        
-        if "selected_jobs" not in st.session_state:
-            st.session_state["selected_jobs"] = []
-        
-        # Display top job matches with selection buttons
-        for index, row in top_matches.iterrows():
-            col1, col2 = st.columns([5, 1])
-            with col1:
-                st.dataframe(pd.DataFrame(row).transpose())  # Show single-row DataFrame
-            with col2:
-                if st.button(f"Select {index}", key=f"select_{index}"):
-                    st.session_state["selected_jobs"].append(row.to_dict())
 
-        st.write("### Job Selected By You")
-        st.dataframe(pd.DataFrame(st.session_state["selected_jobs"]))
+        # Aplicar la transformación
+        filtered_df["key_word_app_normalized"] = filtered_df["key_word_app"].apply(normalize_keyword_list)
+
+        filtered_df["similarity"] = filtered_df["key_word_app_normalized"].apply(lambda job_kw: jaccard_similarity(keyword_set, job_kw))
         
-        # Proceed button
-        if st.button("➡️ Proceed with Selected Jobs"):
-            if not st.session_state["selected_jobs"]:
-                st.warning("⚠️ Please select at least one job to continue.")
-            else:
-                st.session_state["selected_jobs"] = pd.DataFrame(st.session_state["selected_jobs"])
+        # Get top 10 most relevant jobs based on Jaccard similarity
+        top_matches = filtered_df.sort_values(by="similarity", ascending=False).head(10)
+
+        # Display paginated DataFrame
+        st.dataframe(top_matches)
+
+        # Job Selection
+        job_id_input = st.text_input("Enter the Job ID to proceed:", key="job_id_input")
+
+        if job_id_input:
+            if job_id_input in top_matches["Job ID"].astype(str).values:
+                st.success(f"✅ Job ID {job_id_input} selected! Proceeding to the next step...")
+                st.session_state["selected_jobs"] = top_matches.loc[top_matches["Job ID"]==job_id_input]
                 st.session_state.page = "Option2_2"
                 st.rerun()
+            else:
+                st.error("⚠️ Invalid Job ID. Please enter a valid ID from the table.")
     
     # Back to Job Selection
     if st.button("⬅️ Back to Job Selection"):

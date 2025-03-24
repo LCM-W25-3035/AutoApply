@@ -1,6 +1,4 @@
-# Reference
-# Chat gpt prompt first: Script to read updated JSOn csv and customize csv and give the user the option of download the cv
-#  Chat gpt prompt last: Join CSV together before downloading the csv
+import json
 import streamlit as st
 import pandas as pd
 import google.generativeai as genai
@@ -74,12 +72,17 @@ def run():
         file_bytes = file.read()
 
     # Download button
-    st.download_button(
+    if st.download_button(
         label="📥 Download personalized CV",
         data=file_bytes,
         file_name="customization_cv.docx",
         mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    )
+        ):
+        st.session_state.page = "Home"
+        if "app_initialized" in st.session_state:
+            del st.session_state.app_initialized
+        st.rerun()
+        
     # Download the word file
     if st.button("🏠 Back to Home"):
         st.session_state.page = "Home"

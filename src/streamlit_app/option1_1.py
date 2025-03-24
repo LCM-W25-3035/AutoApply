@@ -1,6 +1,4 @@
 # option1.py
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 import streamlit as st
 from utils import extract_cv_information, extract_job_posting_information,resume_education_info_personal,resume_promt_summary,resume_delete_experience_not_related,resume_skills, validate_with_gemini
 import json

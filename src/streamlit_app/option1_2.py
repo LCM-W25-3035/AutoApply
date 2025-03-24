@@ -27,34 +27,38 @@ def run():
 
     # Convert to DataFrame
     df = pd.DataFrame(jobs_data)
-    df = df.rename(columns={"_id": "Job ID", "Title": "Job Title", "Location": "City", "Keyword": "Category"})
+    df = df.rename(columns={"_id": "Job ID", "Title": "Job Title", "Provincia": "Province", "Keyword": "Category"})
  
     # Fill NaN values
     df["Category"] = df["Category"].fillna("Not Determined")
-    df["City"] = df["City"].fillna("Unknown")
+    df["Province"] = df["Province"].fillna("Unknown")
     
     # Normalize text format
     df["Category"] = df["Category"].str.title()
-    df["City"] = df["City"].str.title()
+    df["Province"] = df["Province"].str.title()
     
     # Extract unique categories and cities
     category_options = ["All"] + sorted(df["Category"].unique().tolist())
-    city_options = ["All"] + sorted(df["City"].unique().tolist())
+    city_options = ["All"] + sorted(df["Province"].unique().tolist())
+
+    # Extract unique categories and cities
+    category_options = ["All"] + sorted(df["Category"].unique().tolist())
+    city_options = ["All"] + sorted(df["Province"].unique().tolist())
 
     # Sidebar Filters
     st.sidebar.header("🔍 Filter Jobs")
+        
+    selected_city = st.sidebar.selectbox("Select Province", city_options)
+    selected_category = st.sidebar.selectbox("Select Category", category_options)
 
     # Apply Filters
     filtered_df = df.copy()
 
-    selected_city = st.sidebar.selectbox("Select City", city_options)
-    selected_category = st.sidebar.selectbox("Select Category", category_options)
-
     if selected_city != "All":
-        filtered_df = filtered_df[filtered_df["City"] == selected_city]
+        filtered_df = filtered_df[filtered_df["Province"] == selected_city]
 
     if selected_category != "All":
-        filtered_df = filtered_df[filtered_df["Category"].apply(lambda x: selected_category in x)]
+        filtered_df = filtered_df[filtered_df["Category"] == selected_category]
 
     # Pagination
     total_rows = len(filtered_df)
