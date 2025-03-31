@@ -4,4 +4,4 @@ python-dotenv
 beautifulsoup4
 pandas
 pytest
-jobspy
+python-jobspy
