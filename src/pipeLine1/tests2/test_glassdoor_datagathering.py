@@ -41,3 +41,7 @@ def dismiss_popup(driver):
             """)
     except Exception as e:
         print(f"Error while checking or removing popup: {e}")
+
+# Reference: 
+# (OpenAI first prompt, 2025): How to run the pytest command in the terminal to run the tests?
+# (OpenAI last prompt, 2025): Can show me an example of how to write a unit test script?
