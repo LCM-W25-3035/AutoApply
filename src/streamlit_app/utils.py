@@ -5,31 +5,490 @@ import google.generativeai as genai
 from pypdf import PdfReader
 from io import BytesIO
 import re
-import nltk
-import yake
-from nltk.corpus import stopwords
-from nltk.stem import WordNetLemmatizer
 import string
+import time
 
 your_api_key = st.secrets["api_keys"]["GEMINI_API_KEY"]
 model_gemini = "models/gemini-2.0-flash"
 clean_json = "```json\n"
 
-# Download necessary NLTK resources
-nltk.download('wordnet')
-nltk.download('stopwords')
-# Function to clean text with lemmatization
-lemmatizer = WordNetLemmatizer()
+def extract_keywords_with_gemini():
 
-# Initialize YAKE keyword extractor
-custom_kw_extractor = yake.KeywordExtractor(
-    lan="en",
-    n=2,
-    dedupLim=0.8,
-    top=40
-)
+    with open("resume/resume.json", "r", encoding="utf-8") as file:
+        resume_json = json.load(file)
 
-# Function to clean text
+    validation_prompt = f"""You are a resume keyword extractor.
+
+Given the following resume content, extract up to 25 relevant keywords that best represent this candidate's profile. Each keyword should be 1 to 3 words long, and focus on:
+- Technical skills
+- Tools and technologies
+- Domain expertise
+- Roles and methodologies (e.g. MLOps, Data Engineering)
+
+Resume content:
+{json.dumps(resume_json)}
+
+Return only a Python list of keywords, no explanation.
+"""
+    model = genai.GenerativeModel(
+        model_gemini,
+        generation_config={
+            "temperature": 0.0,
+            "top_p": 1.0,
+            "top_k": 1,
+            "max_output_tokens": 1024
+        }
+    )
+
+    try:
+        response = model.generate_content(validation_prompt)
+        keywords = response.text.strip()
+        if keywords.startswith("```"):
+            keywords = keywords.strip("```python").strip("```").strip()
+        keywords = eval(keywords)
+        if isinstance(keywords, list):
+            return keywords
+    except Exception as e:
+        print(f"❌ Error extracting keywords from Gemini: {e}")
+    
+    return []
+
+
+def key_words_match_jobs_resume(
+    f_key_words_candidate,
+    f_df_text,
+    max_retries=2
+):
+    genai.configure(api_key=your_api_key)
+
+    validation_prompt = f"""
+    You are an AI job matching assistant.
+
+    Given a candidate with the following keywords:
+    {f_key_words_candidate}
+
+    And the following job postings:
+    {f_df_text}
+
+    For each job, return:
+    - The `Job ID` of the job
+    - The number of keywords from `key_words_app` that match the candidate's skills (`matches`)
+    - The total number of keywords in the job's `key_words_app` (`total_of_keywords`)
+    - The Jaccard similarity between the candidate's keywords and the job's `key_words_app`, calculated as:
+  (number of overlapping keywords) / (total number of unique keywords between both sets)* 100,
+  rounded to two decimal places. Name this field `similarity`
+
+    Be flexible. Accept close matches or inferred relationships (e.g., "Cloud Computing" ↔ "AWS", or "ETL" ↔ "Spoon").
+
+    Only return the **top 10 job postings** sorted in **descending order by percentage**.
+
+    🧾 Format your answer strictly as a Python list of dictionaries like this:
+    [
+    {{'Job ID': 'abc123', 'matches': 7, 'total_of_keywords': 10, 'similarity': 70.0}},
+    {{'Job ID': 'abc456', 'matches': 3, 'total_of_keywords': 6, 'similarity': 50.0}}
+    ]
+
+    ❌ Do not include any extra fields, explanations, or markdown formatting.
+    Return only the raw Python list.
+    """
+
+    model = genai.GenerativeModel(
+        model_gemini,
+        generation_config={
+            "temperature": 0.0,
+            "top_p": 1.0,
+            "top_k": 1,
+            "max_output_tokens": 1024
+        }
+    )
+
+    attempt = 0
+    while attempt < max_retries:
+        try:
+            response = model.generate_content(validation_prompt)
+            result_text = response.text.strip()
+            if result_text.startswith("```"):
+                result_text = result_text.strip("```python").strip("```").strip()
+            
+            result_data = eval(result_text)
+            if isinstance(result_data, list) and all(
+                isinstance(item, dict) and
+                "Job ID" in item and
+                "matches" in item and
+                "total_of_keywords" in item
+                for item in result_data
+            ):
+                return result_data
+
+            else:
+                print(f"⚠️ Intento {attempt + 1}: Formato inválido. Reintentando...")
+                attempt += 1
+                time.sleep(1)
+
+        except Exception as e:
+            print(f"❌ Error en intento {attempt + 1}: {e}")
+            attempt += 1
+            time.sleep(1)
+
+    return False, "❌ Gemini did not return a valid structured response after multiple attempts."
+
+def export_match_and_missing_skills():
+
+    ats_result_path="resume/ats_score_evaluation_pre.json"
+    with open(ats_result_path, "r", encoding="utf-8") as file:
+        ats_result = json.load(file)
+
+    match_skills = {
+        "technical_skills": ats_result.get("matching_technical_skills", []),
+        "soft_skills": ats_result.get("matching_soft_skills", [])
+    }
+
+    missing_skills = {
+        "technical_skills": ats_result.get("missing_technical_skills", []),
+        "soft_skills": ats_result.get("missing_soft_skills", [])
+    }
+
+    match_path = "resume/resume_match_skills.json"
+    missing_path = "resume/resume_missing_skills.json"
+
+    with open(match_path, "w", encoding="utf-8") as file:
+        json.dump(match_skills, file, indent=4, ensure_ascii=False)
+        print(f"✅ Saved: {match_path}")
+
+    with open(missing_path, "w", encoding="utf-8") as file:
+        json.dump(missing_skills, file, indent=4, ensure_ascii=False)
+        print(f"✅ Saved: {missing_path}")
+
+
+def ats_score_evaluation_pre():
+
+    with open("resume/resume.json", "r", encoding="utf-8") as file:
+        resume = json.load(file)
+
+    with open("resume/job_posting.json", "r", encoding="utf-8") as file:
+        job_posting = json.load(file)
+
+    job_title = job_posting["job_title"]
+    job_summary = job_posting.get("job_description", "")
+    job_tech_skills = job_posting.get("technical_skills", [])
+    job_soft_skills = job_posting.get("soft_skills", [])
+    job_years_of_experience = job_posting.get("years_of_experience_required", "Not specified")
+    job_requirements = job_posting.get("requirements", [])
+    job_responsibilities = job_posting.get("responsibilities", [])
+
+    resume_name = resume.get("personal_information", {}).get("name", "Unknown")
+    resume_summary = resume.get("professional_summary", "")
+    resume_years_experience = resume.get("years_of_experience", "")
+    resume_skills = resume.get("technical_skills", [])
+    resume_soft_skills = resume.get("soft_skills", [])
+    resume_education = resume.get("education", [])
+    resume_experience = resume.get("work_experience", [])
+
+    system_instructions = """
+    You are an expert Applicant Tracking System (ATS) evaluator.
+
+    Your job is to **strictly analyze** how well a resume matches a job posting.
+
+    You must identify the **technical skills**, **soft skills**, and **keywords** that are explicitly mentioned in the job posting and then determine which of those appear clearly in the resume.
+
+    ---
+
+    ## INSTRUCTIONS (Strict):
+
+    1. The **universe of skills and keywords** must come **only** from the job posting.
+    2. **Matching technical skills** = appear in both the job posting and the resume.
+    3. **Missing technical skills** = appear in the job posting but **not** in the resume.
+    4. **Matching keywords** = appear in both the job posting and the resume.
+    5. **Missing keywords** = appear in the job posting but **not** in the resume.
+    6. **Do NOT infer** technologies, skills, or synonyms not explicitly mentioned in the job posting.
+    7. A skill only counts as matched if it appears clearly in the resume (in the skills section, summary, or experience).
+    8. Be precise with terms:
+    - “GitHub Actions” may match “GitHub CI/CD” if clearly implied.
+    - “AWS Lambda” ≠ “Lambda”. AWS services must be explicitly named.
+    - Distinguish between “GitHub” (version control) and “GitHub Actions” (CI/CD).
+    9. Even if the ATS score is high, always include a **“recommendations”** section with:
+    - Suggestions for improvement.
+    - Gaps or partial matches.
+    - Phrasing tips for clearer alignment.
+
+    ---
+
+    ## MATCHING RULES:
+
+    - Convert all terms to lowercase.
+    - Remove special characters (parentheses, commas, etc.).
+    - Do not group terms (e.g., use “AWS Lambda”, “AWS SNS”, not “AWS (Lambda, SNS)”).
+    - Do not duplicate items.
+    - Match only if the context in the resume supports it clearly.
+
+    ---
+
+    ## EVALUATION CRITERIA:
+
+    1. Technical Skills Match  
+    2. Soft Skills Match  
+    3. Experience Relevance & Duration  
+    4. Responsibility Alignment  
+    5. Professional Summary Fit  
+    6. Keyword Match  
+    7. Education Match  
+    8. Cultural/Organizational Fit
+
+    ---
+
+    ## OUTPUT FORMAT (JSON ONLY):
+
+    ```json
+    {
+    "ats_score": <integer from 0 to 100>,
+    "matching_technical_skills": [list],
+    "missing_technical_skills": [list],
+    "matching_soft_skills": [list],
+    "missing_soft_skills": [list],
+    "keywords_matched": [list],
+    "keywords_missing": [list],
+    "years_of_experience_match": "Yes" or "No",
+    "education_match": "Yes" or "No",
+    "summary_match": "Strong" | "Partial" | "No",
+    "responsibility_alignment": "Strong" | "Partial" | "No",
+    "recommendations": [list]
+    }
+
+        """
+
+    prompt = f"""
+    ======= JOB POSTING =======
+    Job Title: {job_title}
+    Summary: {job_summary}
+    Required Technical Skills: {job_tech_skills}
+    Required Soft Skills: {job_soft_skills}
+    Minimum Years of Experience: {job_years_of_experience}
+    Required Education: {job_requirements}
+    Key Responsibilities:
+    {job_responsibilities}
+
+    ======= RESUME =======
+    Name: {resume_name}
+    Summary: {resume_summary}
+    Years of Experience: {resume_years_experience}
+    Technical Skills: {resume_skills}
+    Soft Skills: {resume_soft_skills}
+    Education: {resume_education}
+    Work Experience:
+    {resume_experience}
+    """
+
+    genai.configure(api_key=your_api_key)
+    model = genai.GenerativeModel(
+        model_gemini,
+        system_instruction=system_instructions,
+        generation_config={
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "top_k": 1,
+        "max_output_tokens": 1024
+    }
+    )
+
+    response = model.generate_content(prompt)
+
+    response_text = response.text.strip()
+
+    if not response_text:
+        print("❌ Empty response from Gemini.")
+        return
+
+    response_clean = (
+        response_text.strip("`").replace("json", "").replace("JSON", "").strip()
+    )
+
+    try:
+        result_json = json.loads(response_clean)
+    except json.JSONDecodeError as e:
+        print("❌ Error decoding JSON:", e)
+        print("🔍 Raw Gemini output:")
+        print(response_clean)
+        return
+
+    output_filepath = f"resume/ats_score_evaluation_pre.json"
+    with open(output_filepath, "w", encoding="utf-8") as file:
+        json.dump(result_json, file, ensure_ascii=False, indent=4)
+        print(f"✅ Output saved to '{output_filepath}'")
+
+def ats_score_evaluation_post():
+
+    # Load files
+    with open("resume/resume_final_to_word.json", "r", encoding="utf-8") as file:
+        resume = json.load(file)
+
+    with open("resume/ats_score_evaluation_pre.json", "r", encoding="utf-8") as file:
+        ats_pre = json.load(file)
+
+    with open("resume/job_posting.json", "r", encoding="utf-8") as file:
+        job_posting = json.load(file)
+
+    # Extract fields
+    job_title = job_posting.get("job_title", "")
+    job_summary = job_posting.get("job_description", "")
+    job_tech_skills = job_posting.get("technical_skills", [])
+    job_soft_skills = job_posting.get("soft_skills", [])
+    job_years_of_experience = job_posting.get("years_of_experience_required", "Not specified")
+    job_requirements = job_posting.get("requirements", [])
+    job_responsibilities = job_posting.get("responsibilities", [])
+
+    resume_name = resume.get("personal_information", {}).get("name", "Unknown")
+    resume_summary = resume.get("professional_summary", "")
+    resume_years_experience = resume.get("years_of_experience", "")
+    resume_skills = resume.get("skills", [])
+    resume_education = resume.get("education", [])
+    resume_experience = resume.get("work_experience", [])
+
+    # Previous match context
+    previous_match_context = f"""
+    ======= PREVIOUS MATCHES CONTEXT =======
+    The following technical and soft skills were already validated as matched in a previous ATS evaluation. 
+    Do not mark them as missing unless you can clearly prove they are not present in the resume or are no longer required in the new job posting.
+
+    Previously matched technical skills: {ats_pre.get("matching_technical_skills", [])}
+    Previously matched soft skills: {ats_pre.get("matching_soft_skills", [])}
+    Previously matched keywords: {ats_pre.get("keywords_matched", [])}
+    ========================================
+    """
+
+    previous_missing_context = f"""
+    ======= CONTEXT: ITEMS PREVIOUSLY MISSING =======
+    Please re-evaluate the following missing items. 
+    IMPORTANT: Do NOT mark a skill or keyword as “matched” unless it is clearly and explicitly present in the resume text (summary, skills, or experience). Do NOT infer based on related terms or assumptions. Re-evaluate previously missing items strictly.
+
+    Previously missing technical skills: {ats_pre.get("missing_technical_skills", [])}
+    Previously missing soft skills: {ats_pre.get("missing_soft_skills", [])}
+    Previously missing keywords: {ats_pre.get("keywords_missing", [])}
+    ========================================
+    """
+
+    # System instructions
+    system_instructions = """You are an expert Applicant Tracking System (ATS) evaluator.
+        Your job is to strictly analyze how well a resume matches a job posting.
+
+        You must infer skills and responsibilities only if they are clearly described in the resume. Be extremely accurate and consistent. This process is used to prepare a professional report and document, so clarity and formatting are critical.
+
+        ## VERY IMPORTANT INSTRUCTIONS:
+
+        1. Match ONLY the skills and keywords that appear in the job posting.
+        2. Do NOT infer skills, technologies, or knowledge from the resume unless the job posting explicitly requires them.
+        3. Do NOT include related or synonymous skills that are not directly listed in the job posting.
+        4. A skill can only be considered "matched" if:
+        - It is explicitly present in the job posting, and
+        - It is clearly demonstrated in the resume (via skills list, professional summary, or experience).
+        - "GitHub Actions" may match "GitHub CI/CD" if clearly implied.
+        - AWS-specific services must be explicitly named (e.g., "AWS Lambda" ≠ just "Lambda").
+        - Clearly distinguish between general terms like "GitHub" (version control) and specific tools like "GitHub Actions" (CI/CD).
+        5. Even if the ATS score is high, **always include a “Recommendations” section**. These should:
+        - Highlight areas that could be improved or better emphasized.
+        - Indicate any gaps or partial matches in experience or responsibilities.
+        - Suggest improvements in phrasing or contextualization (e.g., how to frame "client-facing" experience).
+        6. If something is only partially covered (e.g., “responsibility alignment: partial”), explain why.
+
+
+        ## Matching Rules (Strict and Normalized):
+
+        - Normalize all terms by converting them to lowercase and trimming whitespace.
+        - Remove special characters such as parentheses, commas, or symbols.
+        - Do NOT use grouped terms like "aws (lambda, sns)" — expand each one as its own skill.
+        - DO NOT include the same item in both the "matching" and "missing" lists.
+        - Deduplicate all lists.
+        - Match technical and soft skills only if context clearly supports them.
+
+        ## EVALUATION CRITERIA (Very Strict):
+
+        1. Technical Skills Match
+        2. Soft Skills Match
+        3. Experience Relevance & Duration
+        4. Responsibility Alignment
+        5. Professional Summary Fit
+        6. Keyword Match
+        7. Education Match
+        8. Cultural/Organizational Fit
+
+        ## OUTPUT FORMAT (JSON only):
+        {
+            "ats_score": <integer from 0 to 100>,
+            "matching_technical_skills": [list],
+            "missing_technical_skills": [list],
+            "matching_soft_skills": [list],
+            "missing_soft_skills": [list],
+            "keywords_matched": [list],
+            "keywords_missing": [list],
+            "years_of_experience_match": "Yes" or "No",
+            "education_match": "Yes" or "No",
+            "summary_match": "Strong", "Partial", or "No",
+            "responsibility_alignment": "Strong", "Partial", or "No",
+            "recommendations": [list]
+        }"""
+
+    # Prompt to model
+    prompt = f"""
+    {previous_match_context}
+    {previous_missing_context}
+    ======= JOB POSTING =======
+    Job Title: {job_title}
+    Summary: {job_summary}
+    Required Technical Skills: {job_tech_skills}
+    Required Soft Skills: {job_soft_skills}
+    Minimum Years of Experience: {job_years_of_experience}
+    Required Education: {job_requirements}
+    Key Responsibilities:
+    {job_responsibilities}
+
+    ======= RESUME =======
+    Name: {resume_name}
+    Summary: {resume_summary}
+    Years of Experience: {resume_years_experience}
+    Technical Skills: {resume_skills}
+    Soft Skills: {resume_skills}
+    Education: {resume_education}
+    Work Experience:
+    {resume_experience}
+    """
+
+    genai.configure(api_key=your_api_key)
+    model = genai.GenerativeModel(
+        model_gemini,
+        system_instruction=system_instructions,
+        generation_config={
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "top_k": 1,
+        "max_output_tokens": 1024
+    }
+    )
+
+    response = model.generate_content(prompt)
+
+    response_text = response.text.strip()
+
+    if not response_text:
+        print("❌ Empty response from Gemini.")
+        return
+
+    response_clean = (
+        response_text.strip("`").replace("json", "").replace("JSON", "").strip()
+    )
+
+    try:
+        result_json = json.loads(response_clean)
+    except json.JSONDecodeError as e:
+        print("❌ Error decoding JSON:", e)
+        print("🔍 Raw Gemini output:")
+        print(response_clean)
+        return
+
+    output_filepath = f"resume/ats_score_evaluation_post.json"
+    with open(output_filepath, "w", encoding="utf-8") as file:
+        json.dump(result_json, file, ensure_ascii=False, indent=4)
+        print(f"✅ Output saved to '{output_filepath}'")
+
+
 def clean_text(text):
     if not isinstance(text, str) or not text.strip():
         return ""
@@ -60,43 +519,13 @@ def normalize_keywords(raw_keywords_set):
         words = kw.strip().lower().split()
 
         if len(words) == 1:
-            normalized_keywords.add(words[0])  # Una sola palabra, agregar tal cual
+            normalized_keywords.add(words[0])
         elif len(words) >= 2:
-            # Ordenar solo las dos primeras palabras (para evitar "sql python" vs "python sql")
             sorted_bigram = " ".join(sorted(words[:2]))
             normalized_keywords.add(sorted_bigram)
 
     return normalized_keywords
 
-
-def extract_key_words_from_cv():
-    # Load resume data
-    with open("resume/resume.json", "r", encoding="utf-8") as file:
-        resume_data = json.load(file)
-
-    # Final keyword set
-    keyword_set = set()
-
-    # Process each skill separately
-    for skill in resume_data["technical_skills"] + resume_data["soft_skills"]:
-        cleaned_skill = clean_text_with_lemmatization(skill)
-
-        if " " not in cleaned_skill:  
-            # If it's a single-word skill, keep it as is
-            keyword_set.add(cleaned_skill)
-        else:
-            # Extract keywords using YAKE (Max 2-word phrases)
-            keywords = custom_kw_extractor.extract_keywords(cleaned_skill)
-            
-            for kw in keywords:
-                words = kw[0].split()
-                if len(words) == 1:
-                    keyword_set.add(words[0])  # Single word stays as is
-                else:
-                    keyword_set.add(" ".join(sorted(words[:2])))  # Max 2 words, sorted
-    
-    keyword_set = {tuple(sorted(kw.split())) for kw in keyword_set}
-    return keyword_set
 
 def jaccard_similarity(set1, set2):
     if not set1 or not set2:
@@ -185,6 +614,12 @@ def validate_with_gemini(skill, detail):
     model = genai.GenerativeModel(
     model_gemini,
     system_instruction=validation_prompt,
+        generation_config={
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "top_k": 1,
+        "max_output_tokens": 1024
+    }
     )
 
     try:
@@ -270,12 +705,42 @@ def resume_promt_summary():
     input_filepath = f"resume/resume.json"
     with open(input_filepath, "r", encoding="utf-8") as file_load:
        resume = json.load(file_load)
+    old_summary = resume["professional_summary"]
+    education = resume["education"]
+    year_experience = resume["years_of_experience"]
     
+    input_filepath = f"resume/resume_updated.json"
+    with open(input_filepath, "r", encoding="utf-8") as file_load:
+       resume = json.load(file_load)
+    experience_updated = resume
 
+    # Create final skills json 
     input_filepath = f"resume/job_posting.json"
     with open(input_filepath, "r", encoding="utf-8") as file_load:
        job_offer = json.load(file_load)
     
+    input_filepath = "resume/resume_match_skills.json"
+    with open(input_filepath, "r", encoding="utf-8") as file_load:
+       skills_json = json.load(file_load)
+
+    # Create a set to avoid duplicates
+    combined_skills = set(skills_json["technical_skills"] + skills_json["soft_skills"])
+
+    input_filepath = "resume/resume_user_answers.json"
+    if os.path.exists(input_filepath):
+        with open(input_filepath, "r", encoding="utf-8") as file_load:
+            user_answers = json.load(file_load)
+
+        # Add user_answers skills
+        for entry in user_answers:
+            print(entry)
+            skill = entry.get("skill")
+            if isinstance(skill, str):
+                combined_skills.add(skill)
+
+
+    # Convert the set to a list and structure it in the new JSON
+    final_skills_json = {"skills": list(combined_skills)}
 
     system_instructions ="""
     You are an HR specialist skilled in processing and analyzing resumes.
@@ -286,6 +751,7 @@ def resume_promt_summary():
     - Focus on highlighting relevant experience, skills, and qualifications.
     - Ensure clarity, coherence, and alignment with the job offer.
     - The response must be in JSON format only, without any explanations or additional text.
+    - Rewrite the professional summary to align with the job posting’s focus on contributing to projects that support long-term sustainability and global investment strategies. Use clear, action-oriented language, and highlight relevant skills or experience that demonstrate the candidate’s ability to contribute to sustainable initiatives or global impact.
 
     **Output Format:**
     {
@@ -299,7 +765,7 @@ def resume_promt_summary():
     system_instruction=system_instructions,
     )
 
-    response = model.generate_content(f"The resume to analyze is {resume} and the job offer is {job_offer}")
+    response = model.generate_content(f"The old resume to analyze is {old_summary} the education is {education}, the years of experience is {year_experience}, the new experience updated is {experience_updated}, and the updated skills are {final_skills_json},  and the job offer is {job_offer}")
     cleaned_response = response.text.strip(clean_json).strip("```").replace("\n", "")
 
     json_file = json.loads(cleaned_response)

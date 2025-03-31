@@ -1,7 +1,8 @@
 # option1.py
 import streamlit as st
-from utils import extract_cv_information, extract_job_posting_information,resume_education_info_personal,resume_promt_summary,resume_delete_experience_not_related,resume_skills, validate_with_gemini
+from utils import extract_cv_information, extract_job_posting_information,resume_education_info_personal,resume_delete_experience_not_related, validate_with_gemini, ats_score_evaluation_pre,export_match_and_missing_skills
 import json
+import time
 
 def run():
     st.markdown("<h1 style='text-align: center; font-size: 50px;'>Tailor my resume for a specific job opportunity</h1>", unsafe_allow_html=True)
@@ -20,9 +21,9 @@ def run():
     if ((uploaded_cv is not None) and (uploaded_job is not None)):
         extract_cv_information(uploaded_cv)
         extract_job_posting_information(uploaded_job)
+        ats_score_evaluation_pre()
+        export_match_and_missing_skills()
         resume_education_info_personal()
-        resume_promt_summary()
-        resume_skills()
         resume_delete_experience_not_related()
 
         # Check if all achievements are empty
@@ -45,7 +46,6 @@ def run():
                 st.rerun()
         
         else:
-            st.session_state.page == "analize_skills"
             
             # Initialize session state if it doesn't exist
             if "achievements_pass" not in st.session_state:
@@ -62,6 +62,8 @@ def run():
 
             work_experience = resume_data.get("work_experience", [])
 
+            st.write(f"## Evaluating work experience")
+         
             # Process achievements and validate them
             for job in work_experience:
                 st.write(f"### Evaluating achievements for: {job['job_title']} in {job['company']}")
@@ -77,16 +79,9 @@ def run():
                         st.session_state.achievements_do_not_pass.append(
                             {"job_title": job['job_title'], "achievement": achievement, "feedback": feedback,  "company":job['company'], "key":job['key']}
                         )
+                    time.sleep(0.2)
 
-            # Show results
-            st.write("## ✅ Validated Achievements")
-            st.write(st.session_state.achievements_pass)
-
-            st.write("## ❌ Achievements that need improvement")
-            for item in st.session_state.achievements_do_not_pass:
-                st.write(f"- **{item['key']}**: {item['achievement']}")
-
-            st.session_state.page = "improve_skills"
-            if st.button("Improve skills"):
+            st.session_state.page = "information_to_user"
+            if st.button("View Compatibility Analysis"):
                 st.write(st.session_state.page)
                 st.rerun()

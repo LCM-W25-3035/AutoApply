@@ -77,47 +77,34 @@ def run():
         with open("resume/resume_updated.json", "w", encoding="utf-8") as file:
             json.dump(resume_data, file, indent=4, ensure_ascii=False)
 
-        print("Resume_update.json file generated successfully.")
-
-        option = st.radio("What would you like to do?", [
-                        "Option 1: Add More Skills - Job Achivements",
-                        "Option 2: Finalize the customization - Download the Customize CV"
-                    ], index=None, key="paso_add_skills")
-    
-        if option == "Option 1: Add More Skills - Job Achivements":
-
-            ### add more skills
-            input_filepath = f"resume/resume_missing_skills.json"
-            with open(input_filepath, "r", encoding="utf-8") as file_load:
-                missing_skills = json.load(file_load)
-            missing_skills = sum(missing_skills.values(), [])
+        ### add more skills
+        input_filepath = f"resume/resume_missing_skills.json"
+        with open(input_filepath, "r", encoding="utf-8") as file_load:
+            missing_skills = json.load(file_load)
+        missing_skills = sum(missing_skills.values(), [])
 
 
-            ### add more skills
-            file_path = "resume/resume_delete_experience_not_relate.json"
-            with open(file_path, "r", encoding="utf-8") as file_load:
-                resume_data = json.load(file_load)
+        ### add more skills
+        file_path = "resume/resume_delete_experience_not_relate.json"
+        with open(file_path, "r", encoding="utf-8") as file_load:
+            resume_data = json.load(file_load)
 
-            # Process missing technical and soft skills
-            
-            # Extract company names from work experience
-            jobs_keys = list({exp["key"] for exp in resume_data.get("work_experience", [])})
+        # Process missing technical and soft skills
+        
+        # Extract company names from work experience
+        jobs_keys = list({exp["key"] for exp in resume_data.get("work_experience", [])})
 
-            st.session_state.page == "add_skills"
-            # Initialize the session state if it does not exist
-            if "jobs_keys" not in st.session_state:
-                st.session_state.jobs_keys = jobs_keys
-                print(st.session_state.jobs_keys)
+        # Initialize the session state if it does not exist
+        if "jobs_keys" not in st.session_state:
+            st.session_state.jobs_keys = jobs_keys
+            print(st.session_state.jobs_keys)
 
-            if "skills_add_achivments" not in st.session_state:
-                st.session_state.skills_add_achievements = missing_skills
-                print(st.session_state.skills_add_achievements)
+        if "skills_add_achivments" not in st.session_state:
+            st.session_state.skills_add_achievements = missing_skills
+            print(st.session_state.skills_add_achievements)
 
-            st.session_state.page = "add_skills"
-            st.session_state.skill_pass = []
-            st.session_state.to_improve_feedback = "No feedback"
-            st.rerun()
+        st.session_state.page = "add_skills"
+        st.session_state.skill_pass = []
+        st.session_state.to_improve_feedback = "No feedback"
+        st.rerun()
 
-        if option == "Option 2: Finalize the customization - Download the Customize CV":
-            st.session_state.page = "customization_cv"
-            st.rerun()

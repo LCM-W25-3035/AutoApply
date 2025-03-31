@@ -5,7 +5,7 @@ import google.generativeai as genai
 from io import BytesIO
 import numpy as np
 import re
-from utils import join_all_resume_json, generate_cv
+from utils import join_all_resume_json, generate_cv,resume_promt_summary,ats_score_evaluation_post
 import os
 
 
@@ -25,6 +25,7 @@ def run():
             user_answers_list = json.load(file_load)
     else:
         user_answers_list = []
+
 
     user_answers = {}
     for entry in user_answers_list:
@@ -55,7 +56,8 @@ def run():
 
         with open("resume/resume_final_experience.json", "w", encoding="utf-8") as file:
             json.dump(resume_update, file, indent=4)
-
+    
+    resume_promt_summary()
     join_all_resume_json()
     generate_cv()
 
@@ -67,6 +69,25 @@ def run():
     user_name = " ".join(user_name.title().split())
     output_path = f"output/{user_name}_customization.docx" 
 
+    ats_score_evaluation_post()
+    
+    st.write(f"## Your customization was complete")
+
+    input_filepath = "resume/ats_score_evaluation_pre.json"
+    with open(input_filepath, "r", encoding="utf-8") as file_load:
+        evaluation_pre = json.load(file_load)
+
+    input_filepath = "resume/ats_score_evaluation_post.json"
+    with open(input_filepath, "r", encoding="utf-8") as file_load:
+        evaluation_post = json.load(file_load)
+
+    st.write(f"### Your ATS score Before: {evaluation_pre['ats_score']}")
+    st.write(f"### Your ATS score After: {evaluation_post['ats_score']}")
+    st.write(f"""## Your Customized Resume is Ready!
+                  This resume has been tailored to match the job posting by aligning relevant skills, keywords, and action-oriented language to improve your ATS Score.
+                  📄 You will receive the resume in an editable Word format, so you can make final formatting adjustments or add any personal touches before submitting your application.
+             """)
+    
     # Read the file in binary mode
     with open(output_path, "rb") as file:
         file_bytes = file.read()
@@ -76,15 +97,17 @@ def run():
         label="📥 Download personalized CV",
         data=file_bytes,
         file_name="customization_cv.docx",
-        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        ):
-        st.session_state.page = "Home"
-        if "app_initialized" in st.session_state:
-            del st.session_state.app_initialized
-        st.rerun()
+        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"):
+
+        st.write(f"### OKEY")
+        # st.session_state.page = "Home"
+        # if "app_initialized" in st.session_state:
+        #     del st.session_state.app_initialized
+        # st.rerun()
         
     # Download the word file
     if st.button("🏠 Back to Home"):
+        
         st.session_state.page = "Home"
         if "app_initialized" in st.session_state:
             del st.session_state.app_initialized

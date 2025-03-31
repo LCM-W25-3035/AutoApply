@@ -83,6 +83,9 @@ elif st.session_state.page == "improve_skills":
     import improve_skills
     improve_skills.run()
 
+elif st.session_state.page == "information_to_user":
+    import information_to_user
+    information_to_user.run()
 
 elif st.session_state.page == "Option2":
     import option2

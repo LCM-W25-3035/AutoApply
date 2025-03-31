@@ -1,6 +1,7 @@
 import streamlit as st
-from utils import extract_job_posting_information_from_str, resume_education_info_personal,resume_promt_summary,resume_delete_experience_not_related,resume_skills, validate_with_gemini
+from utils import ats_score_evaluation_pre, export_match_and_missing_skills, extract_job_posting_information_from_str, resume_education_info_personal,resume_promt_summary,resume_delete_experience_not_related,resume_skills, validate_with_gemini
 import json
+import time
 
 var_back_to_job_seleccion = "⬅️ Back to Job Selection"
 def run():
@@ -11,9 +12,9 @@ def run():
     for index, row in selected_job.iterrows():
         extract_job_posting_information_from_str(row["Job Description"])
 
+        ats_score_evaluation_pre()
+        export_match_and_missing_skills()
         resume_education_info_personal()
-        resume_promt_summary()
-        resume_skills()
         resume_delete_experience_not_related()
 
         # Check if all achievements are empty
@@ -36,7 +37,6 @@ def run():
                 st.rerun()
         
         else:
-            st.session_state.page == "analize_skills"
             
             # Initialize session state if it doesn't exist
             if "achievements_pass" not in st.session_state:
@@ -68,32 +68,9 @@ def run():
                         st.session_state.achievements_do_not_pass.append(
                             {"job_title": job['job_title'], "achievement": achievement, "feedback": feedback,  "company":job['company'], "key":job['key']}
                         )
+                    time.sleep(0.2)
 
-            # Show results
-            st.write("## ✅ Validated Achievements")
-            st.write(st.session_state.achievements_pass)
-
-            st.write("## ❌ Achievements that need improvement")
-            for item in st.session_state.achievements_do_not_pass:
-                st.write(f"- **{item['key']}**: {item['achievement']}")
-
-            st.session_state.page = "improve_skills"
-            if st.button("Improve skills"):
+            st.session_state.page = "information_to_user"
+            if st.button("View Compatibility Analysis"):
                 st.write(st.session_state.page)
                 st.rerun()
-
-
-    # Navigation buttons
-    col1, col2 = st.columns([1, 1])
-
-    with col1:
-        if st.button(var_back_to_job_seleccion):
-            st.session_state.page = "Option1_2"
-            st.rerun()
-
-    with col2:
-        if st.button("🏠 Back to Home"):
-            st.session_state.page = "Home"
-            if "app_initialized" in st.session_state:
-                del st.session_state.app_initialized
-            st.rerun()

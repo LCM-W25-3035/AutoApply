@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pymongo
+import os
 
 def run():
     st.markdown("<h1 style='text-align: center; font-size: 50px;'>Select a Job from the Database</h1>", unsafe_allow_html=True)
@@ -14,19 +15,20 @@ def run():
     db = client_mongo[MONGO_DB_NAME]
     collection = db[MONGO_JOBS_COLLECTION]
 
-    # Load jobs from MongoDB
-    jobs_data = list(collection.find({}))  # Retrieve everything
+    # Ruta al archivo local
+    parquet_file = "parquet/jobs_data.parquet"
 
-    if not jobs_data:
-        st.error("No job postings found in the database.")
-        return
+    # Si existe el archivo .parquet, lo cargamos desde allí
+    if os.path.exists(parquet_file):
+        df = pd.read_parquet(parquet_file)
+    else:
+        # Load jobs from MongoDB
+        jobs_data = list(collection.find({}))  # Retrieve everything
+        df = pd.DataFrame(jobs_data)
+        df["_id"] = df["_id"].astype(str)
     
-    for job in jobs_data:
-        job["_id"] = str(job["_id"])  # Convert ObjectId to string
-
-
     # Convert to DataFrame
-    df = pd.DataFrame(jobs_data)
+    
     df = df.rename(columns={"_id": "Job ID", "Title": "Job Title", "Provincia": "Province", "Keyword": "Category"})
  
     # Fill NaN values
@@ -80,7 +82,7 @@ def run():
     st.write(f"Showing {start_idx + 1} - {min(end_idx, total_rows)} of {total_rows} jobs")
 
     # Display paginated DataFrame
-    st.dataframe(filtered_df.iloc[start_idx:end_idx])
+    st.dataframe(filtered_df.iloc[start_idx:end_idx].drop(columns=["key_word_app","key_words_app"]))
 
     # Job Selection
     job_id_input = st.text_input("Enter the Job ID to proceed:", key="job_id_input")
