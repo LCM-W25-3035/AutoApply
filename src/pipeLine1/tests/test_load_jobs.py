@@ -70,7 +70,21 @@ def test_csv_read_error(mock_read, mock_exists):
 def test_bulk_write_error(mock_mongo, mock_read_csv, mock_exists):
     mock_collection = MagicMock()
     mock_collection.delete_many.return_value.deleted_count = 1
-    mock_collection.insert_many.side_effect = BulkWriteError("Mock insert error")
+
+    mock_collection.insert_many.side_effect = BulkWriteError({
+        "writeErrors": [],
+        "writeConcernErrors": [],
+        "nInserted": 0,
+        "nUpserted": 0,
+        "nMatched": 0,
+        "nModified": 0,
+        "nRemoved": 0,
+        "upserted": [],
+        "insertedIds": [],
+        "writeConcernError": {},
+        "errorLabels": []
+    })
+
     mock_collection.find.return_value = []
 
     mock_db = MagicMock()
@@ -85,3 +99,4 @@ def test_bulk_write_error(mock_mongo, mock_read_csv, mock_exists):
 
     import_and_reload()
     mock_collection.insert_many.assert_called_once()
+
