@@ -121,12 +121,12 @@ def key_words_match_jobs_resume(
                 return result_data
 
             else:
-                print(f"⚠️ Intento {attempt + 1}: Formato inválido. Reintentando...")
+                print(f"⚠️ Attempt{attempt + 1}: Invalid format. Retrying...")
                 attempt += 1
                 time.sleep(1)
 
         except Exception as e:
-            print(f"❌ Error en intento {attempt + 1}: {e}")
+            print(f"❌ Error on attempt {attempt + 1}: {e}")
             attempt += 1
             time.sleep(1)
 
