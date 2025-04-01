@@ -1,3 +1,7 @@
+# Reference: 
+# (OpenAI first prompt, 2025): How do you create a test branch and run case tests in a programming project? Can you give me a guide on how to implement this in Git Hub?
+# (OpenAI last prompt, 2025): What happens when it is real-time interaction?
+
 import pytest
 import time
 from unittest.mock import MagicMock
