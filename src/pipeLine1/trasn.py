@@ -6,7 +6,7 @@ from nltk.tokenize import sent_tokenize
 import nltk
 
 # Sample DataFrame
-df = pd.read_csv('FullDataset.csv')
+#df = pd.read_csv('FullDataset.csv')
 
 
 # Function to detect language and translate if needed
@@ -30,6 +30,6 @@ def detect_and_translate(text):
 
 
 # Apply function to the column
-df["Job Description"] = df["Job Description"].apply(detect_and_translate)
+# df["Job Description"] = df["Job Description"].apply(detect_and_translate)
 
-df.to_csv('test.csv')
+# df.to_csv('test.csv')
