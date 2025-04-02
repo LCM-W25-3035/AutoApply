@@ -90,7 +90,7 @@ unique_records.head(5)
 unique_records.rename(columns={'Location_x': 'Location', 'Salary_x': 'Salary','Posted Day_x':'Posted Day','Job Description_x':'Job Description','job url_x':'job url','Keyword_x':'Keyword'}, inplace=True)
 
 # %%
-unique_records.to_csv('JobSpy_Octoparse_combined_jobs.csv',index=False)
+unique_records.to_csv('src/data_gathering/JobSpy_Octoparse_combined_jobs.csv',index=False)
 
 
 # %% [markdown]

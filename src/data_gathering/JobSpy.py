@@ -92,7 +92,7 @@ new_dataframe.rename(columns={'title': 'Job Title', 'company': 'Company Name','l
 
 new_dataframe.head(5)
 
-new_dataframe.to_csv('JobSpy_scraped_jobs.csv',index=False)
+new_dataframe.to_csv('src/data_gathering//JobSpy_scraped_jobs.csv',index=False)
 #Job Title	Company Name	Location	Salary	Posted Day	Job Description	job url	Provincia	Keyword
 
 

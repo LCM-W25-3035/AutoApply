@@ -14,36 +14,6 @@ import logging
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-def read_list_from_file(filename):
-    """Reads a list of items from a given file."""
-    try:
-        with open(filename, 'r', encoding='utf-8') as file:
-            return [line.strip() for line in file.readlines()]
-    except FileNotFoundError:
-        logging.error(f"File not found: {filename}")
-        return []
-    except Exception as e:
-        logging.error(f"Error reading {filename}: {e}")
-        return []
-
-def load_and_combine_data(keywords, provinces):
-    """Loads and combines job data from diverse files into a single DataFrame."""
-    data_final = pd.DataFrame()
-    
-    for keyword in keywords:
-        for province in provinces:
-            file_path = f"src\data_gathering\glassdoor_jobs_{keyword}{province}.csv"
-            if os.path.exists(file_path):
-                try:
-                    data = pd.read_csv(file_path)
-                    data['Provincia'] = province
-                    data['Keyword'] = keyword
-                    data_final = pd.concat([data_final, data], ignore_index=True)
-                except Exception as e:
-                    logging.error(f"Error reading {file_path}: {e}")
-    
-    data_final.drop_duplicates(keep='first', inplace=True)
-    return data_final
 
 def clean_data(df):
     """Performs data cleaning."""
@@ -65,21 +35,15 @@ def clean_data(df):
     return df
 
 def main():
-    """Main function that executes the process."""
-    logging.info("Starting data processing...")
-
-    keywords = read_list_from_file("keywords.txt")
-    provinces = read_list_from_file("providence.txt")
-
-    if not keywords or not provinces:
-        logging.error("No keywords or provinces found. Exiting process.")
+    try:
+        df1=pd.read_csv("Jobs-Data_Scraped.csv")
+        df2=pd.read_csv("src/data_gathering/JobSpy_Octoparse_combined_jobs.csv")
+        df3=pd.read_csv('src/data_gathering//JobSpy_scraped_jobs.csv')
+    except FileNotFoundError:
+        logging.error("One or more required files are missing.")
         return
 
-    data = load_and_combine_data(keywords, provinces)
-
-    if data.empty:
-        logging.warning("No data was loaded. Exiting process.")
-        return
+    data= pd.concat([df1, df2,df3], ignore_index=True)
 
     logging.info("Cleaning data...")
     cleaned_data = clean_data(data)
