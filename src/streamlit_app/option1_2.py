@@ -38,10 +38,6 @@ def run():
     # Normalize text format
     df["Category"] = df["Category"].str.title()
     df["Province"] = df["Province"].str.title()
-    
-    # Extract unique categories and cities
-    category_options = ["All"] + sorted(df["Category"].unique().tolist())
-    city_options = ["All"] + sorted(df["Province"].unique().tolist())
 
     # Extract unique categories and cities
     category_options = ["All"] + sorted(df["Category"].unique().tolist())

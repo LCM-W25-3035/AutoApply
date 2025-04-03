@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 from utils import extract_cv_information, key_words_match_jobs_resume, extract_keywords_with_gemini
 
+var_job_id = 'Job ID'
+
 def run():
     st.markdown("""
         <h1 style='text-align: center; font-size: 50px;'>Upload Your Resume</h1>
@@ -15,15 +17,15 @@ def run():
         key_words_candidate = extract_keywords_with_gemini()
         filtered_df = st.session_state['filtered_jobs']
         if filtered_df.shape[0] > 1500:
-            filtered_df_str = filtered_df.iloc[:1500][['Job ID', 'key_words_app']].to_string(index=False)
+            filtered_df_str = filtered_df.iloc[:1500][[var_job_id, 'key_words_app']].to_string(index=False)
         else:
-            filtered_df_str = filtered_df[['Job ID', 'key_words_app']].to_string(index=False)
+            filtered_df_str = filtered_df[[var_job_id, 'key_words_app']].to_string(index=False)
 
         top_matches2 = key_words_match_jobs_resume(key_words_candidate, filtered_df_str)
         top_matches2 = pd.DataFrame(top_matches2)
 
-        filtered_df = filtered_df[filtered_df['Job ID'].isin(top_matches2['Job ID'])]
-        filtered_df = filtered_df.merge(top_matches2, on='Job ID')
+        filtered_df = filtered_df[filtered_df[var_job_id].isin(top_matches2[var_job_id])]
+        filtered_df = filtered_df.merge(top_matches2, on=var_job_id)
         top_matches = filtered_df.sort_values(by="similarity", ascending=False).head(10)
 
         st.session_state.top_matches = top_matches

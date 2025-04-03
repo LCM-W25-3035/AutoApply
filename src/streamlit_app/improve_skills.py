@@ -10,6 +10,7 @@ from utils import validate_with_gemini
 import time
 
 var_back_to_job_seleccion = "⬅️ Back to Job Selection"
+var_resume_updated = "resume/resume_updated.json"
 
 def run():
     st.markdown("<h1 style='text-align: center; font-size: 50px;'>Improve Skills For My Resume</h1>", unsafe_allow_html=True)
@@ -25,7 +26,6 @@ def run():
         print(to_improve)
         st.write(f"**Current Achievement:** {to_improve['achievement']}")
         st.write(f"**Hint to Improve achievement:** {to_improve['feedback']}")
-        # improved_achievement = st.text_input("Please rewrite the achievement with improvements:", value=to_improve["feedback"])
         improved_achievement = st.text_input(
             "Please describe your achievement, including how you obtained it and a metric or result achieved",
             key = to_improve['achievement']
@@ -47,7 +47,7 @@ def run():
                 st.write(f"**Hint to add achievements:** {feedback}")
 
     else:
-        output_file = "resume/resume_updated.json"
+        output_file = var_resume_updated
         with open(output_file, "w", encoding="utf-8") as file:
             json.dump(st.session_state.achievements_pass, file, indent=4, ensure_ascii=False)
 
@@ -56,7 +56,7 @@ def run():
             resume_data = json.load(file)
 
         # Load the data with the updated achievements
-        with open("resume/resume_updated.json", "r", encoding="utf-8") as file:
+        with open(var_resume_updated, "r", encoding="utf-8") as file:
             updated_achievements = json.load(file)
 
         # Create a dictionary to quickly access achievements by key
@@ -74,7 +74,7 @@ def run():
             if key in achievements_dict:
                 experience["achievement"] = achievements_dict[key]
 
-        with open("resume/resume_updated.json", "w", encoding="utf-8") as file:
+        with open(var_resume_updated, "w", encoding="utf-8") as file:
             json.dump(resume_data, file, indent=4, ensure_ascii=False)
 
         ### add more skills

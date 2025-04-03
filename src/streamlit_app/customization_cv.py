@@ -99,13 +99,9 @@ def run():
         file_name="customization_cv.docx",
         mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"):
 
-        st.write(f"### OKEY")
-        # st.session_state.page = "Home"
-        # if "app_initialized" in st.session_state:
-        #     del st.session_state.app_initialized
-        # st.rerun()
+        st.write(f"### Process finalized")
         
-    # Download the word file
+    # Reestar the aplication
     if st.button("🏠 Back to Home"):
         
         st.session_state.page = "Home"

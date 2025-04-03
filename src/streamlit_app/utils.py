@@ -11,10 +11,13 @@ import time
 your_api_key = st.secrets["api_keys"]["GEMINI_API_KEY"]
 model_gemini = "models/gemini-2.0-flash"
 clean_json = "```json\n"
+var_resume_json = "resume/resume.json"
+var_fill_cv = "fill_cv line"
+var_resume_match_skils = "resume/resume_match_skills.json"
 
 def extract_keywords_with_gemini():
 
-    with open("resume/resume.json", "r", encoding="utf-8") as file:
+    with open(var_resume_json, "r", encoding="utf-8") as file:
         resume_json = json.load(file)
 
     validation_prompt = f"""You are a resume keyword extractor.
@@ -121,12 +124,12 @@ def key_words_match_jobs_resume(
                 return result_data
 
             else:
-                print(f"⚠️ Intento {attempt + 1}: Formato inválido. Reintentando...")
+                print(f"⚠️ Attempt {attempt + 1}: Invalid format. Retrying...")
                 attempt += 1
                 time.sleep(1)
 
         except Exception as e:
-            print(f"❌ Error en intento {attempt + 1}: {e}")
+            print(f"❌ Error on attempt {attempt + 1}: {e}")
             attempt += 1
             time.sleep(1)
 
@@ -148,7 +151,7 @@ def export_match_and_missing_skills():
         "soft_skills": ats_result.get("missing_soft_skills", [])
     }
 
-    match_path = "resume/resume_match_skills.json"
+    match_path = var_resume_match_skils
     missing_path = "resume/resume_missing_skills.json"
 
     with open(match_path, "w", encoding="utf-8") as file:
@@ -162,7 +165,7 @@ def export_match_and_missing_skills():
 
 def ats_score_evaluation_pre():
 
-    with open("resume/resume.json", "r", encoding="utf-8") as file:
+    with open(var_resume_json, "r", encoding="utf-8") as file:
         resume = json.load(file)
 
     with open("resume/job_posting.json", "r", encoding="utf-8") as file:
@@ -543,7 +546,7 @@ def join_all_resume_json():
     with open(input_filepath, "r", encoding="utf-8") as file_load:
        summary = json.load(file_load)
 
-    input_filepath = "resume/resume_match_skills.json"
+    input_filepath = var_resume_match_skils
     with open(input_filepath, "r", encoding="utf-8") as file_load:
        skills_json = json.load(file_load)
 
@@ -641,7 +644,7 @@ def validate_with_gemini(skill, detail):
 
 
 def resume_skills():
-    input_filepath = f"resume/resume.json"
+    input_filepath = var_resume_json
 
     with open(input_filepath, "r", encoding="utf-8") as file_load:
        cv_data = json.load(file_load)
@@ -677,7 +680,7 @@ def resume_skills():
         json.dump(missing_skills, file, indent=4)
     print("Skills missing saved in 'resume/resume_missing_skills.json'.")
 
-    with open("resume/resume_match_skills.json", "w") as file:
+    with open(var_resume_match_skils, "w") as file:
         json.dump(match_skills, file, indent=4)
     print("Skills missing saved in 'resume/resume_match_skills.json'.")
 
@@ -685,7 +688,7 @@ def resume_skills():
 
 def resume_education_info_personal():
 
-    input_filepath = f"resume/resume.json"
+    input_filepath = var_resume_json
     with open(input_filepath, "r", encoding="utf-8") as file_load:
        original_cv = json.load(file_load)
     
@@ -702,7 +705,7 @@ def resume_education_info_personal():
 
 def resume_promt_summary():
 
-    input_filepath = f"resume/resume.json"
+    input_filepath = var_resume_json
     with open(input_filepath, "r", encoding="utf-8") as file_load:
        resume = json.load(file_load)
     old_summary = resume["professional_summary"]
@@ -719,7 +722,7 @@ def resume_promt_summary():
     with open(input_filepath, "r", encoding="utf-8") as file_load:
        job_offer = json.load(file_load)
     
-    input_filepath = "resume/resume_match_skills.json"
+    input_filepath = var_resume_match_skils
     with open(input_filepath, "r", encoding="utf-8") as file_load:
        skills_json = json.load(file_load)
 
@@ -778,7 +781,7 @@ def resume_promt_summary():
 
 def resume_delete_experience_not_related():
 
-    input_filepath = f"resume/resume.json"
+    input_filepath = var_resume_json
     with open(input_filepath, "r", encoding="utf-8") as file_load:
        resume = json.load(file_load)
     
@@ -834,7 +837,7 @@ def customize_cv() -> dict:
     """
 
 
-    input_filepath = f"resume/resume.json"
+    input_filepath = var_resume_json
     with open(input_filepath, "r", encoding="utf-8") as file_load:
         original_cv = json.load(file_load)
 
@@ -1018,7 +1021,7 @@ def extract_cv_information(uploaded_pdf):
 
     json_file = json.loads(cleaned_response)
     # Save the result to the output file
-    output_filepath = "resume/resume.json"
+    output_filepath = var_resume_json
     with open(output_filepath, "w", encoding="utf-8") as file_save:
         json.dump(json_file, file_save, ensure_ascii=False, indent=4)
         print(f"Output saved to '{output_filepath}'.")
@@ -1378,10 +1381,8 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
 from docx.enum.style import WD_STYLE_TYPE
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
-# from docx2pdf import convert
 
 def split_into_sentences(text):
-    print("split_into_sentences line", 839)
     """Splits the text into sentences using punctuation."""
     print(text)
     sentences = re.split(r'(?<=[.!?])\s+', text.strip())
@@ -1399,7 +1400,6 @@ class CVGenerator:
         self.setup_styles()
         
     def setup_styles(self):
-        print("setup_styles line", 852)
         """Set up document styles."""
         styles = self.doc.styles
         
@@ -1430,7 +1430,6 @@ class CVGenerator:
         return paragraph
         
     def add_section_title(self, title):
-        print("add_section_title line", 883)
         """Add a section title with proper formatting."""
         # Add space before section
         spacing_para = self.doc.add_paragraph()
@@ -1442,7 +1441,6 @@ class CVGenerator:
         self.add_horizontal_line(paragraph)
         
     def add_horizontal_line(self, paragraph):
-        print("add_horizontal_line line", 895)
         """Add a horizontal line after a section title."""
         p = paragraph._p
         p_pr = p.get_or_add_pPr()
@@ -1454,7 +1452,6 @@ class CVGenerator:
         p_pr.append(bottom_border)
         
     def add_right_aligned_text(self, paragraph, text):
-        print("add_right_aligned_text line", 907)
         """Add right aligned text to a paragraph using tab stops."""
         paragraph.paragraph_format.tab_stops.clear_all()
         paragraph.paragraph_format.tab_stops.add_tab_stop(
@@ -1463,7 +1460,6 @@ class CVGenerator:
         paragraph.add_run('\t' + text)
         
     def fill_cv(self, data):
-        print("fill_cv line", 916)
         """Fill the CV with the provided data."""
         # Clear the document
         for paragraph in self.doc.paragraphs[:]:
@@ -1471,14 +1467,12 @@ class CVGenerator:
             p.getparent().remove(p)
             
         # Name
-        print("fill_cv line", 924)
         name_paragraph = self.doc.add_paragraph()
         name_text = data.get('personal_information', {}).get('name', '')
         name_run = name_paragraph.add_run(name_text)
         name_run.bold = True
         name_run.font.size = Pt(48)
 
-        print("fill_cv line", 931)
         # Contact information (including Social Media)
         personal_info = data.get('personal_information', {})
         address = personal_info.get('addres', '')
@@ -1487,18 +1481,15 @@ class CVGenerator:
         social_list = personal_info.get('social_media', [])
         social = ", ".join(social_list) if isinstance(social_list, list) else social_list
 
-        print("fill_cv line", 940)
         # Create a contact string that only includes non-empty fields
         contact_parts = [address, phone, email, social]
         contact = " | ".join([str(part) for part in contact_parts if part])
         
-        print("fill_cv line", 945)
         contact_paragraph = self.doc.add_paragraph()
         contact_paragraph.add_run(contact)
         contact_paragraph.paragraph_format.space_after = Pt(12)
         
         # Summary (justified)
-        print("fill_cv line", 951)
         self.add_section_title("Summary")
         summary_text = data.get('professional_summary', '')
         summary_para = self.doc.add_paragraph()
@@ -1507,7 +1498,6 @@ class CVGenerator:
         summary_para.paragraph_format.space_after = Pt(12)
         
         # Experience
-        print("fill_cv line", 960)
         self.add_section_title("Experience")
         for exp in data.get('work_experience', []):
             achievements = exp.get('achievement', [])
@@ -1529,7 +1519,6 @@ class CVGenerator:
             
             # Functions (bullet points, justified)
             functions_text = exp.get('achievement', '')
-            # functions = split_into_sentences(functions_text)
             functions = functions_text
             for function in functions:
                 if function.strip():
@@ -1538,7 +1527,6 @@ class CVGenerator:
                     bullet_para.paragraph_format.space_after = Pt(3)
                     
         # Education
-        print("fill_cv line", 986)
         self.add_section_title("Education")
         for edu in data.get('education', []):
             edu_para = self.doc.add_paragraph()
@@ -1554,7 +1542,6 @@ class CVGenerator:
             degree_para.paragraph_format.space_after = Pt(6)
             
         # Skills in columns
-        print("fill_cv line", 1003)
         self.add_section_title("Skills")
         skills_list = data.get('skills', [])  # Obtener la lista directamente
         skills = [skill.strip() for skill in skills_list if isinstance(skill, str)]
@@ -1566,7 +1553,6 @@ class CVGenerator:
         table = self.doc.add_table(rows=num_rows, cols=num_columns)
         table.autofit = True
         
-        print("fill_cv line", 1015)
         skill_index = 0
         for r in range(num_rows):
             row_cells = table.rows[r].cells
@@ -1600,12 +1586,6 @@ def generate_cv():
         generator.fill_cv(data)
         generator.save(output_path)
         print(f"Word CV generated successfully: {output_path}")
-        
-        # Convert the Word file to PDF
-        # pdf_output = os.path.splitext(output_path)[0] + ".pdf"
-        # convert(output_path, pdf_output)
-        # print(f"PDF CV generated successfully: {pdf_output}")
-        
         return True
         
     except Exception as e:
