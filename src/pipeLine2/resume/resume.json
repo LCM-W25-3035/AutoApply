@@ -1,0 +1,2613 @@
+{
+  "filename": "resume_sample_1.pdf",
+  "page_data": [
+    {
+      "page": 0,
+      "image_url": "https://images.nanonets.com/tr:rt-0/uploadedfiles/rawocr/764a92d8-4638-4d6d-81b6-005ad7e2ab0b-1.jpeg?ik-s=81d34784a44897ddbbf846c5f6f71290e09f2a7c&ik-t=1743649313",
+      "size": {
+        "width": 2550,
+        "height": 3300
+      },
+      "words": [
+        {
+          "text": "KANDACE",
+          "xmin": 523,
+          "ymin": 126,
+          "xmax": 1265,
+          "ymax": 228
+        },
+        {
+          "text": "LOUDOR",
+          "xmin": 1348,
+          "ymin": 127,
+          "xmax": 2012,
+          "ymax": 225
+        },
+        {
+          "text": "DATA",
+          "xmin": 1020,
+          "ymin": 294,
+          "xmax": 1185,
+          "ymax": 340
+        },
+        {
+          "text": "I",
+          "xmin": 1178,
+          "ymin": 304,
+          "xmax": 1180,
+          "ymax": 321
+        },
+        {
+          "text": "SCIENTIST",
+          "xmin": 1203,
+          "ymin": 294,
+          "xmax": 1542,
+          "ymax": 342
+        },
+        {
+          "text": "CONTACT",
+          "xmin": 427,
+          "ymin": 506,
+          "xmax": 735,
+          "ymax": 554
+        },
+        {
+          "text": "WORK",
+          "xmin": 886,
+          "ymin": 506,
+          "xmax": 1088,
+          "ymax": 552
+        },
+        {
+          "text": "EXPERIENCE",
+          "xmin": 1110,
+          "ymin": 506,
+          "xmax": 1513,
+          "ymax": 554
+        },
+        {
+          "text": "kloudor@email.com",
+          "xmin": 238,
+          "ymin": 602,
+          "xmax": 664,
+          "ymax": 640
+        },
+        {
+          "text": "/",
+          "xmin": 686,
+          "ymin": 607,
+          "xmax": 723,
+          "ymax": 630
+        },
+        {
+          "text": "Data",
+          "xmin": 890,
+          "ymin": 606,
+          "xmax": 1022,
+          "ymax": 654
+        },
+        {
+          "text": "Scientist",
+          "xmin": 1046,
+          "ymin": 604,
+          "xmax": 1297,
+          "ymax": 654
+        },
+        {
+          "text": "(123",
+          "xmin": 336,
+          "ymin": 672,
+          "xmax": 434,
+          "ymax": 706
+        },
+        {
+          "text": ")",
+          "xmin": 434,
+          "ymin": 673,
+          "xmax": 441,
+          "ymax": 704
+        },
+        {
+          "text": "456-7890",
+          "xmin": 457,
+          "ymin": 672,
+          "xmax": 664,
+          "ymax": 705
+        },
+        {
+          "text": "I",
+          "xmin": 686,
+          "ymin": 671,
+          "xmax": 735,
+          "ymax": 713
+        },
+        {
+          "text": "Grubhub",
+          "xmin": 887,
+          "ymin": 688,
+          "xmax": 1097,
+          "ymax": 728
+        },
+        {
+          "text": "Mount",
+          "xmin": 311,
+          "ymin": 741,
+          "xmax": 449,
+          "ymax": 775
+        },
+        {
+          "text": "Laurel.",
+          "xmin": 467,
+          "ymin": 739,
+          "xmax": 604,
+          "ymax": 775
+        },
+        {
+          "text": "NI",
+          "xmin": 626,
+          "ymin": 741,
+          "xmax": 665,
+          "ymax": 773
+        },
+        {
+          "text": "O",
+          "xmin": 692,
+          "ymin": 737,
+          "xmax": 724,
+          "ymax": 776
+        },
+        {
+          "text": "June",
+          "xmin": 882,
+          "ymin": 760,
+          "xmax": 985,
+          "ymax": 801
+        },
+        {
+          "text": "2018",
+          "xmin": 1002,
+          "ymin": 759,
+          "xmax": 1110,
+          "ymax": 798
+        },
+        {
+          "text": "|",
+          "xmin": 1127,
+          "ymin": 780,
+          "xmax": 1137,
+          "ymax": 784
+        },
+        {
+          "text": "current",
+          "xmin": 1156,
+          "ymin": 764,
+          "xmax": 1330,
+          "ymax": 798
+        },
+        {
+          "text": "/",
+          "xmin": 1359,
+          "ymin": 761,
+          "xmax": 1371,
+          "ymax": 791
+        },
+        {
+          "text": "Princeton,",
+          "xmin": 1405,
+          "ymin": 760,
+          "xmax": 1641,
+          "ymax": 798
+        },
+        {
+          "text": ",N",
+          "xmin": 1634,
+          "ymin": 761,
+          "xmax": 1697,
+          "ymax": 806
+        },
+        {
+          "text": "|",
+          "xmin": 1698,
+          "ymin": 768,
+          "xmax": 1698,
+          "ymax": 787
+        },
+        {
+          "text": "LinkedIn",
+          "xmin": 489,
+          "ymin": 808,
+          "xmax": 665,
+          "ymax": 844
+        },
+        {
+          "text": "in",
+          "xmin": 689,
+          "ymin": 809,
+          "xmax": 727,
+          "ymax": 847
+        },
+        {
+          "text": "Deployed",
+          "xmin": 992,
+          "ymin": 827,
+          "xmax": 1190,
+          "ymax": 874
+        },
+        {
+          "text": "a",
+          "xmin": 1209,
+          "ymin": 837,
+          "xmax": 1226,
+          "ymax": 862
+        },
+        {
+          "text": "recommendation",
+          "xmin": 1247,
+          "ymin": 827,
+          "xmax": 1612,
+          "ymax": 863
+        },
+        {
+          "text": "engine",
+          "xmin": 1631,
+          "ymin": 829,
+          "xmax": 1771,
+          "ymax": 872
+        },
+        {
+          "text": "to",
+          "xmin": 1786,
+          "ymin": 832,
+          "xmax": 1826,
+          "ymax": 863
+        },
+        {
+          "text": "production",
+          "xmin": 1844,
+          "ymin": 827,
+          "xmax": 2075,
+          "ymax": 870
+        },
+        {
+          "text": "to",
+          "xmin": 2092,
+          "ymin": 832,
+          "xmax": 2131,
+          "ymax": 862
+        },
+        {
+          "text": "Github",
+          "xmin": 524,
+          "ymin": 873,
+          "xmax": 666,
+          "ymax": 911
+        },
+        {
+          "text": "C",
+          "xmin": 687,
+          "ymin": 874,
+          "xmax": 724,
+          "ymax": 910
+        },
+        {
+          "text": "conditionally",
+          "xmin": 990,
+          "ymin": 867,
+          "xmax": 1263,
+          "ymax": 930
+        },
+        {
+          "text": "recommend",
+          "xmin": 1282,
+          "ymin": 883,
+          "xmax": 1537,
+          "ymax": 919
+        },
+        {
+          "text": "other",
+          "xmin": 1556,
+          "ymin": 883,
+          "xmax": 1669,
+          "ymax": 919
+        },
+        {
+          "text": "menu",
+          "xmin": 1685,
+          "ymin": 893,
+          "xmax": 1803,
+          "ymax": 919
+        },
+        {
+          "text": "items",
+          "xmin": 1822,
+          "ymin": 885,
+          "xmax": 1935,
+          "ymax": 919
+        },
+        {
+          "text": "based",
+          "xmin": 1954,
+          "ymin": 883,
+          "xmax": 2074,
+          "ymax": 919
+        },
+        {
+          "text": "on",
+          "xmin": 2093,
+          "ymin": 893,
+          "xmax": 2143,
+          "ymax": 919
+        },
+        {
+          "text": "past",
+          "xmin": 2163,
+          "ymin": 888,
+          "xmax": 2249,
+          "ymax": 927
+        },
+        {
+          "text": "order",
+          "xmin": 2265,
+          "ymin": 883,
+          "xmax": 2381,
+          "ymax": 919
+        },
+        {
+          "text": "history",
+          "xmin": 991,
+          "ymin": 936,
+          "xmax": 1135,
+          "ymax": 982
+        },
+        {
+          "text": "/",
+          "xmin": 1133,
+          "ymin": 946,
+          "xmax": 1144,
+          "ymax": 972
+        },
+        {
+          "text": "increasing",
+          "xmin": 1166,
+          "ymin": 928,
+          "xmax": 1381,
+          "ymax": 981
+        },
+        {
+          "text": "average",
+          "xmin": 1395,
+          "ymin": 946,
+          "xmax": 1561,
+          "ymax": 982
+        },
+        {
+          "text": "order",
+          "xmin": 1578,
+          "ymin": 936,
+          "xmax": 1694,
+          "ymax": 972
+        },
+        {
+          "text": "size",
+          "xmin": 1709,
+          "ymin": 938,
+          "xmax": 1786,
+          "ymax": 972
+        },
+        {
+          "text": "by",
+          "xmin": 1804,
+          "ymin": 936,
+          "xmax": 1851,
+          "ymax": 982
+        },
+        {
+          "text": "7%",
+          "xmin": 1868,
+          "ymin": 938,
+          "xmax": 1928,
+          "ymax": 969
+        },
+        {
+          "text": "Implemented",
+          "xmin": 992,
+          "ymin": 1002,
+          "xmax": 1271,
+          "ymax": 1046
+        },
+        {
+          "text": "various",
+          "xmin": 1288,
+          "ymin": 1004,
+          "xmax": 1445,
+          "ymax": 1037
+        },
+        {
+          "text": "time",
+          "xmin": 1461,
+          "ymin": 1004,
+          "xmax": 1555,
+          "ymax": 1037
+        },
+        {
+          "text": "series",
+          "xmin": 1570,
+          "ymin": 1004,
+          "xmax": 1691,
+          "ymax": 1037
+        },
+        {
+          "text": "EDUCATION",
+          "xmin": 346,
+          "ymin": 1037,
+          "xmax": 732,
+          "ymax": 1085
+        },
+        {
+          "text": "forecasting",
+          "xmin": 1708,
+          "ymin": 1002,
+          "xmax": 1943,
+          "ymax": 1048
+        },
+        {
+          "text": "techniques",
+          "xmin": 1958,
+          "ymin": 1003,
+          "xmax": 2188,
+          "ymax": 1044
+        },
+        {
+          "text": "to",
+          "xmin": 2205,
+          "ymin": 1007,
+          "xmax": 2243,
+          "ymax": 1036
+        },
+        {
+          "text": "predict",
+          "xmin": 991,
+          "ymin": 1045,
+          "xmax": 1136,
+          "ymax": 1100
+        },
+        {
+          "text": "surge",
+          "xmin": 1152,
+          "ymin": 1065,
+          "xmax": 1267,
+          "ymax": 1099
+        },
+        {
+          "text": "in",
+          "xmin": 1285,
+          "ymin": 1057,
+          "xmax": 1317,
+          "ymax": 1090
+        },
+        {
+          "text": "orders",
+          "xmin": 1337,
+          "ymin": 1056,
+          "xmax": 1473,
+          "ymax": 1091
+        },
+        {
+          "text": "X",
+          "xmin": 1472,
+          "ymin": 1067,
+          "xmax": 1481,
+          "ymax": 1089
+        },
+        {
+          "text": "lowering",
+          "xmin": 1504,
+          "ymin": 1056,
+          "xmax": 1686,
+          "ymax": 1102
+        },
+        {
+          "text": "customer",
+          "xmin": 1703,
+          "ymin": 1060,
+          "xmax": 1903,
+          "ymax": 1091
+        },
+        {
+          "text": "wait",
+          "xmin": 1916,
+          "ymin": 1049,
+          "xmax": 2006,
+          "ymax": 1091
+        },
+        {
+          "text": "by",
+          "xmin": 2022,
+          "ymin": 1056,
+          "xmax": 2069,
+          "ymax": 1099
+        },
+        {
+          "text": "10",
+          "xmin": 2088,
+          "ymin": 1049,
+          "xmax": 2136,
+          "ymax": 1091
+        },
+        {
+          "text": "minutes",
+          "xmin": 2157,
+          "ymin": 1057,
+          "xmax": 2327,
+          "ymax": 1091
+        },
+        {
+          "text": "B.S",
+          "xmin": 655,
+          "ymin": 1134,
+          "xmax": 718,
+          "ymax": 1172
+        },
+        {
+          "text": "Designed",
+          "xmin": 992,
+          "ymin": 1120,
+          "xmax": 1184,
+          "ymax": 1164
+        },
+        {
+          "text": "a",
+          "xmin": 1202,
+          "ymin": 1130,
+          "xmax": 1221,
+          "ymax": 1154
+        },
+        {
+          "text": "model",
+          "xmin": 1241,
+          "ymin": 1120,
+          "xmax": 1371,
+          "ymax": 1156
+        },
+        {
+          "text": "in",
+          "xmin": 1391,
+          "ymin": 1122,
+          "xmax": 1423,
+          "ymax": 1155
+        },
+        {
+          "text": "a",
+          "xmin": 1442,
+          "ymin": 1130,
+          "xmax": 1460,
+          "ymax": 1154
+        },
+        {
+          "text": "pilot",
+          "xmin": 1482,
+          "ymin": 1120,
+          "xmax": 1575,
+          "ymax": 1164
+        },
+        {
+          "text": "to",
+          "xmin": 1589,
+          "ymin": 1125,
+          "xmax": 1628,
+          "ymax": 1156
+        },
+        {
+          "text": "increase",
+          "xmin": 1647,
+          "ymin": 1122,
+          "xmax": 1820,
+          "ymax": 1156
+        },
+        {
+          "text": "incentives",
+          "xmin": 1838,
+          "ymin": 1122,
+          "xmax": 2048,
+          "ymax": 1156
+        },
+        {
+          "text": "for",
+          "xmin": 2064,
+          "ymin": 1120,
+          "xmax": 2124,
+          "ymax": 1156
+        },
+        {
+          "text": "drivers",
+          "xmin": 2140,
+          "ymin": 1121,
+          "xmax": 2285,
+          "ymax": 1156
+        },
+        {
+          "text": "Statistics",
+          "xmin": 524,
+          "ymin": 1206,
+          "xmax": 731,
+          "ymax": 1244
+        },
+        {
+          "text": "during",
+          "xmin": 990,
+          "ymin": 1164,
+          "xmax": 1127,
+          "ymax": 1224
+        },
+        {
+          "text": "peak",
+          "xmin": 1144,
+          "ymin": 1177,
+          "xmax": 1241,
+          "ymax": 1222
+        },
+        {
+          "text": "hours",
+          "xmin": 1260,
+          "ymin": 1177,
+          "xmax": 1380,
+          "ymax": 1213
+        },
+        {
+          "text": "X",
+          "xmin": 1378,
+          "ymin": 1189,
+          "xmax": 1389,
+          "ymax": 1212
+        },
+        {
+          "text": "increasing",
+          "xmin": 1410,
+          "ymin": 1179,
+          "xmax": 1625,
+          "ymax": 1224
+        },
+        {
+          "text": "driver",
+          "xmin": 1640,
+          "ymin": 1177,
+          "xmax": 1765,
+          "ymax": 1213
+        },
+        {
+          "text": "availability",
+          "xmin": 1780,
+          "ymin": 1177,
+          "xmax": 2007,
+          "ymax": 1221
+        },
+        {
+          "text": "by",
+          "xmin": 2025,
+          "ymin": 1177,
+          "xmax": 2073,
+          "ymax": 1224
+        },
+        {
+          "text": "22%",
+          "xmin": 2089,
+          "ymin": 1179,
+          "xmax": 2180,
+          "ymax": 1213
+        },
+        {
+          "text": "Led",
+          "xmin": 992,
+          "ymin": 1240,
+          "xmax": 1061,
+          "ymax": 1275
+        },
+        {
+          "text": "a",
+          "xmin": 1080,
+          "ymin": 1249,
+          "xmax": 1099,
+          "ymax": 1272
+        },
+        {
+          "text": "team",
+          "xmin": 1117,
+          "ymin": 1244,
+          "xmax": 1221,
+          "ymax": 1275
+        },
+        {
+          "text": "of",
+          "xmin": 1240,
+          "ymin": 1239,
+          "xmax": 1282,
+          "ymax": 1275
+        },
+        {
+          "text": "3",
+          "xmin": 1296,
+          "ymin": 1241,
+          "xmax": 1313,
+          "ymax": 1272
+        },
+        {
+          "text": "data",
+          "xmin": 1337,
+          "ymin": 1240,
+          "xmax": 1426,
+          "ymax": 1275
+        },
+        {
+          "text": "scientist",
+          "xmin": 1443,
+          "ymin": 1241,
+          "xmax": 1615,
+          "ymax": 1275
+        },
+        {
+          "text": "to",
+          "xmin": 1630,
+          "ymin": 1244,
+          "xmax": 1668,
+          "ymax": 1273
+        },
+        {
+          "text": "model",
+          "xmin": 1688,
+          "ymin": 1239,
+          "xmax": 1818,
+          "ymax": 1275
+        },
+        {
+          "text": "the",
+          "xmin": 1836,
+          "ymin": 1240,
+          "xmax": 1903,
+          "ymax": 1275
+        },
+        {
+          "text": "Rutgers",
+          "xmin": 305,
+          "ymin": 1276,
+          "xmax": 481,
+          "ymax": 1324
+        },
+        {
+          "text": "University",
+          "xmin": 501,
+          "ymin": 1276,
+          "xmax": 735,
+          "ymax": 1324
+        },
+        {
+          "text": "ordering",
+          "xmin": 1918,
+          "ymin": 1240,
+          "xmax": 2100,
+          "ymax": 1286
+        },
+        {
+          "text": "process",
+          "xmin": 2116,
+          "ymin": 1249,
+          "xmax": 2275,
+          "ymax": 1285
+        },
+        {
+          "text": "5",
+          "xmin": 2293,
+          "ymin": 1241,
+          "xmax": 2309,
+          "ymax": 1272
+        },
+        {
+          "text": "unique",
+          "xmin": 991,
+          "ymin": 1297,
+          "xmax": 1136,
+          "ymax": 1334
+        },
+        {
+          "text": "ways",
+          "xmin": 1151,
+          "ymin": 1305,
+          "xmax": 1258,
+          "ymax": 1339
+        },
+        {
+          "text": "|",
+          "xmin": 1258,
+          "ymin": 1323,
+          "xmax": 1264,
+          "ymax": 1329
+        },
+        {
+          "text": "reported",
+          "xmin": 1288,
+          "ymin": 1296,
+          "xmax": 1468,
+          "ymax": 1340
+        },
+        {
+          "text": "results",
+          "xmin": 1488,
+          "ymin": 1296,
+          "xmax": 1627,
+          "ymax": 1331
+        },
+        {
+          "text": ",",
+          "xmin": 1626,
+          "ymin": 1308,
+          "xmax": 1633,
+          "ymax": 1329
+        },
+        {
+          "text": "and",
+          "xmin": 1656,
+          "ymin": 1296,
+          "xmax": 1731,
+          "ymax": 1331
+        },
+        {
+          "text": "made",
+          "xmin": 1750,
+          "ymin": 1296,
+          "xmax": 1868,
+          "ymax": 1331
+        },
+        {
+          "text": "recommendations",
+          "xmin": 1885,
+          "ymin": 1296,
+          "xmax": 2273,
+          "ymax": 1331
+        },
+        {
+          "text": "to",
+          "xmin": 2289,
+          "ymin": 1300,
+          "xmax": 2329,
+          "ymax": 1331
+        },
+        {
+          "text": "September",
+          "xmin": 108,
+          "ymin": 1343,
+          "xmax": 339,
+          "ymax": 1386
+        },
+        {
+          "text": "2011",
+          "xmin": 355,
+          "ymin": 1344,
+          "xmax": 454,
+          "ymax": 1378
+        },
+        {
+          "text": "|",
+          "xmin": 480,
+          "ymin": 1363,
+          "xmax": 490,
+          "ymax": 1366
+        },
+        {
+          "text": "April",
+          "xmin": 507,
+          "ymin": 1343,
+          "xmax": 605,
+          "ymax": 1386
+        },
+        {
+          "text": "2015",
+          "xmin": 624,
+          "ymin": 1344,
+          "xmax": 728,
+          "ymax": 1378
+        },
+        {
+          "text": "increase",
+          "xmin": 991,
+          "ymin": 1354,
+          "xmax": 1164,
+          "ymax": 1388
+        },
+        {
+          "text": "order",
+          "xmin": 1181,
+          "ymin": 1353,
+          "xmax": 1296,
+          "ymax": 1388
+        },
+        {
+          "text": "output",
+          "xmin": 1312,
+          "ymin": 1357,
+          "xmax": 1452,
+          "ymax": 1393
+        },
+        {
+          "text": "by",
+          "xmin": 1469,
+          "ymin": 1353,
+          "xmax": 1516,
+          "ymax": 1397
+        },
+        {
+          "text": "9%",
+          "xmin": 1534,
+          "ymin": 1354,
+          "xmax": 1594,
+          "ymax": 1388
+        },
+        {
+          "text": "New",
+          "xmin": 333,
+          "ymin": 1410,
+          "xmax": 421,
+          "ymax": 1444
+        },
+        {
+          "text": "Brunswick",
+          "xmin": 442,
+          "ymin": 1408,
+          "xmax": 660,
+          "ymax": 1444
+        },
+        {
+          "text": "|",
+          "xmin": 666,
+          "ymin": 1439,
+          "xmax": 669,
+          "ymax": 1440
+        },
+        {
+          "text": "N",
+          "xmin": 692,
+          "ymin": 1410,
+          "xmax": 718,
+          "ymax": 1441
+        },
+        {
+          "text": "Data",
+          "xmin": 890,
+          "ymin": 1478,
+          "xmax": 1022,
+          "ymax": 1526
+        },
+        {
+          "text": "Scientist",
+          "xmin": 1046,
+          "ymin": 1476,
+          "xmax": 1297,
+          "ymax": 1526
+        },
+        {
+          "text": "SKILLS",
+          "xmin": 509,
+          "ymin": 1569,
+          "xmax": 732,
+          "ymax": 1616
+        },
+        {
+          "text": "Spectrix",
+          "xmin": 887,
+          "ymin": 1562,
+          "xmax": 1076,
+          "ymax": 1607
+        },
+        {
+          "text": "Analytical",
+          "xmin": 1088,
+          "ymin": 1560,
+          "xmax": 1310,
+          "ymax": 1607
+        },
+        {
+          "text": "Services",
+          "xmin": 1328,
+          "ymin": 1562,
+          "xmax": 1514,
+          "ymax": 1601
+        },
+        {
+          "text": "Python",
+          "xmin": 208,
+          "ymin": 1661,
+          "xmax": 352,
+          "ymax": 1705
+        },
+        {
+          "text": "NumPy",
+          "xmin": 377,
+          "ymin": 1663,
+          "xmax": 542,
+          "ymax": 1706
+        },
+        {
+          "text": "Pandas",
+          "xmin": 570,
+          "ymin": 1661,
+          "xmax": 720,
+          "ymax": 1697
+        },
+        {
+          "text": "March",
+          "xmin": 889,
+          "ymin": 1632,
+          "xmax": 1030,
+          "ymax": 1672
+        },
+        {
+          "text": "2016",
+          "xmin": 1048,
+          "ymin": 1634,
+          "xmax": 1158,
+          "ymax": 1672
+        },
+        {
+          "text": "5-",
+          "xmin": 1150,
+          "ymin": 1634,
+          "xmax": 1185,
+          "ymax": 1663
+        },
+        {
+          "text": "(",
+          "xmin": 370,
+          "ymin": 1663,
+          "xmax": 380,
+          "ymax": 1691
+        },
+        {
+          "text": "June",
+          "xmin": 1197,
+          "ymin": 1635,
+          "xmax": 1302,
+          "ymax": 1677
+        },
+        {
+          "text": "2018",
+          "xmin": 1318,
+          "ymin": 1634,
+          "xmax": 1427,
+          "ymax": 1672
+        },
+        {
+          "text": "/",
+          "xmin": 1456,
+          "ymin": 1636,
+          "xmax": 1469,
+          "ymax": 1665
+        },
+        {
+          "text": "|",
+          "xmin": 538,
+          "ymin": 1673,
+          "xmax": 548,
+          "ymax": 1695
+        },
+        {
+          "text": "Princeton",
+          "xmin": 1501,
+          "ymin": 1634,
+          "xmax": 1732,
+          "ymax": 1678
+        },
+        {
+          "text": "N",
+          "xmin": 1758,
+          "ymin": 1635,
+          "xmax": 1794,
+          "ymax": 1676
+        },
+        {
+          "text": "|",
+          "xmin": 1795,
+          "ymin": 1642,
+          "xmax": 1795,
+          "ymax": 1661
+        },
+        {
+          "text": "|",
+          "xmin": 1732,
+          "ymin": 1666,
+          "xmax": 1734,
+          "ymax": 1669
+        },
+        {
+          "text": "Scikit-learn",
+          "xmin": 208,
+          "ymin": 1717,
+          "xmax": 439,
+          "ymax": 1753
+        },
+        {
+          "text": "Keras",
+          "xmin": 472,
+          "ymin": 1719,
+          "xmax": 585,
+          "ymax": 1753
+        },
+        {
+          "text": ",",
+          "xmin": 585,
+          "ymin": 1730,
+          "xmax": 591,
+          "ymax": 1752
+        },
+        {
+          "text": "Flask",
+          "xmin": 617,
+          "ymin": 1717,
+          "xmax": 719,
+          "ymax": 1753
+        },
+        {
+          "text": ")",
+          "xmin": 724,
+          "ymin": 1719,
+          "xmax": 731,
+          "ymax": 1749
+        },
+        {
+          "text": "Built",
+          "xmin": 992,
+          "ymin": 1698,
+          "xmax": 1086,
+          "ymax": 1734
+        },
+        {
+          "text": "a",
+          "xmin": 1102,
+          "ymin": 1708,
+          "xmax": 1120,
+          "ymax": 1731
+        },
+        {
+          "text": "customer",
+          "xmin": 1140,
+          "ymin": 1703,
+          "xmax": 1339,
+          "ymax": 1734
+        },
+        {
+          "text": "attrition",
+          "xmin": 1355,
+          "ymin": 1700,
+          "xmax": 1521,
+          "ymax": 1732
+        },
+        {
+          "text": "random",
+          "xmin": 1541,
+          "ymin": 1698,
+          "xmax": 1703,
+          "ymax": 1734
+        },
+        {
+          "text": "forest",
+          "xmin": 1723,
+          "ymin": 1698,
+          "xmax": 1847,
+          "ymax": 1734
+        },
+        {
+          "text": "model",
+          "xmin": 1863,
+          "ymin": 1698,
+          "xmax": 1993,
+          "ymax": 1734
+        },
+        {
+          "text": "that",
+          "xmin": 2011,
+          "ymin": 1698,
+          "xmax": 2094,
+          "ymax": 1734
+        },
+        {
+          "text": "|",
+          "xmin": 440,
+          "ymin": 1736,
+          "xmax": 447,
+          "ymax": 1749
+        },
+        {
+          "text": "improved",
+          "xmin": 2110,
+          "ymin": 1698,
+          "xmax": 2312,
+          "ymax": 1742
+        },
+        {
+          "text": "SQL",
+          "xmin": 246,
+          "ymin": 1782,
+          "xmax": 329,
+          "ymax": 1819
+        },
+        {
+          "text": "(",
+          "xmin": 345,
+          "ymin": 1782,
+          "xmax": 355,
+          "ymax": 1815
+        },
+        {
+          "text": "MySQL,",
+          "xmin": 354,
+          "ymin": 1782,
+          "xmax": 520,
+          "ymax": 1826
+        },
+        {
+          "text": "Postgres",
+          "xmin": 542,
+          "ymin": 1782,
+          "xmax": 721,
+          "ymax": 1825
+        },
+        {
+          "text": ")",
+          "xmin": 721,
+          "ymin": 1784,
+          "xmax": 731,
+          "ymax": 1814
+        },
+        {
+          "text": "monthly",
+          "xmin": 991,
+          "ymin": 1755,
+          "xmax": 1166,
+          "ymax": 1802
+        },
+        {
+          "text": "retention",
+          "xmin": 1185,
+          "ymin": 1757,
+          "xmax": 1375,
+          "ymax": 1791
+        },
+        {
+          "text": "by",
+          "xmin": 1394,
+          "ymin": 1755,
+          "xmax": 1441,
+          "ymax": 1801
+        },
+        {
+          "text": "12",
+          "xmin": 1461,
+          "ymin": 1757,
+          "xmax": 1508,
+          "ymax": 1790
+        },
+        {
+          "text": "basis",
+          "xmin": 1529,
+          "ymin": 1755,
+          "xmax": 1633,
+          "ymax": 1790
+        },
+        {
+          "text": "points",
+          "xmin": 1650,
+          "ymin": 1757,
+          "xmax": 1780,
+          "ymax": 1801
+        },
+        {
+          "text": "for",
+          "xmin": 1795,
+          "ymin": 1755,
+          "xmax": 1856,
+          "ymax": 1790
+        },
+        {
+          "text": "clients",
+          "xmin": 1871,
+          "ymin": 1755,
+          "xmax": 2003,
+          "ymax": 1791
+        },
+        {
+          "text": "likely",
+          "xmin": 2022,
+          "ymin": 1755,
+          "xmax": 2129,
+          "ymax": 1801
+        },
+        {
+          "text": "to",
+          "xmin": 2145,
+          "ymin": 1760,
+          "xmax": 2185,
+          "ymax": 1790
+        },
+        {
+          "text": "opt-out",
+          "xmin": 2203,
+          "ymin": 1760,
+          "xmax": 2358,
+          "ymax": 1799
+        },
+        {
+          "text": "by",
+          "xmin": 991,
+          "ymin": 1811,
+          "xmax": 1038,
+          "ymax": 1856
+        },
+        {
+          "text": "providing",
+          "xmin": 1057,
+          "ymin": 1802,
+          "xmax": 1259,
+          "ymax": 1858
+        },
+        {
+          "text": "relevant",
+          "xmin": 1275,
+          "ymin": 1811,
+          "xmax": 1446,
+          "ymax": 1847
+        },
+        {
+          "text": "product",
+          "xmin": 1463,
+          "ymin": 1811,
+          "xmax": 1628,
+          "ymax": 1856
+        },
+        {
+          "text": "features",
+          "xmin": 1642,
+          "ymin": 1811,
+          "xmax": 1813,
+          "ymax": 1847
+        },
+        {
+          "text": "for",
+          "xmin": 1830,
+          "ymin": 1811,
+          "xmax": 1890,
+          "ymax": 1847
+        },
+        {
+          "text": "them",
+          "xmin": 1905,
+          "ymin": 1811,
+          "xmax": 2009,
+          "ymax": 1847
+        },
+        {
+          "text": "Git",
+          "xmin": 674,
+          "ymin": 1847,
+          "xmax": 732,
+          "ymax": 1879
+        },
+        {
+          "text": "Coordinated",
+          "xmin": 990,
+          "ymin": 1873,
+          "xmax": 1250,
+          "ymax": 1909
+        },
+        {
+          "text": "with",
+          "xmin": 1267,
+          "ymin": 1873,
+          "xmax": 1355,
+          "ymax": 1909
+        },
+        {
+          "text": "the",
+          "xmin": 1373,
+          "ymin": 1873,
+          "xmax": 1440,
+          "ymax": 1909
+        },
+        {
+          "text": "Time",
+          "xmin": 228,
+          "ymin": 1913,
+          "xmax": 332,
+          "ymax": 1946
+        },
+        {
+          "text": "Series",
+          "xmin": 349,
+          "ymin": 1913,
+          "xmax": 473,
+          "ymax": 1947
+        },
+        {
+          "text": "product",
+          "xmin": 1457,
+          "ymin": 1873,
+          "xmax": 1622,
+          "ymax": 1917
+        },
+        {
+          "text": "and",
+          "xmin": 1636,
+          "ymin": 1873,
+          "xmax": 1712,
+          "ymax": 1909
+        },
+        {
+          "text": "marketing",
+          "xmin": 1732,
+          "ymin": 1873,
+          "xmax": 1945,
+          "ymax": 1920
+        },
+        {
+          "text": "teams",
+          "xmin": 1961,
+          "ymin": 1878,
+          "xmax": 2089,
+          "ymax": 1909
+        },
+        {
+          "text": "to",
+          "xmin": 2105,
+          "ymin": 1878,
+          "xmax": 2144,
+          "ymax": 1909
+        },
+        {
+          "text": "determine",
+          "xmin": 2162,
+          "ymin": 1873,
+          "xmax": 2380,
+          "ymax": 1909
+        },
+        {
+          "text": "Forecasting",
+          "xmin": 492,
+          "ymin": 1913,
+          "xmax": 734,
+          "ymax": 1958
+        },
+        {
+          "text": "what",
+          "xmin": 988,
+          "ymin": 1930,
+          "xmax": 1094,
+          "ymax": 1966
+        },
+        {
+          "text": "kind",
+          "xmin": 1110,
+          "ymin": 1930,
+          "xmax": 1196,
+          "ymax": 1966
+        },
+        {
+          "text": "of",
+          "xmin": 1215,
+          "ymin": 1930,
+          "xmax": 1257,
+          "ymax": 1966
+        },
+        {
+          "text": "client",
+          "xmin": 1271,
+          "ymin": 1931,
+          "xmax": 1383,
+          "ymax": 1966
+        },
+        {
+          "text": "interactions",
+          "xmin": 1400,
+          "ymin": 1932,
+          "xmax": 1649,
+          "ymax": 1966
+        },
+        {
+          "text": "resulted",
+          "xmin": 1666,
+          "ymin": 1930,
+          "xmax": 1834,
+          "ymax": 1966
+        },
+        {
+          "text": "in",
+          "xmin": 1854,
+          "ymin": 1932,
+          "xmax": 1884,
+          "ymax": 1964
+        },
+        {
+          "text": "maximized",
+          "xmin": 1907,
+          "ymin": 1931,
+          "xmax": 2137,
+          "ymax": 1966
+        },
+        {
+          "text": "service",
+          "xmin": 2155,
+          "ymin": 1932,
+          "xmax": 2303,
+          "ymax": 1966
+        },
+        {
+          "text": "Productionizing",
+          "xmin": 230,
+          "ymin": 1973,
+          "xmax": 561,
+          "ymax": 2020
+        },
+        {
+          "text": "Models",
+          "xmin": 580,
+          "ymin": 1973,
+          "xmax": 733,
+          "ymax": 2009
+        },
+        {
+          "text": "opt-ins",
+          "xmin": 990,
+          "ymin": 1988,
+          "xmax": 1136,
+          "ymax": 2026
+        },
+        {
+          "text": "|",
+          "xmin": 1136,
+          "ymin": 2014,
+          "xmax": 1143,
+          "ymax": 2020
+        },
+        {
+          "text": "increasing",
+          "xmin": 1166,
+          "ymin": 1988,
+          "xmax": 1380,
+          "ymax": 2033
+        },
+        {
+          "text": "conversions",
+          "xmin": 1396,
+          "ymin": 1988,
+          "xmax": 1651,
+          "ymax": 2022
+        },
+        {
+          "text": "by",
+          "xmin": 1669,
+          "ymin": 1986,
+          "xmax": 1716,
+          "ymax": 2031
+        },
+        {
+          "text": "18%",
+          "xmin": 1736,
+          "ymin": 1988,
+          "xmax": 1823,
+          "ymax": 2021
+        },
+        {
+          "text": "Recommendation",
+          "xmin": 179,
+          "ymin": 2039,
+          "xmax": 553,
+          "ymax": 2075
+        },
+        {
+          "text": "Engines",
+          "xmin": 573,
+          "ymin": 2041,
+          "xmax": 733,
+          "ymax": 2086
+        },
+        {
+          "text": "Partnered",
+          "xmin": 992,
+          "ymin": 2048,
+          "xmax": 1196,
+          "ymax": 2084
+        },
+        {
+          "text": "with",
+          "xmin": 1214,
+          "ymin": 2048,
+          "xmax": 1303,
+          "ymax": 2084
+        },
+        {
+          "text": "product",
+          "xmin": 1322,
+          "ymin": 2049,
+          "xmax": 1487,
+          "ymax": 2092
+        },
+        {
+          "text": "team",
+          "xmin": 1502,
+          "ymin": 2053,
+          "xmax": 1602,
+          "ymax": 2084
+        },
+        {
+          "text": "to",
+          "xmin": 1623,
+          "ymin": 2053,
+          "xmax": 1661,
+          "ymax": 2084
+        },
+        {
+          "text": "create",
+          "xmin": 1681,
+          "ymin": 2053,
+          "xmax": 1808,
+          "ymax": 2084
+        },
+        {
+          "text": "a",
+          "xmin": 1824,
+          "ymin": 2058,
+          "xmax": 1842,
+          "ymax": 2082
+        },
+        {
+          "text": "production",
+          "xmin": 1863,
+          "ymin": 2048,
+          "xmax": 2093,
+          "ymax": 2090
+        },
+        {
+          "text": "Customer",
+          "xmin": 218,
+          "ymin": 2107,
+          "xmax": 425,
+          "ymax": 2141
+        },
+        {
+          "text": "Segmentation",
+          "xmin": 440,
+          "ymin": 2107,
+          "xmax": 731,
+          "ymax": 2152
+        },
+        {
+          "text": "recommendation",
+          "xmin": 991,
+          "ymin": 2105,
+          "xmax": 1355,
+          "ymax": 2141
+        },
+        {
+          "text": "engine",
+          "xmin": 1374,
+          "ymin": 2107,
+          "xmax": 1515,
+          "ymax": 2152
+        },
+        {
+          "text": "in",
+          "xmin": 1532,
+          "ymin": 2107,
+          "xmax": 1565,
+          "ymax": 2141
+        },
+        {
+          "text": "Python",
+          "xmin": 1586,
+          "ymin": 2105,
+          "xmax": 1731,
+          "ymax": 2149
+        },
+        {
+          "text": "that",
+          "xmin": 1748,
+          "ymin": 2105,
+          "xmax": 1831,
+          "ymax": 2141
+        },
+        {
+          "text": "improved",
+          "xmin": 1847,
+          "ymin": 2105,
+          "xmax": 2050,
+          "ymax": 2150
+        },
+        {
+          "text": "the",
+          "xmin": 2067,
+          "ymin": 2105,
+          "xmax": 2133,
+          "ymax": 2141
+        },
+        {
+          "text": "length",
+          "xmin": 2150,
+          "ymin": 2105,
+          "xmax": 2278,
+          "ymax": 2151
+        },
+        {
+          "text": "on",
+          "xmin": 2296,
+          "ymin": 2115,
+          "xmax": 2345,
+          "ymax": 2141
+        },
+        {
+          "text": "n-",
+          "xmin": 2336,
+          "ymin": 2115,
+          "xmax": 2364,
+          "ymax": 2136
+        },
+        {
+          "text": "AWS",
+          "xmin": 635,
+          "ymin": 2169,
+          "xmax": 731,
+          "ymax": 2203
+        },
+        {
+          "text": "page",
+          "xmin": 991,
+          "ymin": 2168,
+          "xmax": 1089,
+          "ymax": 2205
+        },
+        {
+          "text": "for",
+          "xmin": 1105,
+          "ymin": 2158,
+          "xmax": 1164,
+          "ymax": 2194
+        },
+        {
+          "text": "users",
+          "xmin": 1182,
+          "ymin": 2168,
+          "xmax": 1292,
+          "ymax": 2194
+        },
+        {
+          "text": "with",
+          "xmin": 1307,
+          "ymin": 2158,
+          "xmax": 1396,
+          "ymax": 2194
+        },
+        {
+          "text": "$225K",
+          "xmin": 1415,
+          "ymin": 2152,
+          "xmax": 1553,
+          "ymax": 2195
+        },
+        {
+          "text": "t",
+          "xmin": 1548,
+          "ymin": 2161,
+          "xmax": 1552,
+          "ymax": 2167
+        },
+        {
+          "text": "in",
+          "xmin": 1569,
+          "ymin": 2160,
+          "xmax": 1601,
+          "ymax": 2194
+        },
+        {
+          "text": "incremental",
+          "xmin": 1613,
+          "ymin": 2152,
+          "xmax": 1871,
+          "ymax": 2194
+        },
+        {
+          "text": "annual",
+          "xmin": 1890,
+          "ymin": 2159,
+          "xmax": 2030,
+          "ymax": 2194
+        },
+        {
+          "text": "revenue",
+          "xmin": 2050,
+          "ymin": 2168,
+          "xmax": 2221,
+          "ymax": 2194
+        },
+        {
+          "text": "Compiled",
+          "xmin": 990,
+          "ymin": 2224,
+          "xmax": 1190,
+          "ymax": 2266
+        },
+        {
+          "text": "and",
+          "xmin": 1208,
+          "ymin": 2224,
+          "xmax": 1284,
+          "ymax": 2259
+        },
+        {
+          "text": "analyzed",
+          "xmin": 1302,
+          "ymin": 2224,
+          "xmax": 1486,
+          "ymax": 2267
+        },
+        {
+          "text": "data",
+          "xmin": 1506,
+          "ymin": 2224,
+          "xmax": 1594,
+          "ymax": 2259
+        },
+        {
+          "text": "surrounding",
+          "xmin": 1611,
+          "ymin": 2224,
+          "xmax": 1875,
+          "ymax": 2270
+        },
+        {
+          "text": "the",
+          "xmin": 1889,
+          "ymin": 2224,
+          "xmax": 1955,
+          "ymax": 2259
+        },
+        {
+          "text": "prototypes",
+          "xmin": 1972,
+          "ymin": 2228,
+          "xmax": 2200,
+          "ymax": 2267
+        },
+        {
+          "text": "for",
+          "xmin": 2217,
+          "ymin": 2223,
+          "xmax": 2278,
+          "ymax": 2259
+        },
+        {
+          "text": "a",
+          "xmin": 2275,
+          "ymin": 2233,
+          "xmax": 2313,
+          "ymax": 2259
+        },
+        {
+          "text": "prosthesis,",
+          "xmin": 991,
+          "ymin": 2280,
+          "xmax": 1217,
+          "ymax": 2324
+        },
+        {
+          "text": "which",
+          "xmin": 1235,
+          "ymin": 2280,
+          "xmax": 1359,
+          "ymax": 2316
+        },
+        {
+          "text": "saved",
+          "xmin": 1377,
+          "ymin": 2280,
+          "xmax": 1496,
+          "ymax": 2316
+        },
+        {
+          "text": "over",
+          "xmin": 1515,
+          "ymin": 2290,
+          "xmax": 1608,
+          "ymax": 2316
+        },
+        {
+          "text": "$1",
+          "xmin": 1624,
+          "ymin": 2281,
+          "xmax": 1667,
+          "ymax": 2316
+        },
+        {
+          "text": "1M",
+          "xmin": 1661,
+          "ymin": 2282,
+          "xmax": 1714,
+          "ymax": 2315
+        },
+        {
+          "text": "in",
+          "xmin": 1738,
+          "ymin": 2282,
+          "xmax": 1768,
+          "ymax": 2315
+        },
+        {
+          "text": "its",
+          "xmin": 1791,
+          "ymin": 2282,
+          "xmax": 1835,
+          "ymax": 2315
+        },
+        {
+          "text": "creation",
+          "xmin": 1853,
+          "ymin": 2282,
+          "xmax": 2020,
+          "ymax": 2316
+        },
+        {
+          "text": "Entry-Level",
+          "xmin": 890,
+          "ymin": 2403,
+          "xmax": 1224,
+          "ymax": 2469
+        },
+        {
+          "text": "Data",
+          "xmin": 1249,
+          "ymin": 2406,
+          "xmax": 1382,
+          "ymax": 2454
+        },
+        {
+          "text": "Analyst",
+          "xmin": 1404,
+          "ymin": 2403,
+          "xmax": 1625,
+          "ymax": 2464
+        },
+        {
+          "text": "Avenica",
+          "xmin": 885,
+          "ymin": 2490,
+          "xmax": 1061,
+          "ymax": 2529
+        },
+        {
+          "text": "April",
+          "xmin": 885,
+          "ymin": 2561,
+          "xmax": 991,
+          "ymax": 2608
+        },
+        {
+          "text": "2015",
+          "xmin": 1008,
+          "ymin": 2562,
+          "xmax": 1115,
+          "ymax": 2600
+        },
+        {
+          "text": "|",
+          "xmin": 1134,
+          "ymin": 2583,
+          "xmax": 1142,
+          "ymax": 2586
+        },
+        {
+          "text": "March",
+          "xmin": 1164,
+          "ymin": 2560,
+          "xmax": 1305,
+          "ymax": 2600
+        },
+        {
+          "text": "2016",
+          "xmin": 1323,
+          "ymin": 2562,
+          "xmax": 1432,
+          "ymax": 2600
+        },
+        {
+          "text": "/",
+          "xmin": 1463,
+          "ymin": 2564,
+          "xmax": 1474,
+          "ymax": 2593
+        },
+        {
+          "text": "Mount",
+          "xmin": 1508,
+          "ymin": 2563,
+          "xmax": 1657,
+          "ymax": 2601
+        },
+        {
+          "text": "Laurel.",
+          "xmin": 1676,
+          "ymin": 2560,
+          "xmax": 1828,
+          "ymax": 2600
+        },
+        {
+          "text": "NJ",
+          "xmin": 1848,
+          "ymin": 2563,
+          "xmax": 1887,
+          "ymax": 2605
+        },
+        {
+          "text": "|",
+          "xmin": 1887,
+          "ymin": 2570,
+          "xmax": 1887,
+          "ymax": 2592
+        },
+        {
+          "text": "|",
+          "xmin": 933,
+          "ymin": 2642,
+          "xmax": 943,
+          "ymax": 2653
+        },
+        {
+          "text": "Collaborated",
+          "xmin": 990,
+          "ymin": 2630,
+          "xmax": 1259,
+          "ymax": 2666
+        },
+        {
+          "text": "with",
+          "xmin": 1276,
+          "ymin": 2630,
+          "xmax": 1365,
+          "ymax": 2666
+        },
+        {
+          "text": "product",
+          "xmin": 1385,
+          "ymin": 2630,
+          "xmax": 1550,
+          "ymax": 2675
+        },
+        {
+          "text": "managers",
+          "xmin": 1566,
+          "ymin": 2640,
+          "xmax": 1773,
+          "ymax": 2677
+        },
+        {
+          "text": "to",
+          "xmin": 1789,
+          "ymin": 2635,
+          "xmax": 1829,
+          "ymax": 2666
+        },
+        {
+          "text": "perform",
+          "xmin": 1847,
+          "ymin": 2630,
+          "xmax": 2016,
+          "ymax": 2675
+        },
+        {
+          "text": "cohort",
+          "xmin": 2037,
+          "ymin": 2630,
+          "xmax": 2174,
+          "ymax": 2666
+        },
+        {
+          "text": "analysis",
+          "xmin": 2189,
+          "ymin": 2630,
+          "xmax": 2358,
+          "ymax": 2677
+        },
+        {
+          "text": "that",
+          "xmin": 989,
+          "ymin": 2683,
+          "xmax": 1071,
+          "ymax": 2718
+        },
+        {
+          "text": "identified",
+          "xmin": 1088,
+          "ymin": 2683,
+          "xmax": 1282,
+          "ymax": 2718
+        },
+        {
+          "text": "an",
+          "xmin": 1302,
+          "ymin": 2693,
+          "xmax": 1350,
+          "ymax": 2719
+        },
+        {
+          "text": "opportunity",
+          "xmin": 1368,
+          "ymin": 2685,
+          "xmax": 1619,
+          "ymax": 2729
+        },
+        {
+          "text": "to",
+          "xmin": 1636,
+          "ymin": 2688,
+          "xmax": 1674,
+          "ymax": 2719
+        },
+        {
+          "text": "reduce",
+          "xmin": 1690,
+          "ymin": 2676,
+          "xmax": 1836,
+          "ymax": 2718
+        },
+        {
+          "text": "pricing",
+          "xmin": 1854,
+          "ymin": 2685,
+          "xmax": 1996,
+          "ymax": 2729
+        },
+        {
+          "text": "by",
+          "xmin": 2013,
+          "ymin": 2683,
+          "xmax": 2060,
+          "ymax": 2730
+        },
+        {
+          "text": "21",
+          "xmin": 2077,
+          "ymin": 2685,
+          "xmax": 2120,
+          "ymax": 2717
+        },
+        {
+          "text": "1%",
+          "xmin": 2112,
+          "ymin": 2685,
+          "xmax": 2168,
+          "ymax": 2718
+        },
+        {
+          "text": "for",
+          "xmin": 2183,
+          "ymin": 2683,
+          "xmax": 2243,
+          "ymax": 2718
+        },
+        {
+          "text": "a",
+          "xmin": 2258,
+          "ymin": 2693,
+          "xmax": 2275,
+          "ymax": 2716
+        },
+        {
+          "text": "segment",
+          "xmin": 989,
+          "ymin": 2744,
+          "xmax": 1172,
+          "ymax": 2786
+        },
+        {
+          "text": "of",
+          "xmin": 1187,
+          "ymin": 2739,
+          "xmax": 1230,
+          "ymax": 2775
+        },
+        {
+          "text": "users",
+          "xmin": 1244,
+          "ymin": 2749,
+          "xmax": 1355,
+          "ymax": 2775
+        },
+        {
+          "text": "to",
+          "xmin": 1370,
+          "ymin": 2744,
+          "xmax": 1409,
+          "ymax": 2775
+        },
+        {
+          "text": "boost",
+          "xmin": 1429,
+          "ymin": 2739,
+          "xmax": 1546,
+          "ymax": 2775
+        },
+        {
+          "text": "yearly",
+          "xmin": 1560,
+          "ymin": 2739,
+          "xmax": 1687,
+          "ymax": 2783
+        },
+        {
+          "text": "revenue",
+          "xmin": 1707,
+          "ymin": 2749,
+          "xmax": 1878,
+          "ymax": 2775
+        },
+        {
+          "text": "by",
+          "xmin": 1894,
+          "ymin": 2739,
+          "xmax": 1941,
+          "ymax": 2784
+        },
+        {
+          "text": "$560.000",
+          "xmin": 1959,
+          "ymin": 2730,
+          "xmax": 2162,
+          "ymax": 2775
+        },
+        {
+          "text": "Constructed",
+          "xmin": 990,
+          "ymin": 2803,
+          "xmax": 1243,
+          "ymax": 2838
+        },
+        {
+          "text": "operational",
+          "xmin": 1262,
+          "ymin": 2802,
+          "xmax": 1502,
+          "ymax": 2845
+        },
+        {
+          "text": "reporting",
+          "xmin": 1522,
+          "ymin": 2804,
+          "xmax": 1717,
+          "ymax": 2847
+        },
+        {
+          "text": "in",
+          "xmin": 1735,
+          "ymin": 2804,
+          "xmax": 1766,
+          "ymax": 2838
+        },
+        {
+          "text": "Tableau",
+          "xmin": 1784,
+          "ymin": 2802,
+          "xmax": 1950,
+          "ymax": 2838
+        },
+        {
+          "text": "to",
+          "xmin": 1967,
+          "ymin": 2807,
+          "xmax": 2007,
+          "ymax": 2838
+        },
+        {
+          "text": "improve",
+          "xmin": 2025,
+          "ymin": 2804,
+          "xmax": 2202,
+          "ymax": 2845
+        },
+        {
+          "text": "scheduling",
+          "xmin": 989,
+          "ymin": 2858,
+          "xmax": 1217,
+          "ymax": 2904
+        },
+        {
+          "text": "contractors",
+          "xmin": 1234,
+          "ymin": 2863,
+          "xmax": 1473,
+          "ymax": 2894
+        },
+        {
+          "text": "S.",
+          "xmin": 1470,
+          "ymin": 2869,
+          "xmax": 1482,
+          "ymax": 2892
+        },
+        {
+          "text": "saving",
+          "xmin": 1502,
+          "ymin": 2860,
+          "xmax": 1636,
+          "ymax": 2904
+        },
+        {
+          "text": "$90,000",
+          "xmin": 1653,
+          "ymin": 2848,
+          "xmax": 1826,
+          "ymax": 2896
+        },
+        {
+          "text": "in",
+          "xmin": 1847,
+          "ymin": 2860,
+          "xmax": 1881,
+          "ymax": 2894
+        },
+        {
+          "text": "the",
+          "xmin": 1898,
+          "ymin": 2859,
+          "xmax": 1965,
+          "ymax": 2894
+        },
+        {
+          "text": "annual",
+          "xmin": 1980,
+          "ymin": 2859,
+          "xmax": 2121,
+          "ymax": 2894
+        },
+        {
+          "text": "budget",
+          "xmin": 2141,
+          "ymin": 2858,
+          "xmax": 2287,
+          "ymax": 2905
+        },
+        {
+          "text": "Implemented",
+          "xmin": 992,
+          "ymin": 2923,
+          "xmax": 1271,
+          "ymax": 2964
+        },
+        {
+          "text": "a",
+          "xmin": 1289,
+          "ymin": 2933,
+          "xmax": 1308,
+          "ymax": 2956
+        },
+        {
+          "text": "long-term",
+          "xmin": 1329,
+          "ymin": 2923,
+          "xmax": 1530,
+          "ymax": 2969
+        },
+        {
+          "text": "pricing",
+          "xmin": 1554,
+          "ymin": 2925,
+          "xmax": 1695,
+          "ymax": 2969
+        },
+        {
+          "text": "experiment",
+          "xmin": 1712,
+          "ymin": 2925,
+          "xmax": 1956,
+          "ymax": 2966
+        },
+        {
+          "text": "that",
+          "xmin": 1970,
+          "ymin": 2923,
+          "xmax": 2053,
+          "ymax": 2958
+        },
+        {
+          "text": "improved",
+          "xmin": 2069,
+          "ymin": 2923,
+          "xmax": 2270,
+          "ymax": 2967
+        },
+        {
+          "text": "customer",
+          "xmin": 990,
+          "ymin": 2969,
+          "xmax": 1190,
+          "ymax": 3013
+        },
+        {
+          "text": "lifetime",
+          "xmin": 1207,
+          "ymin": 2977,
+          "xmax": 1364,
+          "ymax": 3012
+        },
+        {
+          "text": "value",
+          "xmin": 1379,
+          "ymin": 2978,
+          "xmax": 1492,
+          "ymax": 3012
+        },
+        {
+          "text": "by",
+          "xmin": 1510,
+          "ymin": 2967,
+          "xmax": 1559,
+          "ymax": 3024
+        },
+        {
+          "text": "23%",
+          "xmin": 1574,
+          "ymin": 2979,
+          "xmax": 1663,
+          "ymax": 3011
+        },
+        {
+          "text": "Ran",
+          "xmin": 991,
+          "ymin": 3044,
+          "xmax": 1065,
+          "ymax": 3078
+        },
+        {
+          "text": "1",
+          "xmin": 1064,
+          "ymin": 3056,
+          "xmax": 1074,
+          "ymax": 3074
+        },
+        {
+          "text": "submitted",
+          "xmin": 1096,
+          "ymin": 3042,
+          "xmax": 1309,
+          "ymax": 3078
+        },
+        {
+          "text": "|",
+          "xmin": 1309,
+          "ymin": 3055,
+          "xmax": 1319,
+          "ymax": 3072
+        },
+        {
+          "text": "and",
+          "xmin": 1339,
+          "ymin": 3042,
+          "xmax": 1415,
+          "ymax": 3078
+        },
+        {
+          "text": "reported",
+          "xmin": 1435,
+          "ymin": 3042,
+          "xmax": 1615,
+          "ymax": 3086
+        },
+        {
+          "text": "on",
+          "xmin": 1634,
+          "ymin": 3052,
+          "xmax": 1684,
+          "ymax": 3078
+        },
+        {
+          "text": "monthly",
+          "xmin": 1704,
+          "ymin": 3042,
+          "xmax": 1879,
+          "ymax": 3088
+        },
+        {
+          "text": "client",
+          "xmin": 1896,
+          "ymin": 3042,
+          "xmax": 2009,
+          "ymax": 3078
+        },
+        {
+          "text": "enrollments",
+          "xmin": 2024,
+          "ymin": 3042,
+          "xmax": 2280,
+          "ymax": 3078
+        },
+        {
+          "text": "o",
+          "xmin": 2279,
+          "ymin": 3068,
+          "xmax": 2285,
+          "ymax": 3077
+        },
+        {
+          "text": "services",
+          "xmin": 989,
+          "ymin": 3100,
+          "xmax": 1157,
+          "ymax": 3132
+        },
+        {
+          "text": "opted",
+          "xmin": 1174,
+          "ymin": 3098,
+          "xmax": 1293,
+          "ymax": 3140
+        },
+        {
+          "text": "in",
+          "xmin": 1313,
+          "ymin": 3100,
+          "xmax": 1343,
+          "ymax": 3132
+        },
+        {
+          "text": "for",
+          "xmin": 1364,
+          "ymin": 3098,
+          "xmax": 1428,
+          "ymax": 3137
+        },
+        {
+          "text": "|",
+          "xmin": 1423,
+          "ymin": 3111,
+          "xmax": 1429,
+          "ymax": 3134
+        },
+        {
+          "text": "and",
+          "xmin": 1452,
+          "ymin": 3098,
+          "xmax": 1527,
+          "ymax": 3134
+        },
+        {
+          "text": "the",
+          "xmin": 1545,
+          "ymin": 3098,
+          "xmax": 1611,
+          "ymax": 3134
+        },
+        {
+          "text": "employees",
+          "xmin": 1628,
+          "ymin": 3098,
+          "xmax": 1857,
+          "ymax": 3141
+        },
+        {
+          "text": "assigned",
+          "xmin": 1873,
+          "ymin": 3098,
+          "xmax": 2056,
+          "ymax": 3145
+        },
+        {
+          "text": "to",
+          "xmin": 2073,
+          "ymin": 3103,
+          "xmax": 2111,
+          "ymax": 3132
+        },
+        {
+          "text": "clients",
+          "xmin": 2131,
+          "ymin": 3098,
+          "xmax": 2261,
+          "ymax": 3132
+        }
+      ],
+      "raw_text": "KANDACE LOUDOR DATA I SCIENTIST CONTACT WORK EXPERIENCE kloudor@email.com / Data Scientist (123 ) 456-7890 I Grubhub Mount Laurel. NI O June 2018 | current / Princeton, ,N | LinkedIn in Deployed a recommendation engine to production to Github C conditionally recommend other menu items based on past order history / increasing average order size by 7% Implemented various time series EDUCATION forecasting techniques to predict surge in orders X lowering customer wait by 10 minutes B.S Designed a model in a pilot to increase incentives for drivers Statistics during peak hours X increasing driver availability by 22% Led a team of 3 data scientist to model the Rutgers University ordering process 5 unique ways | reported results , and made recommendations to September 2011 | April 2015 increase order output by 9% New Brunswick | N Data Scientist SKILLS Spectrix Analytical Services Python NumPy Pandas March 2016 5- ( June 2018 / | Princeton N | | Scikit-learn Keras , Flask ) Built a customer attrition random forest model that | improved SQL ( MySQL, Postgres ) monthly retention by 12 basis points for clients likely to opt-out by providing relevant product features for them Git Coordinated with the Time Series product and marketing teams to determine Forecasting what kind of client interactions resulted in maximized service Productionizing Models opt-ins | increasing conversions by 18% Recommendation Engines Partnered with product team to create a production Customer Segmentation recommendation engine in Python that improved the length on n- AWS page for users with $225K t in incremental annual revenue Compiled and analyzed data surrounding the prototypes for a prosthesis, which saved over $1 1M in its creation Entry-Level Data Analyst Avenica April 2015 | March 2016 / Mount Laurel. NJ | | Collaborated with product managers to perform cohort analysis that identified an opportunity to reduce pricing by 21 1% for a segment of users to boost yearly revenue by $560.000 Constructed operational reporting in Tableau to improve scheduling contractors S. saving $90,000 in the annual budget Implemented a long-term pricing experiment that improved customer lifetime value by 23% Ran 1 submitted | and reported on monthly client enrollments o services opted in for | and the employees assigned to clients "
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+# requirements utils
+streamlit
+pandas
+pypdf
+google.generativeai
+dotenv
+python-docx
+jobspy
+langdetect
