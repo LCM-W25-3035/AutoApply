@@ -1,0 +1,21 @@
+{
+    "personal_information": {
+        "name": "Alice Johnson"
+    },
+    "education": [
+        {
+            "degree": "MSc in Data Science",
+            "institution": "University of California",
+            "location": "California, USA",
+            "start_date": "2017",
+            "end_date": "2019"
+        },
+        {
+            "degree": "BSc in Computer Science",
+            "institution": "University of Washington",
+            "location": "Seattle, WA, USA",
+            "start_date": "2013",
+            "end_date": "2017"
+        }
+    ]
+}

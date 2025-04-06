@@ -1,0 +1,33 @@
+{
+    "ats_score": 100,
+    "matching_technical_skills": [
+        "python",
+        "aws",
+        "machine learning",
+        "sql",
+        "pandas"
+    ],
+    "missing_technical_skills": [],
+    "matching_soft_skills": [
+        "communication",
+        "teamwork",
+        "adaptability"
+    ],
+    "missing_soft_skills": [],
+    "keywords_matched": [
+        "python",
+        "aws",
+        "machine learning",
+        "sql",
+        "pandas",
+        "build and evaluate machine learning models",
+        "collaborate with product and engineering teams",
+        "develop and optimize data pipelines"
+    ],
+    "keywords_missing": [],
+    "years_of_experience_match": "Yes",
+    "education_match": "Yes",
+    "summary_match": "Strong",
+    "responsibility_alignment": "Strong",
+    "recommendations": []
+}

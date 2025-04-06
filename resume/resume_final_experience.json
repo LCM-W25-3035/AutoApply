@@ -1,0 +1,28 @@
+{
+    "work_experience": [
+        {
+            "job_title": "Data Scientist",
+            "company": "FinTech Corp",
+            "location": "Remote",
+            "start_date": "2019",
+            "end_date": "2023",
+            "achievement": [
+                "Built and deployed machine learning models for fraud detection, improving detection accuracy by 25%.",
+                "Developed end-to-end ETL pipelines using Python, AWS Lambda, and S3 to streamline data ingestion.",
+                "Collaborated with cross-functional teams to design data products aligned with business KPIs."
+            ]
+        },
+        {
+            "job_title": "Machine Learning Engineer",
+            "company": "HealthAI Solutions",
+            "location": "San Francisco, CA",
+            "start_date": "2017",
+            "end_date": "2019",
+            "achievement": [
+                "Developed predictive models for patient readmission risk using TensorFlow and XGBoost.",
+                "Automated data preprocessing and model deployment workflows with Airflow and Docker.",
+                "Worked with healthcare stakeholders to validate models and ensure clinical relevance."
+            ]
+        }
+    ]
+}

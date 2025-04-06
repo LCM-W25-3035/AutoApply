@@ -1,0 +1,26 @@
+{
+    "job_title": "Senior Data Scientist",
+    "job_description": "We are seeking a highly skilled Data Scientist with experience in Python, AWS, and machine learning.",
+    "technical_skills": [
+        "Python",
+        "AWS",
+        "Machine Learning",
+        "SQL",
+        "Pandas"
+    ],
+    "soft_skills": [
+        "Communication",
+        "Teamwork",
+        "Adaptability"
+    ],
+    "years_of_experience_required": "5+",
+    "requirements": [
+        "MSc or PhD in Computer Science, Statistics, or a related field",
+        "Proficiency in Python and AWS"
+    ],
+    "responsibilities": [
+        "Build and evaluate machine learning models.",
+        "Collaborate with product and engineering teams.",
+        "Develop and optimize data pipelines."
+    ]
+}

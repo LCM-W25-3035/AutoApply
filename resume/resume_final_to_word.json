@@ -1,0 +1,57 @@
+{
+    "education": [
+        {
+            "degree": "MSc in Data Science",
+            "institution": "University of California",
+            "location": "California, USA",
+            "start_date": "2017",
+            "end_date": "2019"
+        },
+        {
+            "degree": "BSc in Computer Science",
+            "institution": "University of Washington",
+            "location": "Seattle, WA, USA",
+            "start_date": "2013",
+            "end_date": "2017"
+        }
+    ],
+    "personal_information": {
+        "name": "Alice Johnson"
+    },
+    "professional_summary": "Data Scientist with 5+ years of experience leveraging Python, AWS, and machine learning to deliver impactful solutions. Proven ability to build scalable data pipelines and extract insights from complex datasets. Experience collaborating with cross-functional teams to translate objectives into measurable data outcomes. Ready to contribute data-driven solutions to support long-term sustainability and global investment strategies.",
+    "skills": [
+        "Teamwork",
+        "Communication",
+        "AWS",
+        "Pandas",
+        "Adaptability",
+        "Python",
+        "SQL"
+    ],
+    "work_experience": [
+        {
+            "job_title": "Data Scientist",
+            "company": "FinTech Corp",
+            "location": "Remote",
+            "start_date": "2019",
+            "end_date": "2023",
+            "achievement": [
+                "Built and deployed machine learning models for fraud detection, improving detection accuracy by 25%.",
+                "Developed end-to-end ETL pipelines using Python, AWS Lambda, and S3 to streamline data ingestion.",
+                "Collaborated with cross-functional teams to design data products aligned with business KPIs."
+            ]
+        },
+        {
+            "job_title": "Machine Learning Engineer",
+            "company": "HealthAI Solutions",
+            "location": "San Francisco, CA",
+            "start_date": "2017",
+            "end_date": "2019",
+            "achievement": [
+                "Developed predictive models for patient readmission risk using TensorFlow and XGBoost.",
+                "Automated data preprocessing and model deployment workflows with Airflow and Docker.",
+                "Worked with healthcare stakeholders to validate models and ensure clinical relevance."
+            ]
+        }
+    ]
+}
