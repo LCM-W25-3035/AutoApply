@@ -10,8 +10,14 @@ dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'
 load_dotenv(dotenv_path=dotenv_path)
 GEMINI_KEY = os.getenv("GEMINI_API_KEY")
 
-@pytest.mark.skipif(not GEMINI_KEY, reason="Gemini API key not set")
 def test_ats_score_evaluation_post_with_real_files():
+    from dotenv import load_dotenv
+    import os
+    load_dotenv()
+
+    if not os.getenv("GEMINI_API_KEY"):
+        pytest.skip("Gemini API key not set")
+
     resume_dir = Path("resume")
 
     required_files = [

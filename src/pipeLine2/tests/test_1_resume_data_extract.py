@@ -3,18 +3,31 @@ import json
 import pytest
 from pathlib import Path
 from dotenv import load_dotenv
-from pipeLine2.utils import resume_promt_summary, resume_education_info_personal, join_all_resume_json
+from pipeLine2.utils import resume_promt_summary
 
-# Load .env from absolute path
-dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '.env'))
+# Load .env to get the Gemini API key
+dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
 load_dotenv(dotenv_path=dotenv_path)
-
 GEMINI_KEY = os.getenv("GEMINI_API_KEY")
 
 
-@pytest.mark.skipif(not GEMINI_KEY, reason="Gemini API key not set")
 # Test the resume_promt_summary function
-def test_resume_promt_summary_with_existing_inputs():
+def test_resume_promt_summary():
+
+    from dotenv import load_dotenv
+    import os
+    load_dotenv()
+
+    if not os.getenv("GEMINI_API_KEY"):
+        pytest.skip("Gemini API key not set")
+
+    from dotenv import load_dotenv
+    import os
+    load_dotenv()
+
+    if not os.getenv("GEMINI_API_KEY"):
+        pytest.skip("Gemini API key not set")
+
     resume_dir = Path("resume")
     required_files = [
         "resume.json",
@@ -49,7 +62,9 @@ def test_resume_promt_summary_with_existing_inputs():
     assert len(result["professional_summary"]) > 20  # sanity check
 
 # Test the resume_education_info_personal function
-def test_resume_education_info_personal_with_existing_resume():
+from pipeLine2.utils import resume_education_info_personal
+
+def test_resume_education_info_personal():
     resume_dir = Path("resume")
     input_path = resume_dir / "resume.json"
     output_path = resume_dir / "resume_education_info_personal.json"
@@ -88,7 +103,9 @@ def extract_final_experience():
 extract_final_experience()
 
 # Test the join_all_resume_json function
-def test_join_all_resume_json_with_existing_files():
+from pipeLine2.utils import join_all_resume_json
+
+def test_join_all_resume_json():
     resume_dir = Path("resume")
 
     # Input files required by the function

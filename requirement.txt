@@ -7,3 +7,5 @@ dotenv
 python-docx
 jobspy
 langdetect
+pytest
+pytest-cov

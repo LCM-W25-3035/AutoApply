@@ -5,14 +5,20 @@ from pathlib import Path
 from dotenv import load_dotenv
 from pipeLine2.utils import ats_score_evaluation_pre
 
-# Load .env from absolute path
-dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '.env'))
+# Load .env to get the Gemini API key
+dotenv_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '.env'))
 load_dotenv(dotenv_path=dotenv_path)
-
 GEMINI_KEY = os.getenv("GEMINI_API_KEY")
 
-@pytest.mark.skipif(not GEMINI_KEY, reason="Gemini API key not set")
 def test_ats_score_evaluation_pre():
+
+    from dotenv import load_dotenv
+    import os
+    load_dotenv()
+
+    if not os.getenv("GEMINI_API_KEY"):
+        pytest.skip("Gemini API key not set")
+        
     resume_dir = Path("resume")
     resume_path = resume_dir / "resume.json"
     job_path = resume_dir / "job_posting.json"
