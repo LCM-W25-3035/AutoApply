@@ -37,3 +37,7 @@ def test_resume_skills_with_existing_json_files():
     assert "soft_skills" in match
     assert isinstance(match["technical_skills"], list)
     assert isinstance(match["soft_skills"], list)
+
+# Reference
+# (OpenAI first prompt, 2025): How can we write Pytest unit tests for validating skill extraction and matching logic in resume parsing?
+# (OpenAI last prompt, 2025): Can you show me an example of testing a resume_skills function that generates match and missing skills JSON files?

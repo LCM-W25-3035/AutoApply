@@ -41,3 +41,7 @@ def test_ats_score_evaluation_pre():
     assert "ats_score" in result
     assert "matching_technical_skills" in result
     assert isinstance(result["ats_score"], int)
+
+# Reference
+# (OpenAI first prompt, 2025): How can we test functions that depend on Gemini API and generate ATS score evaluation outputs?
+# (OpenAI last prompt, 2025): Can you show me an example of a Pytest function that validates ATS score JSON output structure?

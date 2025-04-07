@@ -145,3 +145,7 @@ def test_join_all_resume_json():
 
     assert isinstance(final_resume["skills"], list)
     assert len(final_resume["skills"]) > 0
+
+# Reference
+# (OpenAI first prompt, 2025): How can we write Pytest-based unit tests for functions that interact with Gemini APIs and JSON I/O?
+# (OpenAI last prompt, 2025): Can you show me an example of how to write structured test cases for resume processing functions using test data and assert validations?

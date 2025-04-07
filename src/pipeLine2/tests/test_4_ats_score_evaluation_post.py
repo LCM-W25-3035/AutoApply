@@ -62,3 +62,7 @@ def test_ats_score_evaluation_post_with_real_files():
 
     assert isinstance(result["ats_score"], int)
     assert isinstance(result["recommendations"], list)
+
+# Reference
+# (OpenAI first prompt, 2025): How can we design tests for validating post-ATS evaluation logic involving Gemini and multiple resume-job input files?
+# (OpenAI last prompt, 2025): Can you show me an example of testing ats_score_evaluation_post function and checking detailed ATS metrics in the output?

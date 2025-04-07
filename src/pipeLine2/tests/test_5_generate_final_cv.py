@@ -26,3 +26,7 @@ def test_generate_cv_creates_docx():
 
     assert result is True, "generate_cv() should return True on success"
     assert expected_output_path.exists(), f"Expected output file not found: {expected_output_path}"
+
+# Reference
+# (OpenAI first prompt, 2025): How can we write a test to validate if a DOCX resume is generated correctly from a JSON file and Word template?
+# (OpenAI last prompt, 2025): Can you show me an example of testing a generate_cv function that produces a customized Word document using user data?
